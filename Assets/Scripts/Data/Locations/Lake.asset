@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aa55a3143072db48b79c2b9b1e112b5, type: 3}
+  m_Name: Lake
+  m_EditorClassIdentifier: 
+  LocationName: Lake
+  LocationSprite: {fileID: 21300000, guid: fd8e873a17502a643889c3960c373789, type: 3}
+  CatchTable:
+  - CatchRate: 0
+    Critters:
+    - {fileID: 11400000, guid: a8fe1a528aef2514ebdc87b30f91a762, type: 2}
+  - CatchRate: 1
+    Critters:
+    - {fileID: 11400000, guid: 6dc41698ef650bc408218360d3da7534, type: 2}
+    - {fileID: 11400000, guid: 2f1cf4a8a111a5f4191bc4aabb09e673, type: 2}

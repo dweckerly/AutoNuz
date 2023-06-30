@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aa55a3143072db48b79c2b9b1e112b5, type: 3}
+  m_Name: Mountains
+  m_EditorClassIdentifier: 
+  LocationName: Mountains
+  LocationSprite: {fileID: 21300000, guid: 5e0d33627e87aa247b8c932a94689b4f, type: 3}
+  CatchTable:
+  - CatchRate: 0
+    Critters:
+    - {fileID: 11400000, guid: 2ce99fd63f270ef42b33f07e1f597392, type: 2}
+  - CatchRate: 1
+    Critters:
+    - {fileID: 11400000, guid: f0263028c63069547b49f94ab71caec7, type: 2}
+    - {fileID: 11400000, guid: 832a56219ee7b43418f548d6f8517ab8, type: 2}

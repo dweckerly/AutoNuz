@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aa55a3143072db48b79c2b9b1e112b5, type: 3}
+  m_Name: Forest
+  m_EditorClassIdentifier: 
+  LocationName: Forest
+  LocationSprite: {fileID: 21300000, guid: 0afc34d7f9baa1e4baabca4cf9f2146d, type: 3}
+  CatchTable:
+  - CatchRate: 0
+    Critters:
+    - {fileID: 11400000, guid: 678374eb941c2de44bd77fd59f9db2c8, type: 2}
+  - CatchRate: 1
+    Critters:
+    - {fileID: 11400000, guid: 43d5ba9e5230cbc4b966bfe71fd7df72, type: 2}
+    - {fileID: 11400000, guid: 5bbfcc676abec1e41bbe2996ed94a7e8, type: 2}
+    - {fileID: 11400000, guid: 86e057ee121207047aef9ebfc45490f2, type: 2}
+  - CatchRate: 2
+    Critters:
+    - {fileID: 11400000, guid: cdab9a33800aa414c818d3c425d7459c, type: 2}

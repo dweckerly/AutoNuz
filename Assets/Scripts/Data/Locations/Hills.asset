@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aa55a3143072db48b79c2b9b1e112b5, type: 3}
+  m_Name: Hills
+  m_EditorClassIdentifier: 
+  LocationName: Hills
+  LocationSprite: {fileID: 21300000, guid: 77a799b0401e64543bda2bf9c6deb65a, type: 3}
+  CatchTable:
+  - CatchRate: 0
+    Critters:
+    - {fileID: 11400000, guid: 717b96580bd15944983249f3c7847288, type: 2}
+    - {fileID: 11400000, guid: 969f4de54bd05ae47948b0b3096e71ac, type: 2}
+  - CatchRate: 1
+    Critters:
+    - {fileID: 11400000, guid: 6afc9ec8c24977a44962ead555da19b3, type: 2}
