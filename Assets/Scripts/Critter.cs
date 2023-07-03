@@ -59,4 +59,15 @@ public class Critter : MonoBehaviour
         if (rate == StatProgressionRate.Exemplary) return Mathf.RoundToInt(1.5f * Level);
         return  0;
     }
+
+    void LevelUp()
+    {
+        Level += 1;
+        neededXp = CalculateXp(Level + 1);
+        Hp = CalculateStat(data.HpProgressionRate);
+        Attack = CalculateStat(data.AttackProgressionRate);
+        Defense = CalculateStat(data.DefenseProgressionRate);
+        Speed = CalculateStat(data.SpeedProgressionRate);
+        currentHp = Hp;
+    }
 }
