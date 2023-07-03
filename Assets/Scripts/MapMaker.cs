@@ -50,25 +50,29 @@ public class MapMaker : MonoBehaviour
         return ids[Random.Range(0, ids.Count)];
     }
 
-    public CritterData SelectAreaToExplore(int index)
+    public void SelectAreaToExplore(int index)
     {
-        float rate = Random.Range(0, 1);
-        if (rate >= 1f)
+        CritterData cd = null;
+        float rate = Random.Range(0f, 1f);
+        if (rate >= 1f && CatchTableHasRateValue(index, CatchRate.UltraRare))
         {
-            if (CatchTableHasRateValue(index, CatchRate.UltraRare))
-                return FindCritterByCatchRate(index, CatchRate.UltraRare);
+            cd = FindCritterByCatchRate(index, CatchRate.UltraRare);
         }
-        if (rate >= 0.9f)
+        if (rate >= 0.9f && CatchTableHasRateValue(index, CatchRate.Rare))
         {
-            if (CatchTableHasRateValue(index, CatchRate.Rare))
-                return FindCritterByCatchRate(index, CatchRate.Rare);
+            cd = FindCritterByCatchRate(index, CatchRate.Rare);
         }
-        if (rate >= 0.6f)
+        if (rate >= 0.6f && CatchTableHasRateValue(index, CatchRate.Uncommon))
         {
-            if (CatchTableHasRateValue(index, CatchRate.Uncommon))
-                return FindCritterByCatchRate(index, CatchRate.Uncommon);
+            cd = FindCritterByCatchRate(index, CatchRate.Uncommon);
         }
-        return FindCritterByCatchRate(index, CatchRate.Common);
+        else
+        {
+            cd = FindCritterByCatchRate(index, CatchRate.Common);
+        }
+        Debug.Log(rate);
+        Debug.Log(cd.CritterName);
+        GenerateMap();
     }
 
     bool CatchTableHasRateValue(int mapIndex, CatchRate catchRate)
