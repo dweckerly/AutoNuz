@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     public void SelectStarterCritter(int index)
     {
         playerCritters[0] = new Critter(starterCritters[index], 5);
-
+        ShowMap();
     }
 
     void ShowMap()

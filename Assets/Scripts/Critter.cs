@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Critter : MonoBehaviour
+public class Critter
 {
     public Critter (CritterData _data, int _Level)
     {
