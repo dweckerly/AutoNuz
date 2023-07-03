@@ -152,20 +152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83347381124ce2545bff85068611553f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  starterCritters:
-  - {fileID: 11400000, guid: 43d5ba9e5230cbc4b966bfe71fd7df72, type: 2}
-  - {fileID: 11400000, guid: 6afc9ec8c24977a44962ead555da19b3, type: 2}
-  - {fileID: 11400000, guid: 6dc41698ef650bc408218360d3da7534, type: 2}
-  selectCritterItems:
-  - critterImage: {fileID: 632367496}
-    critterName: {fileID: 567438709}
-  - critterImage: {fileID: 1753364857}
-    critterName: {fileID: 1291137523}
-  - critterImage: {fileID: 1113114625}
-    critterName: {fileID: 278605902}
-  SelectionPanel: {fileID: 958287606}
-  MapPanel: {fileID: 1928173619}
   BattlePanel: {fileID: 1968774424}
+  FirstCritterSelection: {fileID: 291183164}
+  MapMaker: {fileID: 577247026}
 --- !u!4 &194329966
 Transform:
   m_ObjectHideFlags: 0
@@ -316,6 +305,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 278605900}
   m_CullTransparentMesh: 1
+--- !u!1 &291183163
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 291183165}
+  - component: {fileID: 291183164}
+  m_Layer: 0
+  m_Name: FirstCritterSelector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &291183164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291183163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97b3891ce59959c44860c1988c51529f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  starterCritters:
+  - {fileID: 11400000, guid: 43d5ba9e5230cbc4b966bfe71fd7df72, type: 2}
+  - {fileID: 11400000, guid: 6afc9ec8c24977a44962ead555da19b3, type: 2}
+  - {fileID: 11400000, guid: 6dc41698ef650bc408218360d3da7534, type: 2}
+  selectCritterItems:
+  - critterImage: {fileID: 632367496}
+    critterName: {fileID: 567438709}
+  - critterImage: {fileID: 1753364857}
+    critterName: {fileID: 1291137523}
+  - critterImage: {fileID: 1113114625}
+    critterName: {fileID: 278605902}
+  SelectionPanel: {fileID: 958287606}
+--- !u!4 &291183165
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291183163}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &397268479
 GameObject:
   m_ObjectHideFlags: 0
@@ -603,7 +648,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &577247026
 MonoBehaviour:
@@ -635,6 +680,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9180ab9788fa75e4cbb7824d56adf45f, type: 2}
   - {fileID: 11400000, guid: be48fa3cd8e3df44eb9f7b536dae1a1a, type: 2}
   - {fileID: 11400000, guid: 5b47aefe1fb4c8941a63e2ad8133b37a, type: 2}
+  MapPanel: {fileID: 1928173619}
 --- !u!1 &592866436
 GameObject:
   m_ObjectHideFlags: 0
@@ -853,7 +899,7 @@ RectTransform:
   - {fileID: 1968774425}
   - {fileID: 958287607}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -953,8 +999,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 194329965}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 291183164}
+        m_TargetAssemblyTypeName: FirstCritterSelection, Assembly-CSharp
         m_MethodName: SelectStarterCritter
         m_Mode: 3
         m_Arguments:
@@ -2248,8 +2294,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 194329965}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 291183164}
+        m_TargetAssemblyTypeName: FirstCritterSelection, Assembly-CSharp
         m_MethodName: SelectStarterCritter
         m_Mode: 3
         m_Arguments:
@@ -2470,7 +2516,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1291137522
 GameObject:
@@ -2970,8 +3016,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 194329965}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 291183164}
+        m_TargetAssemblyTypeName: FirstCritterSelection, Assembly-CSharp
         m_MethodName: SelectStarterCritter
         m_Mode: 3
         m_Arguments:

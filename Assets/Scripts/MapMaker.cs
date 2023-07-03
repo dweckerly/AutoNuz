@@ -16,11 +16,10 @@ public class MapMaker : MonoBehaviour
 {
     public MapItem[] MapItems;
     public LocationData[] Locations;
+    public GameObject MapPanel;
 
-    private void Start() 
-    {
-        GenerateMap();
-    }
+    public delegate void OnAreaSelection(CritterData critterData);
+    public event OnAreaSelection AreaSelectionEvent;
     
     public void GenerateMap()
     {
@@ -71,8 +70,7 @@ public class MapMaker : MonoBehaviour
             cd = FindCritterByCatchRate(index, CatchRate.Common);
         }
         Debug.Log(rate);
-        Debug.Log(cd.CritterName);
-        GenerateMap();
+        AreaSelectionEvent?.Invoke(cd);
     }
 
     bool CatchTableHasRateValue(int mapIndex, CatchRate catchRate)

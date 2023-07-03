@@ -1,44 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
-
-[System.Serializable]
-public class SelectCritterItem
-{
-    public Image critterImage;
-    public TMP_Text critterName;
-}
 
 public class GameManager : MonoBehaviour
 {
     Critter[] playerCritters = new Critter[8];
-    public CritterData[] starterCritters;
-    public SelectCritterItem[] selectCritterItems;
-    public GameObject SelectionPanel;
-    public GameObject MapPanel;
     public GameObject BattlePanel;
+
+    public FirstCritterSelection FirstCritterSelection;
+    public MapMaker MapMaker;
 
     private void Start() 
     {
-        for (int i = 0; i < selectCritterItems.Length; i++)
-        {
-            selectCritterItems[i].critterImage.sprite = starterCritters[i].CritterSprite;
-            selectCritterItems[i].critterName.text = starterCritters[i].CritterName;
-        }
+        FirstCritterSelection.CritterSelectionEvent += FirstCritterSelected;
+        MapMaker.AreaSelectionEvent += SelectArea;
+
+        FirstCritterSelection.PopulateSelectionPanel();
     }
 
-    public void SelectStarterCritter(int index)
+    private void OnDestroy() 
     {
-        playerCritters[0] = new Critter(starterCritters[index], 5);
+        FirstCritterSelection.CritterSelectionEvent -= FirstCritterSelected;
+        MapMaker.AreaSelectionEvent -= SelectArea;
+    }
+
+    void FirstCritterSelected(Critter critter)
+    {
+        playerCritters[0] = critter;
         ShowMap();
+    }
+
+    void SelectArea(CritterData critterData)
+    {
+        Debug.Log(critterData.CritterName);
     }
 
     void ShowMap()
     {
-        SelectionPanel.SetActive(false);
+        FirstCritterSelection.SelectionPanel.SetActive(false);
         BattlePanel.SetActive(false);
-        MapPanel.SetActive(true);
+        MapMaker.MapPanel.SetActive(true);
+        MapMaker.GenerateMap();
     }
 }
