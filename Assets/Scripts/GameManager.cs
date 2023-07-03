@@ -5,23 +5,24 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     Critter[] playerCritters = new Critter[8];
-    public GameObject BattlePanel;
 
     public FirstCritterSelection FirstCritterSelection;
     public MapMaker MapMaker;
+    public BattleController BattleController;
 
     private void Start() 
     {
         FirstCritterSelection.CritterSelectionEvent += FirstCritterSelected;
         MapMaker.AreaSelectionEvent += SelectArea;
-
-        FirstCritterSelection.PopulateSelectionPanel();
+        BattleController.OnRunSelected += RunAway;
+        ShowFirstSelectionPanel();
     }
 
     private void OnDestroy() 
     {
         FirstCritterSelection.CritterSelectionEvent -= FirstCritterSelected;
         MapMaker.AreaSelectionEvent -= SelectArea;
+        BattleController.OnRunSelected -= RunAway;
     }
 
     void FirstCritterSelected(Critter critter)
@@ -32,14 +33,36 @@ public class GameManager : MonoBehaviour
 
     void SelectArea(CritterData critterData)
     {
-        Debug.Log(critterData.CritterName);
+        ShowBattle();
+        Critter critter = new Critter(critterData, Random.Range(2, 5));
+        BattleController.PopulateBattleUI(critter);
+    }
+
+    void RunAway()
+    {
+        ShowMap();
+    }
+
+    void ShowFirstSelectionPanel()
+    {
+        BattleController.BattlePanel.SetActive(false);
+        MapMaker.MapPanel.SetActive(false);
+        FirstCritterSelection.SelectionPanel.SetActive(true);
+        FirstCritterSelection.PopulateSelectionPanel();
     }
 
     void ShowMap()
     {
         FirstCritterSelection.SelectionPanel.SetActive(false);
-        BattlePanel.SetActive(false);
+        BattleController.BattlePanel.SetActive(false);
         MapMaker.MapPanel.SetActive(true);
         MapMaker.GenerateMap();
+    }
+
+    void ShowBattle()
+    {
+        FirstCritterSelection.SelectionPanel.SetActive(false);
+        MapMaker.MapPanel.SetActive(false);
+        BattleController.BattlePanel.SetActive(true);
     }
 }

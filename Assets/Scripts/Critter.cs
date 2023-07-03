@@ -17,7 +17,7 @@ public class Critter
         Speed = CalculateStat(data.SpeedProgressionRate);
         currentHp = Hp;
     }
-
+    
     public int Level;
     public CritterData data;
     public int Hp;
