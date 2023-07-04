@@ -26,6 +26,9 @@ public class BattleController : MonoBehaviour
     Critter playerCritter;
     Critter wildCritter;
 
+    float speedTimePlayer = 0f;
+    float speedTimeWild = 0f;
+
     public void PopulateBattleUI(Critter _playerCritter, Critter _wildCritter)
     {
         playerCritter = _playerCritter;
@@ -45,7 +48,7 @@ public class BattleController : MonoBehaviour
 
     public void StartBattle()
     {
-        
+        StartCoroutine(HandleTurnTIme());
     }
 
     public void RunFromFight()
@@ -56,5 +59,22 @@ public class BattleController : MonoBehaviour
     public float CalculateHealthPercentage(Critter critter)
     {
         return critter.currentHp / critter.Hp;
+    }
+
+    IEnumerator HandleTurnTIme()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(0.01f);
+            speedTimePlayer += playerCritter.Speed * Time.deltaTime;
+            playerCritterUI.speedRect.localScale = new Vector3(speedTimePlayer / 2f, 1f, 1f);
+            if (playerCritterUI.speedRect.localScale.x >= 1)
+            {
+                playerCritterUI.speedRect.localScale = new Vector3(0f, 1f, 1f);
+                speedTimePlayer = 0f;
+                Debug.Log("Attack!");
+            }
+        }
+        
     }
 }
