@@ -11,13 +11,13 @@ public class Critter
         data = _data;
         Xp = CalculateXp();
         neededXp = CalculateXp(Level + 1);
-        Hp = CalculateStat(data.HpProgressionRate);
+        Hp = CalculateStat(data.HpProgressionRate) + 10;
         Attack = CalculateStat(data.AttackProgressionRate);
         Defense = CalculateStat(data.DefenseProgressionRate);
         Speed = CalculateStat(data.SpeedProgressionRate);
         currentHp = Hp;
     }
-    
+
     public int Level;
     public CritterData data;
     public int Hp;

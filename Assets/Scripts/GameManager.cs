@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     {
         ShowBattle();
         Critter critter = new Critter(critterData, Random.Range(2, 5));
-        BattleController.PopulateBattleUI(critter);
+        BattleController.PopulateBattleUI(playerCritters[0], critter);
     }
 
     void RunAway()
