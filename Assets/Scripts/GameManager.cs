@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public FirstCritterSelection FirstCritterSelection;
     public MapMaker MapMaker;
     public BattleController BattleController;
+    public PostBattleController PostBattleController;
 
     private void Start() 
     {
@@ -62,6 +63,7 @@ public class GameManager : MonoBehaviour
     {
         FirstCritterSelection.SelectionPanel.SetActive(false);
         BattleController.BattlePanel.SetActive(false);
+        PostBattleController.PostBattlePanel.SetActive(false);
         MapMaker.MapPanel.SetActive(true);
         MapMaker.GenerateMap();
     }
@@ -70,6 +72,7 @@ public class GameManager : MonoBehaviour
     {
         FirstCritterSelection.SelectionPanel.SetActive(false);
         MapMaker.MapPanel.SetActive(false);
+        PostBattleController.PostBattlePanel.SetActive(false);
         BattleController.BattlePanel.SetActive(true);
     }
 
@@ -78,5 +81,6 @@ public class GameManager : MonoBehaviour
         FirstCritterSelection.SelectionPanel.SetActive(false);
         MapMaker.MapPanel.SetActive(false);
         BattleController.BattlePanel.SetActive(false);
+        PostBattleController.PostBattlePanel.SetActive(true);
     }
 }
