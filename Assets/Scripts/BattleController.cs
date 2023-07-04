@@ -23,7 +23,9 @@ public class BattleController : MonoBehaviour
     public GameObject FightRunBtns;
 
     public event Action OnRunSelected;
-    public event Action EndOfBattle;
+    public event Action PlayerDefeated;
+    public delegate void OnBattleEnd(Critter critter);
+    public OnBattleEnd BattleEndEvent;
 
     Critter playerCritter;
     Critter wildCritter;
@@ -103,7 +105,7 @@ public class BattleController : MonoBehaviour
         if (wildCritter.currentHp == 0) 
         {
             battling = false;
-            EndOfBattle?.Invoke();
+            BattleEndEvent?.Invoke(wildCritter);
         }
     }
 
@@ -117,7 +119,7 @@ public class BattleController : MonoBehaviour
         if (playerCritter.currentHp == 0) 
         {
             battling = false;
-            EndOfBattle?.Invoke();
+            PlayerDefeated?.Invoke();
         }
     }
 }
