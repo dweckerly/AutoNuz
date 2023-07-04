@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
         FirstCritterSelection.CritterSelectionEvent += FirstCritterSelected;
         MapMaker.AreaSelectionEvent += SelectArea;
         BattleController.OnRunSelected += RunAway;
+        BattleController.EndOfBattle += PostBattle;
         ShowFirstSelectionPanel();
     }
 
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour
         FirstCritterSelection.CritterSelectionEvent -= FirstCritterSelected;
         MapMaker.AreaSelectionEvent -= SelectArea;
         BattleController.OnRunSelected -= RunAway;
+        BattleController.EndOfBattle -= PostBattle;
     }
 
     void FirstCritterSelected(Critter critter)
@@ -41,6 +43,11 @@ public class GameManager : MonoBehaviour
     void RunAway()
     {
         ShowMap();
+    }
+
+    void PostBattle()
+    {
+
     }
 
     void ShowFirstSelectionPanel()
@@ -64,5 +71,12 @@ public class GameManager : MonoBehaviour
         FirstCritterSelection.SelectionPanel.SetActive(false);
         MapMaker.MapPanel.SetActive(false);
         BattleController.BattlePanel.SetActive(true);
+    }
+
+    void ShowPostBattleScreen()
+    {
+        FirstCritterSelection.SelectionPanel.SetActive(false);
+        MapMaker.MapPanel.SetActive(false);
+        BattleController.BattlePanel.SetActive(false);
     }
 }

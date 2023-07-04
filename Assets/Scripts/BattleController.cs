@@ -20,6 +20,7 @@ public class BattleController : MonoBehaviour
     public GameObject BattlePanel;
     public CritterBattleUI playerCritterUI;
     public CritterBattleUI wildCritterUI;
+    public GameObject FightRunBtns;
 
     public event Action OnRunSelected;
     public event Action EndOfBattle;
@@ -47,11 +48,13 @@ public class BattleController : MonoBehaviour
         wildCritterUI.healthRect.localScale = new Vector3(CalculateHealthPercentage(wildCritter), 1f, 1f);
         wildCritterUI.speedRect.localScale = new Vector3(0, 1f, 1f);
         wildCritterUI.levelText.text = "LVL: " + wildCritter.Level;
+        FightRunBtns.SetActive(true);
     }
 
     public void StartBattle()
     {
         battling = true;
+        FightRunBtns.SetActive(false);
         StartCoroutine(HandleTurnTIme());
     }
 
