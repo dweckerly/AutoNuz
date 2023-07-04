@@ -14,3 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CritterName: Dozely
   CritterSprite: {fileID: 21300000, guid: 37c29a5c819bb8b40a058a725a7135dc, type: 3}
+  levelingRate: 0
+  HpProgressionRate: 2
+  AttackProgressionRate: 2
+  DefenseProgressionRate: 1
+  SpeedProgressionRate: 1

@@ -14,3 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CritterName: Chipunk
   CritterSprite: {fileID: 21300000, guid: 079123b9704e8514d8c4f054f94aa952, type: 3}
+  levelingRate: 1
+  HpProgressionRate: 2
+  AttackProgressionRate: 2
+  DefenseProgressionRate: 1
+  SpeedProgressionRate: 2

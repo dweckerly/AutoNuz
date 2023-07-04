@@ -14,3 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CritterName: Messip
   CritterSprite: {fileID: 21300000, guid: ad155f3e9640b8f4db56aaafe60a67bc, type: 3}
+  levelingRate: 1
+  HpProgressionRate: 2
+  AttackProgressionRate: 2
+  DefenseProgressionRate: 0
+  SpeedProgressionRate: 1

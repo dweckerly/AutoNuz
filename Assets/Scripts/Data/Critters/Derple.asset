@@ -14,3 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CritterName: Derple
   CritterSprite: {fileID: 21300000, guid: 92e96a813e6212f489f940cbd04a4d45, type: 3}
+  levelingRate: 1
+  HpProgressionRate: 2
+  AttackProgressionRate: 1
+  DefenseProgressionRate: 2
+  SpeedProgressionRate: 0

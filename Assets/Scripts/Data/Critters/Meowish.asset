@@ -14,3 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CritterName: Meowish
   CritterSprite: {fileID: 21300000, guid: 744b9edc594c9a84e810e6a883c479c7, type: 3}
+  levelingRate: 1
+  HpProgressionRate: 2
+  AttackProgressionRate: 1
+  DefenseProgressionRate: 1
+  SpeedProgressionRate: 2
