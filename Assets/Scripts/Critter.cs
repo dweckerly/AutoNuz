@@ -11,10 +11,10 @@ public class Critter
         data = _data;
         Xp = CalculateXp();
         neededXp = CalculateXp(Level + 1);
-        Hp = CalculateStat(data.HpProgressionRate) + 10;
-        Attack = CalculateStat(data.AttackProgressionRate);
-        Defense = CalculateStat(data.DefenseProgressionRate);
-        Speed = CalculateStat(data.SpeedProgressionRate);
+        Hp = CalculateStat(data.HpBase) + 10;
+        Attack = CalculateStat(data.AttackBase);
+        Defense = CalculateStat(data.DefenseBase);
+        Speed = CalculateStat(data.SpeedBase);
         currentHp = Hp;
     }
 
@@ -50,24 +50,30 @@ public class Critter
         return 0;
     }
 
-    int CalculateStat(StatProgressionRate rate)
+    int CalculateStat(StatBase statBase)
     {
-        if (rate == StatProgressionRate.Poor) return Mathf.RoundToInt(0.25f * Level);
-        if (rate == StatProgressionRate.Fair) return Mathf.RoundToInt(0.5f * Level);
-        if (rate == StatProgressionRate.Average) return Mathf.RoundToInt(0.75f * Level);
-        if (rate == StatProgressionRate.Superior) return Mathf.RoundToInt(1.25f * Level);
-        if (rate == StatProgressionRate.Exemplary) return Mathf.RoundToInt(1.5f * Level);
-        return  0;
+        
+        return  (((2 * ReturnBaseStatInt(statBase)) * Level) / 100) + 5;
+    }
+
+    int ReturnBaseStatInt(StatBase statBase)
+    {
+        if (statBase == StatBase.Poor) return 10;
+        if (statBase == StatBase.Fair) return 20;
+        if (statBase == StatBase.Average) return 30;
+        if (statBase == StatBase.Superior) return 40;
+        if (statBase == StatBase.Exemplary) return 50;
+        return 0;
     }
 
     void LevelUp()
     {
         Level += 1;
         neededXp = CalculateXp(Level + 1);
-        Hp = CalculateStat(data.HpProgressionRate);
-        Attack = CalculateStat(data.AttackProgressionRate);
-        Defense = CalculateStat(data.DefenseProgressionRate);
-        Speed = CalculateStat(data.SpeedProgressionRate);
+        Hp = CalculateStat(data.HpBase);
+        Attack = CalculateStat(data.AttackBase);
+        Defense = CalculateStat(data.DefenseBase);
+        Speed = CalculateStat(data.SpeedBase);
         currentHp = Hp;
     }
 }
