@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    Critter[] playerCritters = new Critter[8];
+    Critter[] playerCritters = new Critter[5];
 
     public HUDController HUDController;
     public FirstCritterSelection FirstCritterSelection;
@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     {
         FirstCritterSelection.CritterHoverEvent += CritterHover;
         FirstCritterSelection.CritterHoverEventEnd += CritterHoverEnd;
-        FirstCritterSelection.CritterSelectionEvent += FirstCritterSelected;
+        FirstCritterSelection.CritterSelectionEvent += CritterSelected;
         MapController.AreaSelectionEvent += SelectArea;
         BattleController.OnRunSelected += RunAway;
         BattleController.BattleEndEvent += PostBattle;
@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     {
         FirstCritterSelection.CritterHoverEvent -= CritterHover;
         FirstCritterSelection.CritterHoverEventEnd -= CritterHoverEnd;
-        FirstCritterSelection.CritterSelectionEvent -= FirstCritterSelected;
+        FirstCritterSelection.CritterSelectionEvent -= CritterSelected;
         MapController.AreaSelectionEvent -= SelectArea;
         BattleController.OnRunSelected -= RunAway;
         BattleController.BattleEndEvent -= PostBattle;
@@ -47,10 +47,18 @@ public class GameManager : MonoBehaviour
 
     }
 
-    void FirstCritterSelected(Critter critter)
+    void CritterSelected(Critter critter)
     {
-        playerCritters[0] = critter;
-        ShowMap();
+        for (int i = 0; i < playerCritters.Length; i++)
+        {
+            if (playerCritters[i] == null)
+            {
+                playerCritters[i] = critter;
+                ShowMap();
+                return;
+            } 
+        }
+        // need some error message here about party being full
     }
 
     void SelectArea(CritterData critterData)
@@ -74,23 +82,21 @@ public class GameManager : MonoBehaviour
     {
         BattleController.BattlePanel.SetActive(false);
         MapController.MapPanel.SetActive(false);
-        FirstCritterSelection.SelectionPanel.SetActive(true);
-        FirstCritterSelection.PopulateSelectionPanel();
+        FirstCritterSelection.EnableSelectionPanel();
     }
 
     void ShowMap()
     {
         AreaNumber++;
-        FirstCritterSelection.SelectionPanel.SetActive(false);
+        FirstCritterSelection.DisableSelectionPanel();
         BattleController.BattlePanel.SetActive(false);
-        PostBattleController.PostBattlePanel.SetActive(false);
         MapController.MapPanel.SetActive(true);
         MapController.GenerateMap(AreaNumber);
     }
 
     void ShowBattle()
     {
-        FirstCritterSelection.SelectionPanel.SetActive(false);
+        FirstCritterSelection.DisableSelectionPanel();
         MapController.MapPanel.SetActive(false);
         PostBattleController.PostBattlePanel.SetActive(false);
         BattleController.BattlePanel.SetActive(true);
@@ -98,7 +104,7 @@ public class GameManager : MonoBehaviour
 
     void ShowPostBattleScreen()
     {
-        FirstCritterSelection.SelectionPanel.SetActive(false);
+        FirstCritterSelection.DisableSelectionPanel();
         MapController.MapPanel.SetActive(false);
         BattleController.BattlePanel.SetActive(false);
         PostBattleController.PostBattlePanel.SetActive(true);
@@ -106,6 +112,6 @@ public class GameManager : MonoBehaviour
 
     void GameOver()
     {
-        
+        Debug.Log("Game Over...");
     }
 }

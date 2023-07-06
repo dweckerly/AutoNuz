@@ -16,7 +16,7 @@ public class FirstCritterSelection : MonoBehaviour
     public event OnCritterHover CritterHoverEvent;
     public event Action CritterHoverEventEnd;
 
-    public void PopulateSelectionPanel()
+    public void EnableSelectionPanel()
     {
         for (int i = 0; i < selectCritterItems.Length; i++)
         {
@@ -25,14 +25,22 @@ public class FirstCritterSelection : MonoBehaviour
             selectCritterItems[i].critterData = starterCritters[i];
             selectCritterItems[i].CritterHoverEvent += CritterHover;
             selectCritterItems[i].CritterHoverEndEvent += CritterHoverEnd;
+            selectCritterItems[i].CritterSelectedEvent += SelectCritter;
         }
+        SelectionPanel.SetActive(true);
     }
 
-    private void OnDestroy() {
-        for (int i = 0; i < selectCritterItems.Length; i++)
+    public void DisableSelectionPanel() 
+    {
+        if (SelectionPanel.activeSelf)
         {
-            selectCritterItems[i].CritterHoverEvent -= CritterHover;
-            selectCritterItems[i].CritterHoverEndEvent -= CritterHoverEnd;
+            for (int i = 0; i < selectCritterItems.Length; i++)
+            {
+                selectCritterItems[i].CritterHoverEvent -= CritterHover;
+                selectCritterItems[i].CritterHoverEndEvent -= CritterHoverEnd;
+                selectCritterItems[i].CritterSelectedEvent -= SelectCritter;
+            }
+            SelectionPanel.SetActive(false);
         }
     }
 
@@ -46,9 +54,9 @@ public class FirstCritterSelection : MonoBehaviour
         CritterHoverEventEnd?.Invoke();
     }
 
-    public void SelectStarterCritter(int index)
+    public void SelectCritter(CritterData critterData)
     {
-        Critter selectedCritter =  new Critter(starterCritters[index], 5);
+        Critter selectedCritter =  new Critter(critterData, 5);
         CritterSelectionEvent?.Invoke(selectedCritter);
     }
 }

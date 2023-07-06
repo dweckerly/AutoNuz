@@ -20,6 +20,9 @@ public class SelectCritterItem : MonoBehaviour, IPointerEnterHandler, IPointerEx
     public event OnCritterHover CritterHoverEvent;
     public event Action CritterHoverEndEvent;
 
+    public delegate void OnCritterSelected(CritterData critterData);
+    public event OnCritterSelected CritterSelectedEvent;
+
     private void Awake() 
     {
         rectTransform = GetComponent<RectTransform>();
@@ -27,15 +30,18 @@ public class SelectCritterItem : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("Mouse is over " + critterData.CritterName);
         rectTransform.localScale = new Vector3(SCALE_INCREASE, SCALE_INCREASE, SCALE_INCREASE);
         CritterHoverEvent?.Invoke(critterData);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("Mouse is no longer on " + critterData.CritterName);
         rectTransform.localScale = new Vector3(1f, 1f, 1f);
         CritterHoverEndEvent?.Invoke();
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        CritterSelectedEvent?.Invoke(critterData);
     }
 }
