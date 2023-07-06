@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
     public FirstCritterSelection FirstCritterSelection;
     public MapController MapController;
     public BattleController BattleController;
-    public PostBattleController PostBattleController;
 
     private int AreaNumber = 0;
 
