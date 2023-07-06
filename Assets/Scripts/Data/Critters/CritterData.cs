@@ -37,6 +37,21 @@ public enum Personality
     Stubborn, // +ATK -SPD
 }
 
+public enum ElementalType
+{
+    Basic,
+    Buff,
+    Bug,
+    Dirt,
+    Electric,
+    Fire,
+    Plant,
+    Water,
+    Shady,
+    Spooky,
+    Wind,
+}
+
 [CreateAssetMenu(fileName = "critter", menuName = "Data/Critter", order = 1)]
 public class CritterData : ScriptableObject
 {
@@ -47,4 +62,5 @@ public class CritterData : ScriptableObject
     public StatBase AttackBase;
     public StatBase DefenseBase;
     public StatBase SpeedBase;
+    public ElementalType[] Types;
 }
