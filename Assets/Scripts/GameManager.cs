@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
 
     private void Start() 
     {
+        FirstCritterSelection.CritterHoverEvent += CritterHover;
+        FirstCritterSelection.CritterHoverEventEnd += CritterHoverEnd;
         FirstCritterSelection.CritterSelectionEvent += FirstCritterSelected;
         MapMaker.AreaSelectionEvent += SelectArea;
         BattleController.OnRunSelected += RunAway;
@@ -24,11 +26,23 @@ public class GameManager : MonoBehaviour
 
     private void OnDestroy() 
     {
+        FirstCritterSelection.CritterHoverEvent -= CritterHover;
+        FirstCritterSelection.CritterHoverEventEnd -= CritterHoverEnd;
         FirstCritterSelection.CritterSelectionEvent -= FirstCritterSelected;
         MapMaker.AreaSelectionEvent -= SelectArea;
         BattleController.OnRunSelected -= RunAway;
         BattleController.BattleEndEvent -= PostBattle;
         BattleController.PlayerDefeated -= GameOver;
+    }
+
+    void CritterHover(CritterData critterData)
+    {
+
+    }
+
+    void CritterHoverEnd()
+    {
+
     }
 
     void FirstCritterSelected(Critter critter)

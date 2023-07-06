@@ -1,24 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
-public class SelectCritterItem : MonoBehaviour
+public class SelectCritterItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    const float SCALE_INCREASE = 1.2f;
+
     public CritterData critterData;
     public Image critterImage;
     public TMP_Text critterName;
 
-    void OnMouseOver()
+    private RectTransform rectTransform;
+
+    public delegate void OnCritterHover(CritterData critterData);
+    public event OnCritterHover CritterHoverEvent;
+    public event Action CritterHoverEndEvent;
+
+    private void Awake() 
     {
-        //If your mouse hovers over the GameObject with the script attached, output this message
-        Debug.Log("Mouse is over GameObject.");
+        rectTransform = GetComponent<RectTransform>();
     }
 
-    void OnMouseExit()
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        //The mouse is no longer hovering over the GameObject so output this message each frame
-        Debug.Log("Mouse is no longer on GameObject.");
+        Debug.Log("Mouse is over " + critterData.CritterName);
+        rectTransform.localScale = new Vector3(SCALE_INCREASE, SCALE_INCREASE, SCALE_INCREASE);
+        CritterHoverEvent?.Invoke(critterData);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        Debug.Log("Mouse is no longer on " + critterData.CritterName);
+        rectTransform.localScale = new Vector3(1f, 1f, 1f);
+        CritterHoverEndEvent?.Invoke();
     }
 }
