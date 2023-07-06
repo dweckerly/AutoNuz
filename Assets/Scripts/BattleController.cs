@@ -17,6 +17,7 @@ public class CritterBattleUI
 
 public class BattleController : MonoBehaviour
 {
+    const float BASE_BATTLE_SPEED = 2f;
     public GameObject BattlePanel;
     public CritterBattleUI playerCritterUI;
     public CritterBattleUI wildCritterUI;
@@ -77,7 +78,7 @@ public class BattleController : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
 
             speedTimePlayer += playerCritter.Speed * Time.deltaTime;
-            playerCritterUI.speedRect.localScale = new Vector3(speedTimePlayer / 2f, 1f, 1f);
+            playerCritterUI.speedRect.localScale = new Vector3(speedTimePlayer / BASE_BATTLE_SPEED, 1f, 1f);
             if (playerCritterUI.speedRect.localScale.x >= 1)
             {
                 playerCritterUI.speedRect.localScale = new Vector3(0f, 1f, 1f);
@@ -85,7 +86,7 @@ public class BattleController : MonoBehaviour
                 DamageWildCritter();
             }
             speedTimeWild += wildCritter.Speed * Time.deltaTime;
-            wildCritterUI.speedRect.localScale = new Vector3(speedTimeWild / 1f, 1f, 1f);
+            wildCritterUI.speedRect.localScale = new Vector3(speedTimeWild / BASE_BATTLE_SPEED, 1f, 1f);
             if (wildCritterUI.speedRect.localScale.x >= 1)
             {
                 wildCritterUI.speedRect.localScale = new Vector3(0f, 1f, 1f);
