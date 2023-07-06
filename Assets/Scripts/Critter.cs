@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Critter
 {
+    const int GENETIC_MOD_MAX = 31;
+
     public Critter (CritterData _data, int _Level)
     {
         if (_Level < 1) _Level = 1;
@@ -13,11 +15,15 @@ public class Critter
         Xp = CalculateXp();
         neededXp = CalculateXp(Level + 1);
         personality = SelectPersonality();
+        HpGeneticMod = UnityEngine.Random.Range(0, GENETIC_MOD_MAX);
+        AttackGeneticMod = UnityEngine.Random.Range(0, GENETIC_MOD_MAX);
+        DefenseGeneticMod = UnityEngine.Random.Range(0, GENETIC_MOD_MAX);
+        SpeedGeneticMod = UnityEngine.Random.Range(0, GENETIC_MOD_MAX);
         float[] personalityModifiers = PersonalityModifiers();
-        Hp = CalculateStat(data.HpBase, personalityModifiers[0]) + 10;
-        Attack = CalculateStat(data.AttackBase, personalityModifiers[1]);
-        Defense = CalculateStat(data.DefenseBase, personalityModifiers[2]);
-        Speed = CalculateStat(data.SpeedBase, personalityModifiers[3]);
+        Hp = CalculateStat(data.HpBase, personalityModifiers[0], HpGeneticMod) + 10;
+        Attack = CalculateStat(data.AttackBase, personalityModifiers[1], AttackGeneticMod);
+        Defense = CalculateStat(data.DefenseBase, personalityModifiers[2], DefenseGeneticMod);
+        Speed = CalculateStat(data.SpeedBase, personalityModifiers[3], SpeedGeneticMod);
         currentHp = Hp;
     }
 
@@ -31,16 +37,20 @@ public class Critter
     public int currentHp;
     public int neededXp;
     public Personality personality;
+    int HpGeneticMod;
+    int AttackGeneticMod;
+    int DefenseGeneticMod;
+    int SpeedGeneticMod;
 
     public void LevelUp()
     {
         Level += 1;
         neededXp = CalculateXp(Level + 1);
         float[] personalityModifiers = PersonalityModifiers();
-        Hp = CalculateStat(data.HpBase, personalityModifiers[0]);
-        Attack = CalculateStat(data.AttackBase, personalityModifiers[1]);
-        Defense = CalculateStat(data.DefenseBase, personalityModifiers[2]);
-        Speed = CalculateStat(data.SpeedBase, personalityModifiers[3]);
+        Hp = CalculateStat(data.HpBase, personalityModifiers[0], HpGeneticMod);
+        Attack = CalculateStat(data.AttackBase, personalityModifiers[1], AttackGeneticMod);
+        Defense = CalculateStat(data.DefenseBase, personalityModifiers[2], DefenseGeneticMod);
+        Speed = CalculateStat(data.SpeedBase, personalityModifiers[3], SpeedGeneticMod);
         currentHp = Hp;
     }
 
@@ -66,9 +76,9 @@ public class Critter
         return 0;
     }
 
-    int CalculateStat(StatBase statBase, float personalityMod)
+    int CalculateStat(StatBase statBase, float personalityMod, int geneticMod)
     {
-        return  Mathf.RoundToInt(((((2 * BaseStatInt(statBase)) * Level) / 100) + 5) * personalityMod);
+        return  Mathf.RoundToInt(((((2 * BaseStatInt(statBase) + geneticMod) * Level) / 100) + 5) * personalityMod);
     }
 
     int BaseStatInt(StatBase statBase)
