@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public MapController MapController;
     public BattleController BattleController;
 
+    public CritterData[] starterCritters;
+
     private int AreaNumber = 0;
 
     private void Start() 
@@ -90,7 +92,7 @@ public class GameManager : MonoBehaviour
     {
         BattleController.BattlePanel.SetActive(false);
         MapController.MapPanel.SetActive(false);
-        FirstCritterSelection.EnableSelectionPanel();
+        FirstCritterSelection.EnableSelectionPanel(starterCritters);
     }
 
     void ShowMap()
