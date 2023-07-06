@@ -1,15 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
-
-[System.Serializable]
-public class SelectCritterItem
-{
-    public Image critterImage;
-    public TMP_Text critterName;
-}
 
 public class FirstCritterSelection : MonoBehaviour
 {
@@ -26,6 +17,7 @@ public class FirstCritterSelection : MonoBehaviour
         {
             selectCritterItems[i].critterImage.sprite = starterCritters[i].CritterSprite;
             selectCritterItems[i].critterName.text = starterCritters[i].CritterName;
+            selectCritterItems[i].critterData = starterCritters[i];
         }
     }
 

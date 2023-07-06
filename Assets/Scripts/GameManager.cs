@@ -34,7 +34,6 @@ public class GameManager : MonoBehaviour
     void FirstCritterSelected(Critter critter)
     {
         playerCritters[0] = critter;
-        HUDController.HUD.SetActive(true);
         ShowMap();
     }
 
@@ -57,7 +56,6 @@ public class GameManager : MonoBehaviour
 
     void ShowFirstSelectionPanel()
     {
-        HUDController.HUD.SetActive(false);
         BattleController.BattlePanel.SetActive(false);
         MapMaker.MapPanel.SetActive(false);
         FirstCritterSelection.SelectionPanel.SetActive(true);
