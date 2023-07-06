@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
         BattleController.OnRunSelected += RunAway;
         BattleController.BattleEndEvent += PostBattle;
         BattleController.PlayerDefeated += GameOver;
+        HUDController.HideDetails();
         ShowFirstSelectionPanel();
     }
 
@@ -41,22 +42,26 @@ public class GameManager : MonoBehaviour
     void CritterHover(Critter critter)
     {
         selectedCritter = critter;
+        HUDController.UpdateAndShowDetails(selectedCritter);
     }
 
     void CritterHoverEnd()
     {
         selectedCritter = null;
+        HUDController.HideDetails();
     }
 
     void CritterSelected()
     {
         if (selectedCritter != null)
         {
+            HUDController.HideDetails();
             for (int i = 0; i < playerCritters.Length; i++)
             {
                 if (playerCritters[i] == null)
                 {
                     playerCritters[i] = selectedCritter;
+                    selectedCritter = null;
                     ShowMap();
                     return;
                 }
@@ -102,16 +107,7 @@ public class GameManager : MonoBehaviour
     {
         FirstCritterSelection.DisableSelectionPanel();
         MapController.MapPanel.SetActive(false);
-        PostBattleController.PostBattlePanel.SetActive(false);
         BattleController.BattlePanel.SetActive(true);
-    }
-
-    void ShowPostBattleScreen()
-    {
-        FirstCritterSelection.DisableSelectionPanel();
-        MapController.MapPanel.SetActive(false);
-        BattleController.BattlePanel.SetActive(false);
-        PostBattleController.PostBattlePanel.SetActive(true);
     }
 
     void GameOver()
