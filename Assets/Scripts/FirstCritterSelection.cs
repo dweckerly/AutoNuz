@@ -12,7 +12,7 @@ public class FirstCritterSelection : MonoBehaviour
 
     public event Action CritterSelectionEvent;
 
-    public delegate void OnCritterHover(CritterData critterData);
+    public delegate void OnCritterHover(Critter critter);
     public event OnCritterHover CritterHoverEvent;
     public event Action CritterHoverEventEnd;
 
@@ -22,7 +22,7 @@ public class FirstCritterSelection : MonoBehaviour
         {
             selectCritterItems[i].critterImage.sprite = starterCritters[i].CritterSprite;
             selectCritterItems[i].critterName.text = starterCritters[i].CritterName;
-            selectCritterItems[i].critterData = starterCritters[i];
+            selectCritterItems[i].critter = new Critter(starterCritters[i], 5);
             selectCritterItems[i].CritterHoverEvent += CritterHover;
             selectCritterItems[i].CritterHoverEndEvent += CritterHoverEnd;
             selectCritterItems[i].CritterSelectedEvent += SelectCritter;
@@ -44,9 +44,9 @@ public class FirstCritterSelection : MonoBehaviour
         }
     }
 
-    void CritterHover(CritterData critterData)
+    void CritterHover(Critter critter)
     {
-        CritterHoverEvent?.Invoke(critterData);
+        CritterHoverEvent?.Invoke(critter);
     }
 
     void CritterHoverEnd()

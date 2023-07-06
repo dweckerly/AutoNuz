@@ -10,13 +10,13 @@ public class SelectCritterItem : MonoBehaviour, IPointerEnterHandler, IPointerEx
 {
     const float SCALE_INCREASE = 1.2f;
 
-    public CritterData critterData;
+    public Critter critter;
     public Image critterImage;
     public TMP_Text critterName;
 
     private RectTransform rectTransform;
 
-    public delegate void OnCritterHover(CritterData critterData);
+    public delegate void OnCritterHover(Critter critter);
     public event OnCritterHover CritterHoverEvent;
     public event Action CritterHoverEndEvent;
 
@@ -30,7 +30,7 @@ public class SelectCritterItem : MonoBehaviour, IPointerEnterHandler, IPointerEx
     public void OnPointerEnter(PointerEventData eventData)
     {
         rectTransform.localScale = new Vector3(SCALE_INCREASE, SCALE_INCREASE, SCALE_INCREASE);
-        CritterHoverEvent?.Invoke(critterData);
+        CritterHoverEvent?.Invoke(critter);
     }
 
     public void OnPointerExit(PointerEventData eventData)

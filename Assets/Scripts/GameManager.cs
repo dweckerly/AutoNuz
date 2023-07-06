@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     Critter[] playerCritters = new Critter[5];
-    CritterData selectedCritterData;
+    Critter selectedCritter;
 
     public HUDController HUDController;
     public FirstCritterSelection FirstCritterSelection;
@@ -38,27 +38,25 @@ public class GameManager : MonoBehaviour
         BattleController.PlayerDefeated -= GameOver;
     }
 
-    void CritterHover(CritterData critterData)
+    void CritterHover(Critter critter)
     {
-        selectedCritterData = critterData;
+        selectedCritter = critter;
     }
 
     void CritterHoverEnd()
     {
-        selectedCritterData = null;
+        selectedCritter = null;
     }
 
     void CritterSelected()
     {
-        if (selectedCritterData != null)
+        if (selectedCritter != null)
         {
-            Critter critter = new Critter(selectedCritterData, 5);
-            Debug.Log("Critter selected in Game Manager");
             for (int i = 0; i < playerCritters.Length; i++)
             {
                 if (playerCritters[i] == null)
                 {
-                    playerCritters[i] = critter;
+                    playerCritters[i] = selectedCritter;
                     ShowMap();
                     return;
                 }
