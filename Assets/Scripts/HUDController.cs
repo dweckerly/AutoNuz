@@ -24,14 +24,20 @@ public class HUDController : MonoBehaviour
     public GameObject CritterDetailsContainer;
     public GameObject LocationDetailsContainer;
 
+    private void Awake()
+    {
+        CritterDetailsContainer.SetActive(false);
+        LocationDetailsContainer.SetActive(false);
+    }
+
     public void UpdateAndShowCritterDetails(Critter critter)
     {
         CritterDetails.CritterName.text = critter.data.CritterName;
-        CritterDetails.Personality.text = nameof(critter.personality);
+        CritterDetails.Personality.text = critter.personality.ToString();
         string types = "";
         foreach(ElementalType et in critter.data.Types)
         {
-            types += nameof(et) + " ";
+            types += et.ToString() + " ";
         }
         CritterDetails.Types.text = types;
         CritterDetails.HP.text = critter.currentHp + "/" + critter.Hp;
