@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5275264548240796581}
   - component: {fileID: 8055928839946958975}
   - component: {fileID: 7855690128900087051}
-  - component: {fileID: 154799034884025309}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -77,21 +76,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &154799034884025309
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1052402731662197493}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cdd79045fd6b63488cbf4bb0d7ece51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  critterData: {fileID: 0}
-  critterImage: {fileID: 7855690128900087051}
-  critterName: {fileID: 0}
 --- !u!1 &2896302220254933518
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,6 +222,7 @@ GameObject:
   - component: {fileID: 3302581861004359731}
   - component: {fileID: 5768986633215849432}
   - component: {fileID: 4634489857053766859}
+  - component: {fileID: 4237345356067302328}
   m_Layer: 5
   m_Name: SelectCritterItem
   m_TagString: Untagged
@@ -308,3 +293,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 256, y: 256}
   m_EdgeRadius: 0
+--- !u!225 &4237345356067302328
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3175845812500315314}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0

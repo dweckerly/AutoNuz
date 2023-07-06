@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class SelectCritterItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class SelectCritterItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     const float SCALE_INCREASE = 1.2f;
 
@@ -20,8 +20,7 @@ public class SelectCritterItem : MonoBehaviour, IPointerEnterHandler, IPointerEx
     public event OnCritterHover CritterHoverEvent;
     public event Action CritterHoverEndEvent;
 
-    public delegate void OnCritterSelected(CritterData critterData);
-    public event OnCritterSelected CritterSelectedEvent;
+    public event Action CritterSelectedEvent;
 
     private void Awake() 
     {
@@ -40,8 +39,8 @@ public class SelectCritterItem : MonoBehaviour, IPointerEnterHandler, IPointerEx
         CritterHoverEndEvent?.Invoke();
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+    public void OnPointerClick(PointerEventData eventData)
     {
-        CritterSelectedEvent?.Invoke(critterData);
+        CritterSelectedEvent?.Invoke();
     }
 }

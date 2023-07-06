@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class FirstCritterSelection : MonoBehaviour
 {
@@ -9,8 +10,7 @@ public class FirstCritterSelection : MonoBehaviour
     public SelectCritterItem[] selectCritterItems;
     public GameObject SelectionPanel;
 
-    public delegate void OnCritterSelection(Critter critter);
-    public event OnCritterSelection CritterSelectionEvent;
+    public event Action CritterSelectionEvent;
 
     public delegate void OnCritterHover(CritterData critterData);
     public event OnCritterHover CritterHoverEvent;
@@ -54,9 +54,8 @@ public class FirstCritterSelection : MonoBehaviour
         CritterHoverEventEnd?.Invoke();
     }
 
-    public void SelectCritter(CritterData critterData)
+    void SelectCritter()
     {
-        Critter selectedCritter =  new Critter(critterData, 5);
-        CritterSelectionEvent?.Invoke(selectedCritter);
+        CritterSelectionEvent?.Invoke();
     }
 }

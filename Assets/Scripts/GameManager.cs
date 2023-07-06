@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     Critter[] playerCritters = new Critter[5];
+    CritterData selectedCritterData;
 
     public HUDController HUDController;
     public FirstCritterSelection FirstCritterSelection;
@@ -39,24 +40,29 @@ public class GameManager : MonoBehaviour
 
     void CritterHover(CritterData critterData)
     {
-
+        selectedCritterData = critterData;
     }
 
     void CritterHoverEnd()
     {
-
+        selectedCritterData = null;
     }
 
-    void CritterSelected(Critter critter)
+    void CritterSelected()
     {
-        for (int i = 0; i < playerCritters.Length; i++)
+        if (selectedCritterData != null)
         {
-            if (playerCritters[i] == null)
+            Critter critter = new Critter(selectedCritterData, 5);
+            Debug.Log("Critter selected in Game Manager");
+            for (int i = 0; i < playerCritters.Length; i++)
             {
-                playerCritters[i] = critter;
-                ShowMap();
-                return;
-            } 
+                if (playerCritters[i] == null)
+                {
+                    playerCritters[i] = critter;
+                    ShowMap();
+                    return;
+                }
+            }
         }
         // need some error message here about party being full
     }
