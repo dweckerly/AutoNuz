@@ -8,16 +8,18 @@ public class GameManager : MonoBehaviour
 
     public HUDController HUDController;
     public FirstCritterSelection FirstCritterSelection;
-    public MapMaker MapMaker;
+    public MapController MapController;
     public BattleController BattleController;
     public PostBattleController PostBattleController;
+
+    private int AreaNumber = 0;
 
     private void Start() 
     {
         FirstCritterSelection.CritterHoverEvent += CritterHover;
         FirstCritterSelection.CritterHoverEventEnd += CritterHoverEnd;
         FirstCritterSelection.CritterSelectionEvent += FirstCritterSelected;
-        MapMaker.AreaSelectionEvent += SelectArea;
+        MapController.AreaSelectionEvent += SelectArea;
         BattleController.OnRunSelected += RunAway;
         BattleController.BattleEndEvent += PostBattle;
         BattleController.PlayerDefeated += GameOver;
@@ -29,7 +31,7 @@ public class GameManager : MonoBehaviour
         FirstCritterSelection.CritterHoverEvent -= CritterHover;
         FirstCritterSelection.CritterHoverEventEnd -= CritterHoverEnd;
         FirstCritterSelection.CritterSelectionEvent -= FirstCritterSelected;
-        MapMaker.AreaSelectionEvent -= SelectArea;
+        MapController.AreaSelectionEvent -= SelectArea;
         BattleController.OnRunSelected -= RunAway;
         BattleController.BattleEndEvent -= PostBattle;
         BattleController.PlayerDefeated -= GameOver;
@@ -71,24 +73,25 @@ public class GameManager : MonoBehaviour
     void ShowFirstSelectionPanel()
     {
         BattleController.BattlePanel.SetActive(false);
-        MapMaker.MapPanel.SetActive(false);
+        MapController.MapPanel.SetActive(false);
         FirstCritterSelection.SelectionPanel.SetActive(true);
         FirstCritterSelection.PopulateSelectionPanel();
     }
 
     void ShowMap()
     {
+        AreaNumber++;
         FirstCritterSelection.SelectionPanel.SetActive(false);
         BattleController.BattlePanel.SetActive(false);
         PostBattleController.PostBattlePanel.SetActive(false);
-        MapMaker.MapPanel.SetActive(true);
-        MapMaker.GenerateMap();
+        MapController.MapPanel.SetActive(true);
+        MapController.GenerateMap(AreaNumber);
     }
 
     void ShowBattle()
     {
         FirstCritterSelection.SelectionPanel.SetActive(false);
-        MapMaker.MapPanel.SetActive(false);
+        MapController.MapPanel.SetActive(false);
         PostBattleController.PostBattlePanel.SetActive(false);
         BattleController.BattlePanel.SetActive(true);
     }
@@ -96,7 +99,7 @@ public class GameManager : MonoBehaviour
     void ShowPostBattleScreen()
     {
         FirstCritterSelection.SelectionPanel.SetActive(false);
-        MapMaker.MapPanel.SetActive(false);
+        MapController.MapPanel.SetActive(false);
         BattleController.BattlePanel.SetActive(false);
         PostBattleController.PostBattlePanel.SetActive(true);
     }

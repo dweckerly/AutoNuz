@@ -12,16 +12,17 @@ public class MapItem
     public LocationData location;
 }
 
-public class MapMaker : MonoBehaviour
+public class MapController : MonoBehaviour
 {
     public MapItem[] MapItems;
     public LocationData[] Locations;
     public GameObject MapPanel;
+    public TMP_Text AreaText;
 
     public delegate void OnAreaSelection(CritterData critterData);
     public event OnAreaSelection AreaSelectionEvent;
     
-    public void GenerateMap()
+    public void GenerateMap(int areaNumber, bool addTown = false)
     {
         List<int> locationIDs = new List<int>();
         for(int i  = 0; i < Locations.Length; i++)
@@ -42,6 +43,7 @@ public class MapMaker : MonoBehaviour
             MapItems[i].locationName.text = selectedLocations[i].LocationName;
             MapItems[i].location = selectedLocations[i];
         }
+        AreaText.text = "Area " + areaNumber;
     }
 
     public int SelectMapItem(List<int> ids)
