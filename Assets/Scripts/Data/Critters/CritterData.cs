@@ -22,14 +22,19 @@ public enum Personality
 {
     Aggressive, // +ATK -DEF
     Aloof, // +SPD -HP
+    Balanced,
     Courteous, // +HP -ATK
     Cowardly, // +SPD -ATK
-    Daring, // +ATK -HP
+    Gentle, // +DEF -ATK
     Greedy, // +SPD -DEF
     Hedonistic, // +HP -DEF
+    Lazy, // +DEF -SPD
     Mellow, // +HP -SPD
-
-
+    Obedient,
+    Proud, // +DEF -HP
+    Rowdy, // +ATK -HP
+    Stoic,
+    Stubborn, // +ATK -SPD
 }
 
 [CreateAssetMenu(fileName = "critter", menuName = "Data/Critter", order = 1)]

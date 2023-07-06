@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,10 +12,12 @@ public class Critter
         data = _data;
         Xp = CalculateXp();
         neededXp = CalculateXp(Level + 1);
-        Hp = CalculateStat(data.HpBase) + 10;
-        Attack = CalculateStat(data.AttackBase);
-        Defense = CalculateStat(data.DefenseBase);
-        Speed = CalculateStat(data.SpeedBase);
+        personality = SelectPersonality();
+        float[] personalityModifiers = PersonalityModifiers();
+        Hp = CalculateStat(data.HpBase, personalityModifiers[0]) + 10;
+        Attack = CalculateStat(data.AttackBase, personalityModifiers[1]);
+        Defense = CalculateStat(data.DefenseBase, personalityModifiers[2]);
+        Speed = CalculateStat(data.SpeedBase, personalityModifiers[3]);
         currentHp = Hp;
     }
 
@@ -27,6 +30,19 @@ public class Critter
     public int Xp;
     public int currentHp;
     public int neededXp;
+    public Personality personality;
+
+    public void LevelUp()
+    {
+        Level += 1;
+        neededXp = CalculateXp(Level + 1);
+        float[] personalityModifiers = PersonalityModifiers();
+        Hp = CalculateStat(data.HpBase, personalityModifiers[0]);
+        Attack = CalculateStat(data.AttackBase, personalityModifiers[1]);
+        Defense = CalculateStat(data.DefenseBase, personalityModifiers[2]);
+        Speed = CalculateStat(data.SpeedBase, personalityModifiers[3]);
+        currentHp = Hp;
+    }
 
     int CalculateXp()
     {
@@ -50,13 +66,12 @@ public class Critter
         return 0;
     }
 
-    int CalculateStat(StatBase statBase)
+    int CalculateStat(StatBase statBase, float personalityMod)
     {
-        
-        return  (((2 * ReturnBaseStatInt(statBase)) * Level) / 100) + 5;
+        return  Mathf.RoundToInt(((((2 * BaseStatInt(statBase)) * Level) / 100) + 5) * personalityMod);
     }
 
-    int ReturnBaseStatInt(StatBase statBase)
+    int BaseStatInt(StatBase statBase)
     {
         if (statBase == StatBase.Poor) return 10;
         if (statBase == StatBase.Fair) return 20;
@@ -66,14 +81,49 @@ public class Critter
         return 0;
     }
 
-    void LevelUp()
+    Personality SelectPersonality()
     {
-        Level += 1;
-        neededXp = CalculateXp(Level + 1);
-        Hp = CalculateStat(data.HpBase);
-        Attack = CalculateStat(data.AttackBase);
-        Defense = CalculateStat(data.DefenseBase);
-        Speed = CalculateStat(data.SpeedBase);
-        currentHp = Hp;
+        int count = Enum.GetValues( typeof(Personality)).Length;
+        int index = UnityEngine.Random.Range(0, count);
+        return (Personality) index;
+    }
+
+    float[] PersonalityModifiers()
+    {
+        switch (personality)
+        {
+            case Personality.Aggressive:
+                return new float[4] { 1f, 1.1f, 0.9f, 1f };
+            case Personality.Aloof:
+                return new float[4] { 0.9f, 1f, 1f, 1.1f };
+            case Personality.Balanced:
+                return new float[4] { 1f, 1f, 1f, 1f };
+            case Personality.Courteous:
+                return new float[4] { 1.1f, 0.9f, 1f, 1f };
+            case Personality.Cowardly:
+                return new float[4] { 1f, 0.9f, 1f, 1.1f };
+            case Personality.Gentle:
+                return new float[4] { 1f, 0.9f, 1.1f, 1f };
+            case Personality.Greedy:
+                return new float[4] { 1f, 1f, 0.9f, 1.1f };
+            case Personality.Hedonistic:
+                return new float[4] { 1.1f, 1f, 0.9f, 1f };
+            case Personality.Lazy:
+                return new float[4] { 1f, 1f, 1.1f, 0.9f };
+            case Personality.Mellow:
+                return new float[4] { 1.1f, 1f, 1f, 0.9f };
+            case Personality.Obedient:
+                return new float[4] { 1f, 1f, 1f, 1f };
+            case Personality.Proud:
+                return new float[4] { 0.9f, 1f, 1.1f, 1f };
+            case Personality.Rowdy:
+                return new float[4] { 0.9f, 1.1f, 1f, 1f };
+            case Personality.Stoic:
+                return new float[4] { 1f, 1f, 1f, 1f };
+            case Personality.Stubborn:
+                return new float[4] { 1f, 1.1f, 1f, 0.9f };
+            default:
+                return new float[4] { 1, 1, 1, 1 };
+        }
     }
 }
