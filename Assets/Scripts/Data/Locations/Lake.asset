@@ -22,3 +22,4 @@ MonoBehaviour:
     Critters:
     - {fileID: 11400000, guid: 6dc41698ef650bc408218360d3da7534, type: 2}
     - {fileID: 11400000, guid: 2f1cf4a8a111a5f4191bc4aabb09e673, type: 2}
+  Description: A cool pool of natural waters where many critters like to congregate.

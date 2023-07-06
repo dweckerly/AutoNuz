@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     void CritterHover(Critter critter)
     {
         selectedCritter = critter;
-        HUDController.UpdateAndShowDetails(selectedCritter);
+        HUDController.UpdateAndShowCritterDetails(selectedCritter);
     }
 
     void CritterHoverEnd()

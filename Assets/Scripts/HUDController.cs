@@ -21,9 +21,10 @@ public class HUDController : MonoBehaviour
 {
     public GameObject HUD;
     public CritterDetails CritterDetails;
-    public GameObject DetailsContainer;
+    public GameObject CritterDetailsContainer;
+    public GameObject LocationDetailsContainer;
 
-    public void UpdateAndShowDetails(Critter critter)
+    public void UpdateAndShowCritterDetails(Critter critter)
     {
         CritterDetails.CritterName.text = critter.data.CritterName;
         CritterDetails.Personality.text = nameof(critter.personality);
@@ -37,11 +38,11 @@ public class HUDController : MonoBehaviour
         CritterDetails.ATK.text = critter.Attack.ToString();
         CritterDetails.DEF.text = critter.Defense.ToString();
         CritterDetails.SPD.text = critter.Speed.ToString();
-        DetailsContainer.SetActive(true);
+        CritterDetailsContainer.SetActive(true);
     }
 
     public void HideDetails()
     {
-        DetailsContainer.SetActive(false);
+        CritterDetailsContainer.SetActive(false);
     }
 }

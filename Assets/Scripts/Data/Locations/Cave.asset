@@ -21,3 +21,4 @@ MonoBehaviour:
   - CatchRate: 1
     Critters:
     - {fileID: 11400000, guid: 0dc1fedd359ff1d45975d1de6080bc85, type: 2}
+  Description: A dark and smelly cave that is easy to get lost in.

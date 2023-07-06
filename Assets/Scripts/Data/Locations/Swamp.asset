@@ -24,3 +24,4 @@ MonoBehaviour:
   - CatchRate: 1
     Critters:
     - {fileID: 11400000, guid: fe3403764de277c4287c6058918ec858, type: 2}
+  Description: A dank, murky bog surely full of dangerous critters.

@@ -26,3 +26,4 @@ MonoBehaviour:
   - CatchRate: 2
     Critters:
     - {fileID: 11400000, guid: cad7b688d0183c94b84ea87220b3eb3d, type: 2}
+  Description: A peaceful open field of tall grasses and wild flowers.

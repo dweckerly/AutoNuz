@@ -8,4 +8,6 @@ public class LocationData : ScriptableObject
     public string LocationName;
     public Sprite LocationSprite;
     public CatchEntry[] CatchTable;
+    [TextArea]
+    public string Description;
 }

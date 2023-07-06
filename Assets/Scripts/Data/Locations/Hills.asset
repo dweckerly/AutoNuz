@@ -22,3 +22,4 @@ MonoBehaviour:
   - CatchRate: 1
     Critters:
     - {fileID: 11400000, guid: 6afc9ec8c24977a44962ead555da19b3, type: 2}
+  Description: Smooth hills gently roll across this vast, undulating landscape.
