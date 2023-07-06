@@ -15,7 +15,7 @@ MonoBehaviour:
   CritterName: Elechick
   CritterSprite: {fileID: 21300000, guid: fa9ad728ee056614c90c0a05ffdee64a, type: 3}
   levelingRate: 2
-  HpProgressionRate: 1
-  AttackProgressionRate: 0
-  DefenseProgressionRate: 1
-  SpeedProgressionRate: 2
+  HpBase: 1
+  AttackBase: 0
+  DefenseBase: 1
+  SpeedBase: 2

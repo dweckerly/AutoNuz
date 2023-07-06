@@ -15,7 +15,7 @@ MonoBehaviour:
   CritterName: Ampole
   CritterSprite: {fileID: 21300000, guid: 8bb371193f3583443b0c48cfa03126f0, type: 3}
   levelingRate: 2
-  HpProgressionRate: 1
-  AttackProgressionRate: 0
-  DefenseProgressionRate: 0
-  SpeedProgressionRate: 2
+  HpBase: 1
+  AttackBase: 0
+  DefenseBase: 0
+  SpeedBase: 2

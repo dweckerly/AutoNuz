@@ -15,7 +15,7 @@ MonoBehaviour:
   CritterName: Coonuki
   CritterSprite: {fileID: 21300000, guid: 26542dca653825b45ad4e024b298e638, type: 3}
   levelingRate: 1
-  HpProgressionRate: 1
-  AttackProgressionRate: 1
-  DefenseProgressionRate: 2
-  SpeedProgressionRate: 2
+  HpBase: 2
+  AttackBase: 1
+  DefenseBase: 1
+  SpeedBase: 2

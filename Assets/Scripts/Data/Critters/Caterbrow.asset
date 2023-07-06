@@ -15,7 +15,7 @@ MonoBehaviour:
   CritterName: Caterbrow
   CritterSprite: {fileID: 21300000, guid: 71728bb7a5b768b43a21aa5c4e129c99, type: 3}
   levelingRate: 2
-  HpProgressionRate: 1
-  AttackProgressionRate: 0
-  DefenseProgressionRate: 0
-  SpeedProgressionRate: 1
+  HpBase: 1
+  AttackBase: 0
+  DefenseBase: 0
+  SpeedBase: 2

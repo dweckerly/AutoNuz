@@ -15,7 +15,7 @@ MonoBehaviour:
   CritterName: Tatarata
   CritterSprite: {fileID: 21300000, guid: 77b62858538c56d4aad92006d3bff1bd, type: 3}
   levelingRate: 2
-  HpProgressionRate: 0
-  AttackProgressionRate: 0
-  DefenseProgressionRate: 0
-  SpeedProgressionRate: 3
+  HpBase: 0
+  AttackBase: 1
+  DefenseBase: 0
+  SpeedBase: 3

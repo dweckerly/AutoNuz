@@ -15,7 +15,7 @@ MonoBehaviour:
   CritterName: Wormado-S
   CritterSprite: {fileID: 21300000, guid: d05c7823ffd82b14c84e54ea7ffcd728, type: 3}
   levelingRate: 2
-  HpProgressionRate: 1
-  AttackProgressionRate: 0
-  DefenseProgressionRate: 2
-  SpeedProgressionRate: 0
+  HpBase: 0
+  AttackBase: 0
+  DefenseBase: 2
+  SpeedBase: 0

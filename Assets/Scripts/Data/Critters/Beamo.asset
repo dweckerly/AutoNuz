@@ -15,7 +15,7 @@ MonoBehaviour:
   CritterName: Beamo
   CritterSprite: {fileID: 21300000, guid: fdfb4bb444cee3443b906ef9ae3e5171, type: 3}
   levelingRate: 1
-  HpProgressionRate: 1
-  AttackProgressionRate: 2
-  DefenseProgressionRate: 0
-  SpeedProgressionRate: 2
+  HpBase: 1
+  AttackBase: 1
+  DefenseBase: 0
+  SpeedBase: 2

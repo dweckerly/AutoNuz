@@ -15,7 +15,7 @@ MonoBehaviour:
   CritterName: Carnipula
   CritterSprite: {fileID: 21300000, guid: 723d08d17c043ae40ad12b8a63fd56dc, type: 3}
   levelingRate: 1
-  HpProgressionRate: 1
-  AttackProgressionRate: 2
-  DefenseProgressionRate: 0
-  SpeedProgressionRate: 2
+  HpBase: 1
+  AttackBase: 2
+  DefenseBase: 1
+  SpeedBase: 1
