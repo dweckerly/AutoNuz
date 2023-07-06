@@ -37,9 +37,9 @@ public class HUDController : MonoBehaviour
         string types = "";
         foreach(ElementalType et in critter.data.Types)
         {
-            types += et.ToString() + " ";
+            types += et.ToString() + "/";
         }
-        CritterDetails.Types.text = types;
+        CritterDetails.Types.text = types.Remove(types.Length - 1, 1); ;
         CritterDetails.HP.text = critter.currentHp + "/" + critter.Hp;
         CritterDetails.ATK.text = critter.Attack.ToString();
         CritterDetails.DEF.text = critter.Defense.ToString();
