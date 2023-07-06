@@ -19,3 +19,4 @@ MonoBehaviour:
   AttackBase: 0
   DefenseBase: 1
   SpeedBase: 2
+  Types: 04000000

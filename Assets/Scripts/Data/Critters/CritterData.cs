@@ -46,9 +46,9 @@ public enum ElementalType
     Electric,
     Fire,
     Plant,
-    Water,
     Shady,
     Spooky,
+    Water,
     Wind,
 }
 
