@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class CritterSelector : MonoBehaviour
 {
-    public GameObject SelectCritterItemPrefab;
-    List<SelectCritterItem> selectCritterItems = new List<SelectCritterItem>();
+    public GameObject CritterSelectItemPrefab;
+    List<CritterSelectItem> critterSelectItems = new List<CritterSelectItem>();
     public GameObject SelectionParent;
     public GameObject SelectionPanel;
 
@@ -21,46 +21,46 @@ public class CritterSelector : MonoBehaviour
         SelectionParent.SetActive(true);
         for (int i = 0; i < critters.Length; i++)
         {
-            SelectCritterItem SelectCritterItem = Instantiate(SelectCritterItemPrefab, SelectionPanel.transform).GetComponent<SelectCritterItem>();
-            selectCritterItems.Add(SelectCritterItem);
+            CritterSelectItem CritterSelectItem = Instantiate(CritterSelectItemPrefab, SelectionPanel.transform).GetComponent<CritterSelectItem>();
+            critterSelectItems.Add(CritterSelectItem);
         }
         for (int i = 0; i < critters.Length; i++)
         {
-            selectCritterItems[i].critterImage.sprite = critters[i].CritterSprite;
-            selectCritterItems[i].critterName.text = critters[i].CritterName;
-            selectCritterItems[i].critter = new Critter(critters[i], 5);
-            selectCritterItems[i].CritterHoverEvent += CritterHover;
-            selectCritterItems[i].CritterHoverEndEvent += CritterHoverEnd;
-            selectCritterItems[i].CritterSelectedEvent += SelectCritter;
+            critterSelectItems[i].critterImage.sprite = critters[i].CritterSprite;
+            critterSelectItems[i].critterName.text = critters[i].CritterName;
+            critterSelectItems[i].critter = new Critter(critters[i], 5);
+            critterSelectItems[i].CritterHoverEvent += CritterHover;
+            critterSelectItems[i].CritterHoverEndEvent += CritterHoverEnd;
+            critterSelectItems[i].CritterSelectedEvent += SelectCritter;
         }
     }
 
     public void EnableSelectionPanel(Critter critter)
     {
         SelectionParent.SetActive(true);
-        SelectCritterItem SelectCritterItem = Instantiate(SelectCritterItemPrefab, SelectionPanel.transform).GetComponent<SelectCritterItem>();
-        selectCritterItems.Add(SelectCritterItem);
-        selectCritterItems[0].critterImage.sprite = critter.data.CritterSprite;
-        selectCritterItems[0].critterName.text = critter.data.CritterName;
-        selectCritterItems[0].critter = critter;
-        selectCritterItems[0].CritterHoverEvent += CritterHover;
-        selectCritterItems[0].CritterHoverEndEvent += CritterHoverEnd;
-        selectCritterItems[0].CritterSelectedEvent += SelectCritter;
+        CritterSelectItem SelectCritterItem = Instantiate(CritterSelectItemPrefab, SelectionPanel.transform).GetComponent<CritterSelectItem>();
+        critterSelectItems.Add(SelectCritterItem);
+        critterSelectItems[0].critterImage.sprite = critter.data.CritterSprite;
+        critterSelectItems[0].critterName.text = critter.data.CritterName;
+        critterSelectItems[0].critter = critter;
+        critterSelectItems[0].CritterHoverEvent += CritterHover;
+        critterSelectItems[0].CritterHoverEndEvent += CritterHoverEnd;
+        critterSelectItems[0].CritterSelectedEvent += SelectCritter;
     }
 
     public void DisableSelectionPanel() 
     {
         if (SelectionParent.activeSelf)
         {
-            for (int i = 0; i < selectCritterItems.Count; i++)
+            for (int i = 0; i < critterSelectItems.Count; i++)
             {
-                selectCritterItems[i].CritterHoverEvent -= CritterHover;
-                selectCritterItems[i].CritterHoverEndEvent -= CritterHoverEnd;
-                selectCritterItems[i].CritterSelectedEvent -= SelectCritter;
-                Destroy(selectCritterItems[i].gameObject);
+                critterSelectItems[i].CritterHoverEvent -= CritterHover;
+                critterSelectItems[i].CritterHoverEndEvent -= CritterHoverEnd;
+                critterSelectItems[i].CritterSelectedEvent -= SelectCritter;
+                Destroy(critterSelectItems[i].gameObject);
             }
             SelectionParent.SetActive(false);
-            selectCritterItems.Clear();
+            critterSelectItems.Clear();
         }
     }
 

@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 4634489857053766859}
   - component: {fileID: 4237345356067302328}
   m_Layer: 5
-  m_Name: SelectCritterItem
+  m_Name: CritterSelectItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -264,7 +264,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cdd79045fd6b63488cbf4bb0d7ece51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  critterData: {fileID: 0}
   critterImage: {fileID: 7855690128900087051}
   critterName: {fileID: 3870658951449220287}
 --- !u!61 &4634489857053766859

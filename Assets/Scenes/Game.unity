@@ -861,7 +861,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97b3891ce59959c44860c1988c51529f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectCritterItemPrefab: {fileID: 3175845812500315314, guid: 94ea13d6ebe37c24cbaa6a24f0d68f7f, type: 3}
+  CritterSelectItemPrefab: {fileID: 3175845812500315314, guid: 94ea13d6ebe37c24cbaa6a24f0d68f7f, type: 3}
   SelectionParent: {fileID: 958287606}
   SelectionPanel: {fileID: 1085204066}
 --- !u!4 &291183165
