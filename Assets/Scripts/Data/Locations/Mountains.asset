@@ -22,5 +22,5 @@ MonoBehaviour:
     Critters:
     - {fileID: 11400000, guid: f0263028c63069547b49f94ab71caec7, type: 2}
     - {fileID: 11400000, guid: 832a56219ee7b43418f548d6f8517ab8, type: 2}
-  Description: Jagged peaks and sheer cliffs make treacherous terrain for any seasoned
-    critter tamer.
+  Description: Jagged peaks and sheer cliffs spell danger for even a seasoned critter
+    tamer.

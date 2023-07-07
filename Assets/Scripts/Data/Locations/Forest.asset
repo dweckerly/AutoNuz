@@ -26,4 +26,4 @@ MonoBehaviour:
   - CatchRate: 2
     Critters:
     - {fileID: 11400000, guid: cdab9a33800aa414c818d3c425d7459c, type: 2}
-  Description: Towering trees and thick foliage make a prefect habitat for many critters.
+  Description: Towering trees and thick foliage make a perfect habitat for many critters.
