@@ -14,6 +14,10 @@ public class MapItem
 
 public class MapController : MonoBehaviour
 {
+    const float ULTRA_RARE_CATCH_RATE = 1f;
+    const float RARE_CATCH_RATE = 0.9f;
+    const float UNCOMMON_CATCH_RATE = 0.6f;
+    
     public MapItem[] MapItems;
     public LocationData[] Locations;
     public GameObject MapPanel;
@@ -55,15 +59,15 @@ public class MapController : MonoBehaviour
     {
         CritterData cd = null;
         float rate = Random.Range(0f, 1f);
-        if (rate >= 1f && CatchTableHasRateValue(index, CatchRate.UltraRare))
+        if (rate >= ULTRA_RARE_CATCH_RATE && CatchTableHasRateValue(index, CatchRate.UltraRare))
         {
             cd = FindCritterByCatchRate(index, CatchRate.UltraRare);
         }
-        if (rate >= 0.9f && CatchTableHasRateValue(index, CatchRate.Rare))
+        else if (rate >= RARE_CATCH_RATE && CatchTableHasRateValue(index, CatchRate.Rare))
         {
             cd = FindCritterByCatchRate(index, CatchRate.Rare);
         }
-        if (rate >= 0.6f && CatchTableHasRateValue(index, CatchRate.Uncommon))
+        else if (rate >= UNCOMMON_CATCH_RATE && CatchTableHasRateValue(index, CatchRate.Uncommon))
         {
             cd = FindCritterByCatchRate(index, CatchRate.Uncommon);
         }
@@ -71,7 +75,6 @@ public class MapController : MonoBehaviour
         {
             cd = FindCritterByCatchRate(index, CatchRate.Common);
         }
-        Debug.Log(rate);
         AreaSelectionEvent?.Invoke(cd);
     }
 
