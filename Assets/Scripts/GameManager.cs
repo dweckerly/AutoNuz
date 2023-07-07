@@ -21,11 +21,13 @@ public class GameManager : MonoBehaviour
         CritterSelector.CritterHoverEvent += CritterHover;
         CritterSelector.CritterHoverEventEnd += CritterHoverEnd;
         CritterSelector.CritterSelectionEvent += CritterSelected;
-        MapController.AreaSelectionEvent += SelectArea;
+        MapController.LocationSelectionEvent += SelectLocation;
+        MapController.LocationHoverEvent += LocationHover;
+        MapController.LocationHoverEventEnd += LocationHoverEnd;
         BattleController.OnRunSelected += RunAway;
         BattleController.BattleEndEvent += PostBattle;
         BattleController.PlayerDefeated += GameOver;
-        HUDController.HideDetails();
+        HUDController.HideCritterDetails();
         ShowFirstSelectionPanel();
     }
 
@@ -34,7 +36,9 @@ public class GameManager : MonoBehaviour
         CritterSelector.CritterHoverEvent -= CritterHover;
         CritterSelector.CritterHoverEventEnd -= CritterHoverEnd;
         CritterSelector.CritterSelectionEvent -= CritterSelected;
-        MapController.AreaSelectionEvent -= SelectArea;
+        MapController.LocationSelectionEvent -= SelectLocation;
+        MapController.LocationHoverEvent -= LocationHover;
+        MapController.LocationHoverEventEnd -= LocationHoverEnd;
         BattleController.OnRunSelected -= RunAway;
         BattleController.BattleEndEvent -= PostBattle;
         BattleController.PlayerDefeated -= GameOver;
@@ -49,14 +53,14 @@ public class GameManager : MonoBehaviour
     void CritterHoverEnd()
     {
         selectedCritter = null;
-        HUDController.HideDetails();
+        HUDController.HideCritterDetails();
     }
 
     void CritterSelected()
     {
         if (selectedCritter != null)
         {
-            HUDController.HideDetails();
+            HUDController.HideCritterDetails();
             for (int i = 0; i < playerCritters.Length; i++)
             {
                 if (playerCritters[i] == null)
@@ -71,11 +75,21 @@ public class GameManager : MonoBehaviour
         // need some error message here about party being full
     }
 
-    void SelectArea(CritterData critterData)
+    void SelectLocation(CritterData critterData)
     {
         ShowBattle();
         Critter critter = new Critter(critterData, Random.Range(2, 5));
         BattleController.PopulateBattleUI(playerCritters[0], critter);
+    }
+
+    void LocationHover(LocationData locationData)
+    {
+        HUDController.ShowLocationDetails(locationData);
+    }
+
+    void LocationHoverEnd()
+    {
+        HUDController.HideLocationDetails();
     }
 
     void RunAway()
@@ -86,14 +100,14 @@ public class GameManager : MonoBehaviour
     void PostBattle(Critter critter)
     {
         BattleController.BattlePanel.SetActive(false);
-        MapController.MapPanel.SetActive(false);
+        MapController.DisableMap();
         CritterSelector.EnableSelectionPanel(critter);
     }
 
     void ShowFirstSelectionPanel()
     {
         BattleController.BattlePanel.SetActive(false);
-        MapController.MapPanel.SetActive(false);
+        MapController.DisableMap();
         CritterSelector.EnableSelectionPanel(starterCritters);
     }
 
@@ -102,14 +116,13 @@ public class GameManager : MonoBehaviour
         AreaNumber++;
         CritterSelector.DisableSelectionPanel();
         BattleController.BattlePanel.SetActive(false);
-        MapController.MapPanel.SetActive(true);
-        MapController.GenerateMap(AreaNumber);
+        MapController.EnableMap(AreaNumber);
     }
 
     void ShowBattle()
     {
         CritterSelector.DisableSelectionPanel();
-        MapController.MapPanel.SetActive(false);
+        MapController.DisableMap();
         BattleController.BattlePanel.SetActive(true);
     }
 

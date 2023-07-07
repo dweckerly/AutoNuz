@@ -13,7 +13,8 @@ public class MapSelectItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public Image locationImage;
     public TMP_Text locationName;
 
-    public event Action LocationSelectEvent;
+    public delegate void OnLocationSelect(LocationData locationData);
+    public event OnLocationSelect LocationSelectEvent;
     public delegate void OnLocationHover(LocationData locationData);
     public event OnLocationHover LocationHoverEvent;
     public event Action LocationHoverEventEnd;
@@ -25,7 +26,7 @@ public class MapSelectItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        LocationSelectEvent?.Invoke();
+        LocationSelectEvent?.Invoke(locationData);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

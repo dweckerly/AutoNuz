@@ -22,6 +22,7 @@ public class HUDController : MonoBehaviour
     public GameObject HUD;
     public CritterDetails CritterDetails;
     public GameObject CritterDetailsContainer;
+    public TMP_Text LocationDetails;
     public GameObject LocationDetailsContainer;
 
     private void Awake()
@@ -47,8 +48,19 @@ public class HUDController : MonoBehaviour
         CritterDetailsContainer.SetActive(true);
     }
 
-    public void HideDetails()
+    public void HideCritterDetails()
     {
         CritterDetailsContainer.SetActive(false);
+    }
+
+    public void ShowLocationDetails(LocationData locationData)
+    {
+        LocationDetails.text = locationData.Description;
+        LocationDetailsContainer.SetActive(true);
+    }
+
+    public void HideLocationDetails()
+    {
+        LocationDetailsContainer.SetActive(false);
     }
 }
