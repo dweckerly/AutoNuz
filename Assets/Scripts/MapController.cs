@@ -13,8 +13,6 @@ public class MapController : MonoBehaviour
     public MapSelectItem[] MapItems;
     public LocationData[] Locations;
     public GameObject MapPanel;
-    public GameObject MapSelectParent;
-    public GameObject MapSelectItemPrefab;
     public TMP_Text AreaText;
 
     public delegate void OnLocationSelection(CritterData critterData);

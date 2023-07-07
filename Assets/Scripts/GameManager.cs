@@ -77,6 +77,7 @@ public class GameManager : MonoBehaviour
 
     void SelectLocation(CritterData critterData)
     {
+        HUDController.HideLocationDetails();
         ShowBattle();
         Critter critter = new Critter(critterData, Random.Range(2, 5));
         BattleController.PopulateBattleUI(playerCritters[0], critter);
