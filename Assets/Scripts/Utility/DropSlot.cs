@@ -11,6 +11,7 @@ public class DropSlot : MonoBehaviour, IDropHandler
     {
         rectTransform = GetComponent<RectTransform>();
     }
+    
     public void OnDrop(PointerEventData eventData)
     {
         Debug.Log("OnDrop");

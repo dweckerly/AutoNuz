@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
                 if (playerCritters[i] == null)
                 {
                     playerCritters[i] = selectedCritter;
+                    HUDController.AddCritterToRoster(playerCritters[i]);
                     selectedCritter = null;
                     ShowMap();
                     return;

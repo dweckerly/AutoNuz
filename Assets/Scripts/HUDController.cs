@@ -19,16 +19,36 @@ public class CritterDetails
 
 public class HUDController : MonoBehaviour
 {
+    public Canvas canvas;
     public GameObject HUD;
     public CritterDetails CritterDetails;
     public GameObject CritterDetailsContainer;
     public TMP_Text LocationDetails;
     public GameObject LocationDetailsContainer;
+    public GameObject RosterContainer;
+
+    public GameObject RosterCritterPrefab;
+    public CritterRosterSlot[] DropSlots;
 
     private void Awake()
     {
         CritterDetailsContainer.SetActive(false);
         LocationDetailsContainer.SetActive(false);
+    }
+
+    public void AddCritterToRoster(Critter critter)
+    {
+        CritterRosterItem critterRosterItem = Instantiate(RosterCritterPrefab, RosterContainer.transform).GetComponent<CritterRosterItem>();
+        critterRosterItem.canvas = canvas;
+        critterRosterItem.PopulateDetails(critter);
+        foreach (CritterRosterSlot slot in DropSlots)
+        {
+            if (slot.critterRosterItem == null)
+            {
+                critterRosterItem.SetSlot(slot);
+                return;
+            }       
+        }
     }
 
     public void UpdateAndShowCritterDetails(Critter critter)
