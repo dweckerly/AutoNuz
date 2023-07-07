@@ -106,6 +106,7 @@ public class BattleController : MonoBehaviour
         if (wildCritter.currentHp == 0) 
         {
             battling = false;
+            wildCritter.currentHp = Mathf.RoundToInt(wildCritter.Hp / 2);
             BattleEndEvent?.Invoke(wildCritter);
         }
     }
