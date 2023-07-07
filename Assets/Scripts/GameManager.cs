@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     Critter selectedCritter;
 
     public HUDController HUDController;
-    public CritterSelector FirstCritterSelection;
+    public CritterSelector CritterSelector;
     public MapController MapController;
     public BattleController BattleController;
 
@@ -18,9 +18,9 @@ public class GameManager : MonoBehaviour
 
     private void Start() 
     {
-        FirstCritterSelection.CritterHoverEvent += CritterHover;
-        FirstCritterSelection.CritterHoverEventEnd += CritterHoverEnd;
-        FirstCritterSelection.CritterSelectionEvent += CritterSelected;
+        CritterSelector.CritterHoverEvent += CritterHover;
+        CritterSelector.CritterHoverEventEnd += CritterHoverEnd;
+        CritterSelector.CritterSelectionEvent += CritterSelected;
         MapController.AreaSelectionEvent += SelectArea;
         BattleController.OnRunSelected += RunAway;
         BattleController.BattleEndEvent += PostBattle;
@@ -31,9 +31,9 @@ public class GameManager : MonoBehaviour
 
     private void OnDestroy() 
     {
-        FirstCritterSelection.CritterHoverEvent -= CritterHover;
-        FirstCritterSelection.CritterHoverEventEnd -= CritterHoverEnd;
-        FirstCritterSelection.CritterSelectionEvent -= CritterSelected;
+        CritterSelector.CritterHoverEvent -= CritterHover;
+        CritterSelector.CritterHoverEventEnd -= CritterHoverEnd;
+        CritterSelector.CritterSelectionEvent -= CritterSelected;
         MapController.AreaSelectionEvent -= SelectArea;
         BattleController.OnRunSelected -= RunAway;
         BattleController.BattleEndEvent -= PostBattle;
@@ -85,20 +85,22 @@ public class GameManager : MonoBehaviour
 
     void PostBattle(Critter critter)
     {
-
+        BattleController.BattlePanel.SetActive(false);
+        MapController.MapPanel.SetActive(false);
+        CritterSelector.EnableSelectionPanel(critter);
     }
 
     void ShowFirstSelectionPanel()
     {
         BattleController.BattlePanel.SetActive(false);
         MapController.MapPanel.SetActive(false);
-        FirstCritterSelection.EnableSelectionPanel(starterCritters);
+        CritterSelector.EnableSelectionPanel(starterCritters);
     }
 
     void ShowMap()
     {
         AreaNumber++;
-        FirstCritterSelection.DisableSelectionPanel();
+        CritterSelector.DisableSelectionPanel();
         BattleController.BattlePanel.SetActive(false);
         MapController.MapPanel.SetActive(true);
         MapController.GenerateMap(AreaNumber);
@@ -106,7 +108,7 @@ public class GameManager : MonoBehaviour
 
     void ShowBattle()
     {
-        FirstCritterSelection.DisableSelectionPanel();
+        CritterSelector.DisableSelectionPanel();
         MapController.MapPanel.SetActive(false);
         BattleController.BattlePanel.SetActive(true);
     }

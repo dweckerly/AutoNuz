@@ -35,6 +35,19 @@ public class CritterSelector : MonoBehaviour
         }
     }
 
+    public void EnableSelectionPanel(Critter critter)
+    {
+        SelectionParent.SetActive(true);
+        SelectCritterItem SelectCritterItem = Instantiate(SelectCritterItemPrefab, SelectionPanel.transform).GetComponent<SelectCritterItem>();
+        selectCritterItems.Add(SelectCritterItem);
+        selectCritterItems[0].critterImage.sprite = critter.data.CritterSprite;
+        selectCritterItems[0].critterName.text = critter.data.CritterName;
+        selectCritterItems[0].critter = critter;
+        selectCritterItems[0].CritterHoverEvent += CritterHover;
+        selectCritterItems[0].CritterHoverEndEvent += CritterHoverEnd;
+        selectCritterItems[0].CritterSelectedEvent += SelectCritter;
+    }
+
     public void DisableSelectionPanel() 
     {
         if (SelectionParent.activeSelf)

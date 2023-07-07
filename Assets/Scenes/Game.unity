@@ -594,7 +594,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HUDController: {fileID: 531896768}
-  FirstCritterSelection: {fileID: 291183164}
+  CritterSelector: {fileID: 291183164}
   MapController: {fileID: 577247026}
   BattleController: {fileID: 631167622}
   starterCritters:
@@ -843,7 +843,7 @@ GameObject:
   - component: {fileID: 291183165}
   - component: {fileID: 291183164}
   m_Layer: 0
-  m_Name: FirstCritterSelector
+  m_Name: CritterSelector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
