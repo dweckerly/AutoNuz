@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -15,11 +14,13 @@ public class CritterRosterItem : MonoBehaviour, IBeginDragHandler, IEndDragHandl
 
     public Canvas canvas;
     private RectTransform rectTransform;
-    private CanvasGroup canvasGroup;
+    public CanvasGroup canvasGroup;
 
     Vector2 originalPosition;
 
     public CritterRosterSlot critterRosterSlot;
+    public event Action OnDragEvent;
+    public event Action OnDragEventEnd;
 
     private void Awake()
     {
@@ -47,7 +48,7 @@ public class CritterRosterItem : MonoBehaviour, IBeginDragHandler, IEndDragHandl
     {
         originalPosition = rectTransform.anchoredPosition;
         canvasGroup.alpha = 0.6f;
-        canvasGroup.blocksRaycasts = false;
+        OnDragEvent?.Invoke();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -58,7 +59,7 @@ public class CritterRosterItem : MonoBehaviour, IBeginDragHandler, IEndDragHandl
     public void OnEndDrag(PointerEventData eventData)
     {
         canvasGroup.alpha = 1f;
-        canvasGroup.blocksRaycasts = true;
         rectTransform.anchoredPosition = originalPosition;
+        OnDragEventEnd?.Invoke();
     }
 }

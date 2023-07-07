@@ -29,6 +29,7 @@ public class HUDController : MonoBehaviour
 
     public GameObject RosterCritterPrefab;
     public CritterRosterSlot[] DropSlots;
+    public List<CritterRosterItem> rosterItems = new List<CritterRosterItem>();
 
     private void Awake()
     {
@@ -41,14 +42,38 @@ public class HUDController : MonoBehaviour
         CritterRosterItem critterRosterItem = Instantiate(RosterCritterPrefab, RosterContainer.transform).GetComponent<CritterRosterItem>();
         critterRosterItem.canvas = canvas;
         critterRosterItem.PopulateDetails(critter);
+        critterRosterItem.OnDragEvent += RosterItemDragEvent;
+        critterRosterItem.OnDragEventEnd += RosterItemDragEventEnd;
         foreach (CritterRosterSlot slot in DropSlots)
         {
             if (slot.critterRosterItem == null)
             {
                 critterRosterItem.SetSlot(slot);
+                rosterItems.Add(critterRosterItem);
                 return;
             }       
         }
+    }
+
+    private void OnDestroy() 
+    {
+        foreach(CritterRosterItem cri in rosterItems)
+        {
+            cri.OnDragEvent -= RosterItemDragEvent;
+            cri.OnDragEventEnd -= RosterItemDragEventEnd;
+        }    
+    }
+
+    void RosterItemDragEvent()
+    {
+        foreach (CritterRosterItem cri in rosterItems)
+            cri.canvasGroup.blocksRaycasts = false;
+    }
+
+    void RosterItemDragEventEnd()
+    {
+        foreach (CritterRosterItem cri in rosterItems)
+            cri.canvasGroup.blocksRaycasts = true;
     }
 
     public void UpdateAndShowCritterDetails(Critter critter)

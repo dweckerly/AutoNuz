@@ -15,14 +15,17 @@ public class CritterRosterSlot : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
+        Debug.Log("OnDrop: " + gameObject.name);
         if (eventData.pointerDrag != null)
         {
             CritterRosterItem rosterItem = eventData.pointerDrag.GetComponent<CritterRosterItem>();
             if (critterRosterItem != null) 
             {
+                CritterRosterSlot slot = critterRosterItem.critterRosterSlot;
                 critterRosterItem.SetSlot(rosterItem.critterRosterSlot);
+                rosterItem.SetSlot(slot);
                 critterRosterItem = rosterItem;
-                critterRosterItem.SetSlot(this);
+                
             }
         }
     }
