@@ -13,12 +13,11 @@ public class CritterRosterItem : MonoBehaviour, IBeginDragHandler, IEndDragHandl
     public TMP_Text healthText;
 
     public Canvas canvas;
-    private RectTransform rectTransform;
+    public RectTransform rectTransform;
     public CanvasGroup canvasGroup;
 
     Vector2 originalPosition;
 
-    public CritterRosterSlot critterRosterSlot;
     public event Action OnDragEvent;
     public event Action OnDragEventEnd;
 
@@ -35,13 +34,6 @@ public class CritterRosterItem : MonoBehaviour, IBeginDragHandler, IEndDragHandl
         level.text = critter.Level.ToString();
         healthBar.localScale = new Vector3((float)critter.currentHp / (float)critter.Hp, 1f, 1f);
         healthText.text = critter.currentHp + "/" + critter.Hp;
-    }
-
-    public void SetSlot(CritterRosterSlot slot)
-    {
-        critterRosterSlot = slot;
-        slot.critterRosterItem = this;
-        rectTransform.anchoredPosition = slot.rectTransform.anchoredPosition;
     }
 
     public void OnBeginDrag(PointerEventData eventData)

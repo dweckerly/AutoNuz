@@ -37,6 +37,15 @@ public class HUDController : MonoBehaviour
         LocationDetailsContainer.SetActive(false);
     }
 
+    public void UpdateCritterRoster(Critter[] critters)
+    {
+        rosterItems.Clear();
+        foreach(Critter critter in critters)
+        {
+            AddCritterToRoster(critter);
+        }
+    }
+
     public void AddCritterToRoster(Critter critter)
     {
         CritterRosterItem critterRosterItem = Instantiate(RosterCritterPrefab, RosterContainer.transform).GetComponent<CritterRosterItem>();
@@ -48,7 +57,7 @@ public class HUDController : MonoBehaviour
         {
             if (slot.critterRosterItem == null)
             {
-                critterRosterItem.SetSlot(slot);
+                //critterRosterItem.SetSlot(slot);
                 rosterItems.Add(critterRosterItem);
                 return;
             }       
