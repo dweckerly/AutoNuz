@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class FirstCritterSelection : MonoBehaviour
+public class CritterSelector : MonoBehaviour
 {
     public GameObject SelectCritterItemPrefab;
     List<SelectCritterItem> selectCritterItems = new List<SelectCritterItem>();

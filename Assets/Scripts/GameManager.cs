@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     Critter selectedCritter;
 
     public HUDController HUDController;
-    public FirstCritterSelection FirstCritterSelection;
+    public CritterSelector FirstCritterSelection;
     public MapController MapController;
     public BattleController BattleController;
 
