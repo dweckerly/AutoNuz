@@ -117,6 +117,7 @@ public class BattleController : MonoBehaviour
         {
             battling = false;
             wildCritter.currentHp = Mathf.RoundToInt(wildCritter.Hp / 2);
+            StopAllCoroutines();
             BattleEndEvent?.Invoke(wildCritter);
         }
     }
@@ -133,6 +134,7 @@ public class BattleController : MonoBehaviour
         {
             playerCritter.Alive = false;
             battling = false;
+            StopAllCoroutines();
             PlayerCritterDefeated?.Invoke();
         }
     }
