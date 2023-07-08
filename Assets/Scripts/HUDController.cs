@@ -31,15 +31,26 @@ public class HUDController : MonoBehaviour
     public CritterRosterSlot[] DropSlots;
     public List<CritterRosterItem> rosterItems = new List<CritterRosterItem>();
 
+    public delegate void OnCritterSwap(Critter c1, Critter c2);
+    public OnCritterSwap CritterSwapEvent;
+
     private void Awake()
     {
         CritterDetailsContainer.SetActive(false);
         LocationDetailsContainer.SetActive(false);
+        foreach(CritterRosterSlot crs in DropSlots)
+        {
+            crs.CritterSwapEvent += CritterSwap;
+        }
     }
 
     public void UpdateCritterRoster(Critter[] critters)
     {
         rosterItems.Clear();
+        for(int i = RosterContainer.transform.childCount - 1; i >= 0; i--)
+        {
+            Destroy(RosterContainer.transform.GetChild(i).gameObject);
+        }
         foreach(Critter critter in critters)
         {
             AddCritterToRoster(critter);
@@ -57,7 +68,8 @@ public class HUDController : MonoBehaviour
         {
             if (slot.critterRosterItem == null)
             {
-                //critterRosterItem.SetSlot(slot);
+                slot.critterRosterItem = critterRosterItem;
+                critterRosterItem.SetAnchoredPosition(slot.rectTransform.anchoredPosition);
                 rosterItems.Add(critterRosterItem);
                 return;
             }       
@@ -66,6 +78,10 @@ public class HUDController : MonoBehaviour
 
     private void OnDestroy() 
     {
+        foreach(CritterRosterSlot crs in DropSlots)
+        {
+            crs.CritterSwapEvent -= CritterSwap;
+        }
         foreach(CritterRosterItem cri in rosterItems)
         {
             cri.OnDragEvent -= RosterItemDragEvent;
@@ -117,4 +133,9 @@ public class HUDController : MonoBehaviour
     {
         LocationDetailsContainer.SetActive(false);
     }
+
+    void CritterSwap(Critter c1, Critter c2)
+    {
+
+    } 
 }

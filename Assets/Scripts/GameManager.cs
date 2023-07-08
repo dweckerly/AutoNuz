@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
 
     private void Start() 
     {
+        HUDController.CritterSwapEvent += SwapCritters;
         CritterSelector.CritterHoverEvent += CritterHover;
         CritterSelector.CritterHoverEventEnd += CritterHoverEnd;
         CritterSelector.CritterSelectionEvent += CritterSelected;
@@ -33,6 +35,7 @@ public class GameManager : MonoBehaviour
 
     private void OnDestroy() 
     {
+        HUDController.CritterSwapEvent -= SwapCritters;
         CritterSelector.CritterHoverEvent -= CritterHover;
         CritterSelector.CritterHoverEventEnd -= CritterHoverEnd;
         CritterSelector.CritterSelectionEvent -= CritterSelected;
@@ -42,6 +45,15 @@ public class GameManager : MonoBehaviour
         BattleController.OnRunSelected -= RunAway;
         BattleController.BattleEndEvent -= PostBattle;
         BattleController.PlayerDefeated -= GameOver;
+    }
+
+    void SwapCritters(Critter c1, Critter c2)
+    {
+        int index1 = Array.IndexOf(playerCritters, c1);
+        int index2 = Array.IndexOf(playerCritters, c2);
+        playerCritters[index1] = c2;
+        playerCritters[index2] = c1;
+        HUDController.UpdateCritterRoster(playerCritters);
     }
 
     void CritterHover(Critter critter)
@@ -80,7 +92,7 @@ public class GameManager : MonoBehaviour
     {
         HUDController.HideLocationDetails();
         ShowBattle();
-        Critter critter = new Critter(critterData, Random.Range(2, 5));
+        Critter critter = new Critter(critterData, UnityEngine.Random.Range(2, 5));
         BattleController.PopulateBattleUI(playerCritters[0], critter);
     }
 

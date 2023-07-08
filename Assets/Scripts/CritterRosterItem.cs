@@ -36,6 +36,11 @@ public class CritterRosterItem : MonoBehaviour, IBeginDragHandler, IEndDragHandl
         healthText.text = critter.currentHp + "/" + critter.Hp;
     }
 
+    public void SetAnchoredPosition(Vector2 pos)
+    {
+        rectTransform.anchoredPosition = pos;
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         originalPosition = rectTransform.anchoredPosition;
@@ -51,7 +56,12 @@ public class CritterRosterItem : MonoBehaviour, IBeginDragHandler, IEndDragHandl
     public void OnEndDrag(PointerEventData eventData)
     {
         canvasGroup.alpha = 1f;
-        rectTransform.anchoredPosition = originalPosition;
+        ResetPosition();
         OnDragEventEnd?.Invoke();
+    }
+
+    public void ResetPosition()
+    {
+        rectTransform.anchoredPosition = originalPosition;
     }
 }
