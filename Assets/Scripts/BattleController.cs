@@ -116,6 +116,8 @@ public class BattleController : MonoBehaviour
         if (wildCritter.currentHp == 0) 
         {
             battling = false;
+            speedTimePlayer = 0f;
+            speedTimeWild = 0f;
             wildCritter.currentHp = Mathf.RoundToInt(wildCritter.Hp / 2);
             StopAllCoroutines();
             BattleEndEvent?.Invoke(wildCritter);
@@ -134,6 +136,8 @@ public class BattleController : MonoBehaviour
         {
             playerCritter.Alive = false;
             battling = false;
+            speedTimePlayer = 0f;
+            speedTimeWild = 0f;
             StopAllCoroutines();
             PlayerCritterDefeated?.Invoke();
         }
