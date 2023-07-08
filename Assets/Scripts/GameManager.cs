@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
         MapController.LocationHoverEventEnd += LocationHoverEnd;
         BattleController.OnRunSelected += RunAway;
         BattleController.BattleEndEvent += PostBattle;
-        BattleController.PlayerDefeated += GameOver;
+        BattleController.PlayerCritterDefeated += ChangePlayerBattleCritter;
         BattleController.PlayerCritterDamaged += UpdateCritterRosterDisplay;
         HUDController.HideCritterDetails();
         ShowFirstSelectionPanel();
@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
         MapController.LocationHoverEventEnd -= LocationHoverEnd;
         BattleController.OnRunSelected -= RunAway;
         BattleController.BattleEndEvent -= PostBattle;
-        BattleController.PlayerDefeated -= GameOver;
+        BattleController.PlayerCritterDefeated -= ChangePlayerBattleCritter;
         BattleController.PlayerCritterDamaged -= UpdateCritterRosterDisplay;
     }
 
@@ -145,6 +145,18 @@ public class GameManager : MonoBehaviour
     void UpdateCritterRosterDisplay()
     {
         HUDController.UpdateCritterRosterHealthDisplays();
+    }
+
+    void ChangePlayerBattleCritter()
+    {
+        int index = Array.IndexOf(playerCritters, BattleController.playerCritter);
+        if (index + 1 >= playerCritters.Length || playerCritters[index + 1] == null)
+        {
+            GameOver();
+            return;
+        }
+        BattleController.PopulatePlayerCritterUI(playerCritters[index + 1]);
+        BattleController.StartBattle();      
     }
 
     void GameOver()
