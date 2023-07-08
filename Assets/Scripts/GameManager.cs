@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
         BattleController.OnRunSelected += RunAway;
         BattleController.BattleEndEvent += PostBattle;
         BattleController.PlayerDefeated += GameOver;
+        BattleController.PlayerCritterDamaged += UpdateCritterRosterDisplay;
         HUDController.HideCritterDetails();
         ShowFirstSelectionPanel();
     }
@@ -45,6 +46,7 @@ public class GameManager : MonoBehaviour
         BattleController.OnRunSelected -= RunAway;
         BattleController.BattleEndEvent -= PostBattle;
         BattleController.PlayerDefeated -= GameOver;
+        BattleController.PlayerCritterDamaged -= UpdateCritterRosterDisplay;
     }
 
     void SwapCritters(Critter c1, Critter c2)
@@ -138,6 +140,11 @@ public class GameManager : MonoBehaviour
         CritterSelector.DisableSelectionPanel();
         MapController.DisableMap();
         BattleController.BattlePanel.SetActive(true);
+    }
+
+    void UpdateCritterRosterDisplay()
+    {
+        HUDController.UpdateCritterRosterHealthDisplays();
     }
 
     void GameOver()

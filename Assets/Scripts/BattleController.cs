@@ -24,6 +24,7 @@ public class BattleController : MonoBehaviour
     public GameObject FightRunBtns;
 
     public event Action OnRunSelected;
+    public event Action PlayerCritterDamaged;
     public event Action PlayerDefeated;
     public delegate void OnBattleEnd(Critter critter);
     public OnBattleEnd BattleEndEvent;
@@ -118,6 +119,7 @@ public class BattleController : MonoBehaviour
         if (playerCritter.currentHp < 0) playerCritter.currentHp = 0;
         playerCritterUI.healthText.text = playerCritter.currentHp + "/" + playerCritter.Hp;
         playerCritterUI.healthRect.localScale = new Vector3((float)(playerCritter.currentHp) / (float)(playerCritter.Hp), 1f, 1f);
+        PlayerCritterDamaged.Invoke();
         if (playerCritter.currentHp == 0) 
         {
             battling = false;

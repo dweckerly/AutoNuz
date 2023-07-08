@@ -142,4 +142,13 @@ public class HUDController : MonoBehaviour
     {
         CritterSwapEvent.Invoke(c1, c2);
     } 
+
+    public void UpdateCritterRosterHealthDisplays()
+    {
+        foreach(CritterRosterItem cri in rosterItems)
+        {
+            cri.healthBar.localScale = new Vector3((float)cri.critter.currentHp / (float)cri.critter.Hp, 1f, 1f);
+            cri.healthText.text = cri.critter.currentHp + "/" + cri.critter.Hp;
+        }
+    }
 }
