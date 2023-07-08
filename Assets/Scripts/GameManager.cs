@@ -124,6 +124,7 @@ public class GameManager : MonoBehaviour
     {
         BattleController.BattlePanel.SetActive(false);
         MapController.DisableMap();
+        GiveXp(critter.neededXp);
         CritterSelector.EnableSelectionPanel(critter);
     }
 
@@ -151,7 +152,7 @@ public class GameManager : MonoBehaviour
 
     void UpdateCritterRosterDisplay()
     {
-        HUDController.UpdateCritterRosterHealthDisplays();
+        HUDController.UpdateCritterRosterDisplays();
     }
 
     void ChangePlayerBattleCritter()
@@ -171,5 +172,20 @@ public class GameManager : MonoBehaviour
     void GameOver()
     {
         Debug.Log("Game Over...");
+    }
+
+    void GiveXp(int amount)
+    {
+        int critterCount = 0;
+        foreach(Critter c in playerCritters)
+        {
+            if (c != null && c.Alive) critterCount++;
+        }
+        int xpAmount = Mathf.CeilToInt((float)amount / (float)critterCount);
+        foreach(Critter critter in playerCritters)
+        {
+            if(critter != null && critter.Alive) critter.ReceiveXp(xpAmount);
+        }
+        HUDController.UpdateCritterRosterDisplays();
     }
 }

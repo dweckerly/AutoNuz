@@ -12,7 +12,7 @@ public class Critter
         if (_Level < 1) _Level = 1;
         Level = _Level;
         data = _data;
-        Xp = CalculateXp();
+        Xp = 0;
         neededXp = CalculateXp(Level + 1);
         personality = SelectPersonality();
         HpGeneticMod = UnityEngine.Random.Range(0, GENETIC_MOD_MAX);
@@ -137,5 +137,11 @@ public class Critter
             default:
                 return new float[4] { 1, 1, 1, 1 };
         }
+    }
+
+    public void ReceiveXp(int amount)
+    {
+        Xp += amount;
+        if (Xp >= neededXp) LevelUp();
     }
 }
