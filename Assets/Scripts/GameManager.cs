@@ -94,8 +94,15 @@ public class GameManager : MonoBehaviour
     {
         HUDController.HideLocationDetails();
         ShowBattle();
-        Critter critter = new Critter(critterData, UnityEngine.Random.Range(2, 5));
-        BattleController.PopulateBattleUI(playerCritters[0], critter);
+        Critter wildCritter = new Critter(critterData, UnityEngine.Random.Range(2, 4));
+        foreach(Critter playerCritter in playerCritters)
+        {
+            if (playerCritter != null && playerCritter.Alive)
+            {
+                BattleController.InitializeBattleUI(playerCritter, wildCritter);
+                return;
+            }
+        }
     }
 
     void LocationHover(LocationData locationData)
@@ -149,14 +156,16 @@ public class GameManager : MonoBehaviour
 
     void ChangePlayerBattleCritter()
     {
-        int index = Array.IndexOf(playerCritters, BattleController.playerCritter);
-        if (index + 1 >= playerCritters.Length || playerCritters[index + 1] == null)
+        for(int i = 0; i < playerCritters.Length; i++)
         {
-            GameOver();
-            return;
+            if (playerCritters[i] != null && playerCritters[i].Alive)
+            {
+                BattleController.PopulatePlayerCritterUI(playerCritters[i]);
+                BattleController.StartBattle();
+                return;
+            }
         }
-        BattleController.PopulatePlayerCritterUI(playerCritters[index + 1]);
-        BattleController.StartBattle();      
+        GameOver();            
     }
 
     void GameOver()

@@ -41,6 +41,7 @@ public class Critter
     int AttackGeneticMod;
     int DefenseGeneticMod;
     int SpeedGeneticMod;
+    public bool Alive = true;
 
     public void LevelUp()
     {

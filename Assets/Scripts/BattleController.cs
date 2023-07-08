@@ -37,7 +37,7 @@ public class BattleController : MonoBehaviour
 
     bool battling = false;
 
-    public void PopulateBattleUI(Critter _playerCritter, Critter _wildCritter)
+    public void InitializeBattleUI(Critter _playerCritter, Critter _wildCritter)
     {
         PopulatePlayerCritterUI(_playerCritter);
         PopulateWildCritterUI(_wildCritter);
@@ -78,7 +78,7 @@ public class BattleController : MonoBehaviour
 
     public float CalculateHealthPercentage(Critter critter)
     {
-        return critter.currentHp / critter.Hp;
+        return (float)critter.currentHp / (float)critter.Hp;
     }
 
     IEnumerator HandleTurnTIme()
@@ -131,6 +131,7 @@ public class BattleController : MonoBehaviour
         PlayerCritterDamaged.Invoke();
         if (playerCritter.currentHp == 0) 
         {
+            playerCritter.Alive = false;
             battling = false;
             PlayerCritterDefeated?.Invoke();
         }
