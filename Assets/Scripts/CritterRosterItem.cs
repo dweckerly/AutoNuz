@@ -11,6 +11,7 @@ public class CritterRosterItem : MonoBehaviour, IBeginDragHandler, IEndDragHandl
     public TMP_Text level;
     public RectTransform healthBar;
     public TMP_Text healthText;
+    public RectTransform xpBar;
 
     public Canvas canvas;
     public RectTransform rectTransform;
@@ -34,6 +35,7 @@ public class CritterRosterItem : MonoBehaviour, IBeginDragHandler, IEndDragHandl
         level.text = critter.Level.ToString();
         healthBar.localScale = new Vector3((float)critter.currentHp / (float)critter.Hp, 1f, 1f);
         healthText.text = critter.currentHp + "/" + critter.Hp;
+        xpBar.localScale = new Vector3((float)critter.Xp / (float)critter.neededXp, 1f, 1f);
     }
 
     public void SetAnchoredPosition(Vector2 pos)

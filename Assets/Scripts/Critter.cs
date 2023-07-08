@@ -47,6 +47,7 @@ public class Critter
     {
         Level += 1;
         neededXp = CalculateXp(Level + 1);
+        Xp = 0;
         float[] personalityModifiers = PersonalityModifiers();
         Hp = CalculateStat(data.HpBase, personalityModifiers[0], HpGeneticMod);
         Attack = CalculateStat(data.AttackBase, personalityModifiers[1], AttackGeneticMod);

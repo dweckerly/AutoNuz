@@ -151,4 +151,12 @@ public class HUDController : MonoBehaviour
             cri.healthText.text = cri.critter.currentHp + "/" + cri.critter.Hp;
         }
     }
+
+    public void UpdateCritterRosterXpDisplays()
+    {
+        foreach(CritterRosterItem cri in rosterItems)
+        {
+            cri.xpBar.localScale = new Vector3((float)cri.critter.Xp / (float)cri.critter.neededXp, 1f, 1f);
+        }
+    }
 }
