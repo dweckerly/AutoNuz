@@ -46,10 +46,14 @@ public class HUDController : MonoBehaviour
 
     public void UpdateCritterRoster(Critter[] critters)
     {
-        rosterItems.Clear();
-        for(int i = RosterContainer.transform.childCount - 1; i >= 0; i--)
+        foreach(CritterRosterItem cri in rosterItems)
         {
-            Destroy(RosterContainer.transform.GetChild(i).gameObject);
+            Destroy(cri.gameObject);
+        }
+        rosterItems.Clear();
+        foreach (CritterRosterSlot slot in DropSlots)
+        {
+            slot.critterRosterItem = null;
         }
         foreach(Critter critter in critters)
         {
@@ -136,6 +140,6 @@ public class HUDController : MonoBehaviour
 
     void CritterSwap(Critter c1, Critter c2)
     {
-
+        CritterSwapEvent.Invoke(c1, c2);
     } 
 }
