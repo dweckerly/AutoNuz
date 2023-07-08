@@ -22,8 +22,6 @@ public class CritterRosterSlot : MonoBehaviour, IDropHandler
             CritterRosterItem rosterItem = eventData.pointerDrag.GetComponent<CritterRosterItem>();
             if (critterRosterItem != null) 
             {
-                Debug.Log("selected: " + rosterItem.critter.data.CritterName);
-                Debug.Log("occupying: " + critterRosterItem.critter.data.CritterName);
                 CritterSwapEvent?.Invoke(rosterItem.critter, critterRosterItem.critter);
             }
             else
