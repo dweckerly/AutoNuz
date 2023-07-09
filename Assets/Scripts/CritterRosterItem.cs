@@ -12,6 +12,7 @@ public class CritterRosterItem : MonoBehaviour, IBeginDragHandler, IEndDragHandl
     public RectTransform healthBar;
     public TMP_Text healthText;
     public RectTransform xpBar;
+    public GameObject DeathOverlay;
 
     public Canvas canvas;
     public RectTransform rectTransform;
@@ -36,6 +37,7 @@ public class CritterRosterItem : MonoBehaviour, IBeginDragHandler, IEndDragHandl
         healthBar.localScale = new Vector3((float)critter.currentHp / (float)critter.Hp, 1f, 1f);
         healthText.text = critter.currentHp + "/" + critter.Hp;
         xpBar.localScale = new Vector3((float)critter.Xp / (float)critter.neededXp, 1f, 1f);
+        if (critter.currentHp <= 0) DeathOverlay.SetActive(true);
     }
 
     public void SetAnchoredPosition(Vector2 pos)

@@ -151,6 +151,7 @@ public class HUDController : MonoBehaviour
             cri.healthText.text = cri.critter.currentHp + "/" + cri.critter.Hp;
             cri.xpBar.localScale = new Vector3((float)cri.critter.Xp / (float)cri.critter.neededXp, 1f, 1f);
             cri.level.text = cri.critter.Level.ToString();
+            if (cri.critter.currentHp <= 0) cri.DeathOverlay.SetActive(true);
         }
     }
 }
