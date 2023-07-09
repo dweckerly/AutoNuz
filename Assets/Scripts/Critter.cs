@@ -49,11 +49,10 @@ public class Critter
         neededXp = CalculateXp(Level + 1);
         Xp = 0;
         float[] personalityModifiers = PersonalityModifiers();
-        Hp = CalculateStat(data.HpBase, personalityModifiers[0], HpGeneticMod);
+        Hp = CalculateStat(data.HpBase, personalityModifiers[0], HpGeneticMod) + 10;
         Attack = CalculateStat(data.AttackBase, personalityModifiers[1], AttackGeneticMod);
         Defense = CalculateStat(data.DefenseBase, personalityModifiers[2], DefenseGeneticMod);
         Speed = CalculateStat(data.SpeedBase, personalityModifiers[3], SpeedGeneticMod);
-        currentHp = Hp;
     }
 
     int CalculateXp()
@@ -143,5 +142,16 @@ public class Critter
     {
         Xp += amount;
         if (Xp >= neededXp) LevelUp();
+    }
+
+    public void Rest()
+    {
+        Heal(Mathf.RoundToInt(Hp / 2));
+    }
+
+    public void Heal(int amount)
+    {
+        currentHp += amount;
+        if (currentHp > Hp) currentHp = Hp;
     }
 }
