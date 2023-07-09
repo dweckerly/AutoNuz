@@ -90,8 +90,8 @@ public class GameManager : MonoBehaviour
                     return;
                 }
             }
+            HUDController.ShowExpositoryText("Your party is full! Release another critter to keep this one.");
         }
-        // need some error message here about party being full
     }
 
     void SelectLocation(CritterData critterData)

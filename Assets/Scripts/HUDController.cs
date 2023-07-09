@@ -47,6 +47,7 @@ public class HUDController : MonoBehaviour
     {
         CritterDetailsContainer.SetActive(false);
         LocationDetailsContainer.SetActive(false);
+        ExpositoryText.gameObject.SetActive(false);
         foreach(CritterRosterSlot crs in DropSlots)
         {
             crs.CritterSwapEvent += CritterSwap;
@@ -150,8 +151,10 @@ public class HUDController : MonoBehaviour
         HideExpositoryText();
     }
 
-    void ShowExpositoryText(string message)
+    public void ShowExpositoryText(string message)
     {
+        CritterDetailsContainer.SetActive(false);
+        LocationDetailsContainer.SetActive(false);
         ExpositoryText.text = message;
         ExpositoryText.gameObject.SetActive(true);
     }
@@ -163,6 +166,8 @@ public class HUDController : MonoBehaviour
 
     public void UpdateAndShowCritterDetails(Critter critter)
     {
+        LocationDetailsContainer.SetActive(false);
+        ExpositoryText.gameObject.SetActive(false);
         CritterDetails.CritterName.text = critter.data.CritterName;
         CritterDetails.Personality.text = critter.personality.ToString();
         string types = "";
@@ -186,6 +191,8 @@ public class HUDController : MonoBehaviour
 
     public void ShowLocationDetails(LocationData locationData)
     {
+        CritterDetailsContainer.SetActive(false);
+        ExpositoryText.gameObject.SetActive(false);
         LocationDetails.text = locationData.Description;
         LocationDetailsContainer.SetActive(true);
     }
