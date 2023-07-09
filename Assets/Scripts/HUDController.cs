@@ -73,6 +73,8 @@ public class HUDController : MonoBehaviour
         critterRosterItem.PopulateDetails(critter);
         critterRosterItem.OnDragEvent += RosterItemDragEvent;
         critterRosterItem.OnDragEventEnd += RosterItemDragEventEnd;
+        critterRosterItem.RosterItemHoverEvent += RosterItemHover;
+        critterRosterItem.RosterItemHoverExitEvent += RosterItemHoverExit;
         foreach (CritterRosterSlot slot in DropSlots)
         {
             if (slot.critterRosterItem == null)
@@ -95,8 +97,10 @@ public class HUDController : MonoBehaviour
         {
             cri.OnDragEvent -= RosterItemDragEvent;
             cri.OnDragEventEnd -= RosterItemDragEventEnd;
+            cri.RosterItemHoverEvent -= RosterItemHover;
+            cri.RosterItemHoverExitEvent -= RosterItemHoverExit;
         }
-        critterReleaseSlot.DropReleaseEvent += DropReleaseCritter;
+        critterReleaseSlot.DropReleaseEvent -= DropReleaseCritter;
     }
 
     void RosterItemDragEvent()
@@ -109,6 +113,16 @@ public class HUDController : MonoBehaviour
     {
         foreach (CritterRosterItem cri in rosterItems)
             cri.canvasGroup.blocksRaycasts = true;
+    }
+
+    void RosterItemHover(Critter critter)
+    {
+        UpdateAndShowCritterDetails(critter);
+    }
+
+    void RosterItemHoverExit()
+    {
+        HideCritterDetails();
     }
 
     public void UpdateAndShowCritterDetails(Critter critter)

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class CritterRosterItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class CritterRosterItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public Critter critter;
     public Image image;
@@ -22,6 +22,11 @@ public class CritterRosterItem : MonoBehaviour, IBeginDragHandler, IEndDragHandl
 
     public event Action OnDragEvent;
     public event Action OnDragEventEnd;
+
+    public delegate void OnRosterItemHover(Critter critter);
+    public OnRosterItemHover RosterItemHoverEvent; 
+
+    public event Action RosterItemHoverExitEvent;
 
     private void Awake()
     {
@@ -67,5 +72,15 @@ public class CritterRosterItem : MonoBehaviour, IBeginDragHandler, IEndDragHandl
     public void ResetPosition()
     {
         rectTransform.anchoredPosition = originalPosition;
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        RosterItemHoverEvent?.Invoke(critter);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        RosterItemHoverExitEvent?.Invoke();
     }
 }
