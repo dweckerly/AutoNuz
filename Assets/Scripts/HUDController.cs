@@ -21,6 +21,7 @@ public class HUDController : MonoBehaviour
 {
     public Canvas canvas;
     public GameObject HUD;
+    public TMP_Text ExpositoryText;
     public CritterDetails CritterDetails;
     public GameObject CritterDetailsContainer;
     public TMP_Text LocationDetails;
@@ -47,6 +48,8 @@ public class HUDController : MonoBehaviour
             crs.CritterSwapEvent += CritterSwap;
         }
         critterReleaseSlot.DropReleaseEvent += DropReleaseCritter;
+        critterReleaseSlot.HoverEvent += ReleaseSlotHover;
+        critterReleaseSlot.HoverEventExit += ReleaseSlotHoverEnd;
     }
 
     public void UpdateCritterRoster(Critter[] critters)
@@ -101,6 +104,8 @@ public class HUDController : MonoBehaviour
             cri.RosterItemHoverExitEvent -= RosterItemHoverExit;
         }
         critterReleaseSlot.DropReleaseEvent -= DropReleaseCritter;
+        critterReleaseSlot.HoverEvent -= ReleaseSlotHover;
+        critterReleaseSlot.HoverEventExit -= ReleaseSlotHoverEnd;
     }
 
     void RosterItemDragEvent()
@@ -123,6 +128,27 @@ public class HUDController : MonoBehaviour
     void RosterItemHoverExit()
     {
         HideCritterDetails();
+    }
+
+    void ReleaseSlotHover(string message)
+    {
+        ShowExpositoryText(message);
+    }
+
+    void ReleaseSlotHoverEnd()
+    {
+        HideExpositoryText();
+    }
+
+    void ShowExpositoryText(string message)
+    {
+        ExpositoryText.text = message;
+        ExpositoryText.gameObject.SetActive(true);
+    }
+
+    void HideExpositoryText()
+    {
+        ExpositoryText.gameObject.SetActive(false);
     }
 
     public void UpdateAndShowCritterDetails(Critter critter)
