@@ -126,7 +126,7 @@ public class GameManager : MonoBehaviour
     {
         BattleController.BattlePanel.SetActive(false);
         MapController.DisableMap();
-        GiveXp(critter.neededXp);
+        GiveXp(critter.neededXp * 2);
         CritterSelector.EnableSelectionPanel(critter);
     }
 

@@ -86,10 +86,10 @@ public class Critter
     int BaseStatInt(StatBase statBase)
     {
         if (statBase == StatBase.Poor) return 10;
-        if (statBase == StatBase.Fair) return 20;
-        if (statBase == StatBase.Average) return 30;
-        if (statBase == StatBase.Superior) return 40;
-        if (statBase == StatBase.Exemplary) return 50;
+        if (statBase == StatBase.Fair) return 35;
+        if (statBase == StatBase.Average) return 50;
+        if (statBase == StatBase.Superior) return 65;
+        if (statBase == StatBase.Exemplary) return 90;
         return 0;
     }
 

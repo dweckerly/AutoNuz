@@ -1555,6 +1555,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 627468121}
   HUD: {fileID: 1809272673}
+  ExpositoryText: {fileID: 430745937}
   CritterDetails:
     CritterName: {fileID: 1527603733}
     Ability: {fileID: 2049527062}
