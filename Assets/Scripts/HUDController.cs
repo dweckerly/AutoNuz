@@ -30,9 +30,13 @@ public class HUDController : MonoBehaviour
     public GameObject RosterCritterPrefab;
     public CritterRosterSlot[] DropSlots;
     public List<CritterRosterItem> rosterItems = new List<CritterRosterItem>();
+    public CritterReleaseSlot critterReleaseSlot;
 
     public delegate void OnCritterSwap(Critter c1, Critter c2);
     public OnCritterSwap CritterSwapEvent;
+
+    public delegate void OnCritterRelease(Critter critter);
+    public OnCritterRelease ReleaseCritterEvent;
 
     private void Awake()
     {
@@ -42,6 +46,7 @@ public class HUDController : MonoBehaviour
         {
             crs.CritterSwapEvent += CritterSwap;
         }
+        critterReleaseSlot.DropReleaseEvent += DropReleaseCritter;
     }
 
     public void UpdateCritterRoster(Critter[] critters)
@@ -90,7 +95,8 @@ public class HUDController : MonoBehaviour
         {
             cri.OnDragEvent -= RosterItemDragEvent;
             cri.OnDragEventEnd -= RosterItemDragEventEnd;
-        }    
+        }
+        critterReleaseSlot.DropReleaseEvent += DropReleaseCritter;
     }
 
     void RosterItemDragEvent()
@@ -153,5 +159,10 @@ public class HUDController : MonoBehaviour
             cri.level.text = cri.critter.Level.ToString();
             if (cri.critter.currentHp <= 0) cri.DeathOverlay.SetActive(true);
         }
+    }
+
+    void DropReleaseCritter(CritterRosterItem critterRosterItem)
+    {
+        ReleaseCritterEvent?.Invoke(critterRosterItem.critter);
     }
 }

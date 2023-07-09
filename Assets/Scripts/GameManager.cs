@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     private void Start() 
     {
         HUDController.CritterSwapEvent += SwapCritters;
+        HUDController.ReleaseCritterEvent += ReleaseCritter;
         CritterSelector.CritterHoverEvent += CritterHover;
         CritterSelector.CritterHoverEventEnd += CritterHoverEnd;
         CritterSelector.CritterSelectionEvent += CritterSelected;
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour
     private void OnDestroy() 
     {
         HUDController.CritterSwapEvent -= SwapCritters;
+        HUDController.ReleaseCritterEvent -= ReleaseCritter;
         CritterSelector.CritterHoverEvent -= CritterHover;
         CritterSelector.CritterHoverEventEnd -= CritterHoverEnd;
         CritterSelector.CritterSelectionEvent -= CritterSelected;
@@ -186,6 +188,29 @@ public class GameManager : MonoBehaviour
         {
             if(critter != null && critter.Alive) critter.ReceiveXp(xpAmount);
         }
-        HUDController.UpdateCritterRosterDisplays();
+        HUDController.UpdateCritterRoster(playerCritters);
+    }
+
+    void ReleaseCritter(Critter critter)
+    {
+        int critterCount = 0;
+        foreach(Critter c in playerCritters)
+        {
+            if (c != null && c.Alive) critterCount++;
+        }
+        if (critterCount > 1)
+        {
+            int index = Array.IndexOf(playerCritters, critter);
+            playerCritters[index] = null;
+            for(int i = 1; i < playerCritters.Length; i++)
+            {
+                if (playerCritters[i - 1] == null)
+                {
+                    playerCritters[i - 1] = playerCritters[i];
+                    playerCritters[i] = null;
+                }
+            }
+            HUDController.UpdateCritterRosterDisplays();
+        }
     }
 }
