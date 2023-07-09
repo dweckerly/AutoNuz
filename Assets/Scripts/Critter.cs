@@ -6,6 +6,8 @@ using UnityEngine;
 public class Critter
 {
     const int GENETIC_MOD_MAX = 31;
+    const float PERSONALITY_POSITIVE_MOD = 1.1f;
+    const float PERSONALITY_NEGATIVE_MOD = 0.9f;
 
     public Critter (CritterData _data, int _Level)
     {
@@ -104,37 +106,37 @@ public class Critter
         switch (personality)
         {
             case Personality.Aggressive:
-                return new float[4] { 1f, 1.1f, 0.9f, 1f };
+                return new float[4] { 1f, PERSONALITY_POSITIVE_MOD, PERSONALITY_NEGATIVE_MOD, 1f };
             case Personality.Aloof:
-                return new float[4] { 0.9f, 1f, 1f, 1.1f };
+                return new float[4] { PERSONALITY_NEGATIVE_MOD, 1f, 1f, PERSONALITY_POSITIVE_MOD };
             case Personality.Balanced:
                 return new float[4] { 1f, 1f, 1f, 1f };
             case Personality.Courteous:
-                return new float[4] { 1.1f, 0.9f, 1f, 1f };
+                return new float[4] { PERSONALITY_POSITIVE_MOD, PERSONALITY_NEGATIVE_MOD, 1f, 1f };
             case Personality.Cowardly:
-                return new float[4] { 1f, 0.9f, 1f, 1.1f };
+                return new float[4] { 1f, PERSONALITY_NEGATIVE_MOD, 1f, PERSONALITY_POSITIVE_MOD };
             case Personality.Gentle:
-                return new float[4] { 1f, 0.9f, 1.1f, 1f };
+                return new float[4] { 1f, PERSONALITY_NEGATIVE_MOD, PERSONALITY_POSITIVE_MOD, 1f };
             case Personality.Greedy:
-                return new float[4] { 1f, 1f, 0.9f, 1.1f };
+                return new float[4] { 1f, 1f, PERSONALITY_NEGATIVE_MOD, PERSONALITY_POSITIVE_MOD };
             case Personality.Hedonistic:
-                return new float[4] { 1.1f, 1f, 0.9f, 1f };
+                return new float[4] { PERSONALITY_POSITIVE_MOD, 1f, PERSONALITY_NEGATIVE_MOD, 1f };
             case Personality.Lazy:
-                return new float[4] { 1f, 1f, 1.1f, 0.9f };
+                return new float[4] { 1f, 1f, PERSONALITY_POSITIVE_MOD, PERSONALITY_NEGATIVE_MOD };
             case Personality.Mellow:
-                return new float[4] { 1.1f, 1f, 1f, 0.9f };
+                return new float[4] { PERSONALITY_POSITIVE_MOD, 1f, 1f, PERSONALITY_NEGATIVE_MOD };
             case Personality.Obedient:
                 return new float[4] { 1f, 1f, 1f, 1f };
             case Personality.Proud:
-                return new float[4] { 0.9f, 1f, 1.1f, 1f };
+                return new float[4] { PERSONALITY_NEGATIVE_MOD, 1f, PERSONALITY_POSITIVE_MOD, 1f };
             case Personality.Rowdy:
-                return new float[4] { 0.9f, 1.1f, 1f, 1f };
+                return new float[4] { PERSONALITY_NEGATIVE_MOD, PERSONALITY_POSITIVE_MOD, 1f, 1f };
             case Personality.Stoic:
                 return new float[4] { 1f, 1f, 1f, 1f };
             case Personality.Stubborn:
-                return new float[4] { 1f, 1.1f, 1f, 0.9f };
+                return new float[4] { 1f, PERSONALITY_POSITIVE_MOD, 1f, PERSONALITY_NEGATIVE_MOD };
             default:
-                return new float[4] { 1, 1, 1, 1 };
+                return new float[4] { 1f, 1f, 1f, 1f };
         }
     }
 
