@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     {
         HUDController.CritterSwapEvent += SwapCritters;
         HUDController.ReleaseCritterEvent += ReleaseCritter;
+        HUDController.RestOptionSelectedEvent += RestCritters;
         CritterSelector.CritterHoverEvent += CritterHover;
         CritterSelector.CritterHoverEventEnd += CritterHoverEnd;
         CritterSelector.CritterSelectionEvent += CritterSelected;
@@ -39,6 +40,7 @@ public class GameManager : MonoBehaviour
     {
         HUDController.CritterSwapEvent -= SwapCritters;
         HUDController.ReleaseCritterEvent -= ReleaseCritter;
+        HUDController.RestOptionSelectedEvent -= RestCritters;
         CritterSelector.CritterHoverEvent -= CritterHover;
         CritterSelector.CritterHoverEventEnd -= CritterHoverEnd;
         CritterSelector.CritterSelectionEvent -= CritterSelected;
@@ -134,7 +136,7 @@ public class GameManager : MonoBehaviour
     {
         BattleController.BattlePanel.SetActive(false);
         MapController.DisableMap();
-        CritterSelector.EnableSelectionPanel(starterCritters);
+        CritterSelector.EnableSelectionPanel(starterCritters, false);
     }
 
     void ShowMap()
@@ -212,5 +214,15 @@ public class GameManager : MonoBehaviour
             }
             HUDController.UpdateCritterRoster(playerCritters);
         }
+    }
+
+    void RestCritters()
+    {
+        foreach(Critter critter in playerCritters)
+        {
+            if (critter != null && critter.Alive) critter.Rest();
+        }
+        HUDController.UpdateCritterRosterDisplays();
+        ShowMap();
     }
 }

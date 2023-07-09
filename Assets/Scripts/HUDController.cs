@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -39,6 +39,8 @@ public class HUDController : MonoBehaviour
 
     public delegate void OnCritterRelease(Critter critter);
     public OnCritterRelease ReleaseCritterEvent;
+
+    public event Action RestOptionSelectedEvent;
 
     private void Awake()
     {
@@ -215,7 +217,7 @@ public class HUDController : MonoBehaviour
 
     void PostBattleRest()
     {
-
+        RestOptionSelectedEvent?.Invoke();
     }
 
     void RestBtnHover(string message)

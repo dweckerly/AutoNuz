@@ -1045,6 +1045,7 @@ MonoBehaviour:
   CritterSelectItemPrefab: {fileID: 3175845812500315314, guid: 94ea13d6ebe37c24cbaa6a24f0d68f7f, type: 3}
   SelectionParent: {fileID: 958287606}
   SelectionPanel: {fileID: 1085204066}
+  PostBattleRestBtn: {fileID: 1652870606}
 --- !u!4 &291183165
 Transform:
   m_ObjectHideFlags: 0

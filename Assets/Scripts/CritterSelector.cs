@@ -9,6 +9,7 @@ public class CritterSelector : MonoBehaviour
     List<CritterSelectItem> critterSelectItems = new List<CritterSelectItem>();
     public GameObject SelectionParent;
     public GameObject SelectionPanel;
+    public GameObject PostBattleRestBtn;
 
     public event Action CritterSelectionEvent;
 
@@ -16,9 +17,10 @@ public class CritterSelector : MonoBehaviour
     public event OnCritterHover CritterHoverEvent;
     public event Action CritterHoverEventEnd;
 
-    public void EnableSelectionPanel(CritterData[] critters)
+    public void EnableSelectionPanel(CritterData[] critters, bool showRestOption = true)
     {
         SelectionParent.SetActive(true);
+        PostBattleRestBtn.SetActive(showRestOption);
         for (int i = 0; i < critters.Length; i++)
         {
             CritterSelectItem CritterSelectItem = Instantiate(CritterSelectItemPrefab, SelectionPanel.transform).GetComponent<CritterSelectItem>();
@@ -33,11 +35,13 @@ public class CritterSelector : MonoBehaviour
             critterSelectItems[i].CritterHoverEndEvent += CritterHoverEnd;
             critterSelectItems[i].CritterSelectedEvent += SelectCritter;
         }
+        
     }
 
-    public void EnableSelectionPanel(Critter critter)
+    public void EnableSelectionPanel(Critter critter, bool showRestOption = true)
     {
         SelectionParent.SetActive(true);
+        PostBattleRestBtn.SetActive(showRestOption);
         CritterSelectItem SelectCritterItem = Instantiate(CritterSelectItemPrefab, SelectionPanel.transform).GetComponent<CritterSelectItem>();
         critterSelectItems.Add(SelectCritterItem);
         critterSelectItems[0].critterImage.sprite = critter.data.CritterSprite;
