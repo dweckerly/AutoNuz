@@ -32,6 +32,7 @@ public class HUDController : MonoBehaviour
     public CritterRosterSlot[] DropSlots;
     public List<CritterRosterItem> rosterItems = new List<CritterRosterItem>();
     public CritterReleaseSlot critterReleaseSlot;
+    public RestButton PostBattleRestBtn;
 
     public delegate void OnCritterSwap(Critter c1, Critter c2);
     public OnCritterSwap CritterSwapEvent;
@@ -50,6 +51,9 @@ public class HUDController : MonoBehaviour
         critterReleaseSlot.DropReleaseEvent += DropReleaseCritter;
         critterReleaseSlot.HoverEvent += ReleaseSlotHover;
         critterReleaseSlot.HoverEventExit += ReleaseSlotHoverEnd;
+        PostBattleRestBtn.BtnClickEvent += PostBattleRest;
+        PostBattleRestBtn.BtnHoverEvent += RestBtnHover;
+        PostBattleRestBtn.BtnHoverEventEnd += RestBtnHoverEnd;
     }
 
     public void UpdateCritterRoster(Critter[] critters)
@@ -106,6 +110,9 @@ public class HUDController : MonoBehaviour
         critterReleaseSlot.DropReleaseEvent -= DropReleaseCritter;
         critterReleaseSlot.HoverEvent -= ReleaseSlotHover;
         critterReleaseSlot.HoverEventExit -= ReleaseSlotHoverEnd;
+        PostBattleRestBtn.BtnClickEvent -= PostBattleRest;
+        PostBattleRestBtn.BtnHoverEvent -= RestBtnHover;
+        PostBattleRestBtn.BtnHoverEventEnd -= RestBtnHoverEnd;
     }
 
     void RosterItemDragEvent()
@@ -204,5 +211,20 @@ public class HUDController : MonoBehaviour
     void DropReleaseCritter(CritterRosterItem critterRosterItem)
     {
         ReleaseCritterEvent?.Invoke(critterRosterItem.critter);
+    }
+
+    void PostBattleRest()
+    {
+
+    }
+
+    void RestBtnHover(string message)
+    {
+        ShowExpositoryText(message);
+    }
+
+    void RestBtnHoverEnd()
+    {
+        HideExpositoryText();
     }
 }
