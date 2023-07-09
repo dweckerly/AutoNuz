@@ -210,7 +210,7 @@ public class GameManager : MonoBehaviour
                     playerCritters[i] = null;
                 }
             }
-            HUDController.UpdateCritterRosterDisplays();
+            HUDController.UpdateCritterRoster(playerCritters);
         }
     }
 }

@@ -62,7 +62,7 @@ public class HUDController : MonoBehaviour
         }
         foreach(Critter critter in critters)
         {
-            AddCritterToRoster(critter);
+            if(critter != null) AddCritterToRoster(critter);
         }
     }
 
