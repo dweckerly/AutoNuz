@@ -14,6 +14,7 @@ public class CritterDetails
     public TMP_Text ATK;
     public TMP_Text DEF;
     public TMP_Text SPD;
+    public TMP_Text LVL;
 
 }
 
@@ -174,6 +175,7 @@ public class HUDController : MonoBehaviour
         CritterDetails.ATK.text = critter.Attack.ToString();
         CritterDetails.DEF.text = critter.Defense.ToString();
         CritterDetails.SPD.text = critter.Speed.ToString();
+        CritterDetails.LVL.text = critter.Level.ToString();
         CritterDetailsContainer.SetActive(true);
     }
 
