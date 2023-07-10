@@ -97,7 +97,7 @@ public class BattleController : MonoBehaviour
             {
                 playerCritterUI.speedRect.localScale = new Vector3(0f, 1f, 1f);
                 speedTimePlayer = 0f;
-                DamageWildCritter();
+                PlayerCritterAttack();
             }
             speedTimeWild += wildCritter.Speed * Time.deltaTime;
             wildCritterUI.speedRect.localScale = new Vector3(speedTimeWild / BASE_BATTLE_SPEED, 1f, 1f);
@@ -105,12 +105,12 @@ public class BattleController : MonoBehaviour
             {
                 wildCritterUI.speedRect.localScale = new Vector3(0f, 1f, 1f);
                 speedTimeWild = 0f;
-                DamagePlayerCritter();
+                WildCritterAttack();
             }
         }
     }
 
-    void DamageWildCritter()
+    void PlayerCritterAttack()
     {
         int damage = (int)Mathf.Clamp((playerCritter.Attack - wildCritter.Defense) * DetermineTypeAdvantages(playerCritter, wildCritter), 1, playerCritter.Attack * DetermineTypeAdvantages(playerCritter, wildCritter));
         wildCritter.currentHp -= damage;
@@ -128,7 +128,7 @@ public class BattleController : MonoBehaviour
         }
     }
 
-    void DamagePlayerCritter()
+    void WildCritterAttack()
     {
         int damage = (int)Mathf.Clamp((wildCritter.Attack - playerCritter.Defense) * DetermineTypeAdvantages(wildCritter, playerCritter), 1, wildCritter.Attack * DetermineTypeAdvantages(wildCritter, playerCritter));
         playerCritter.currentHp -= damage;
