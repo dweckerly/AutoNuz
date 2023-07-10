@@ -60,6 +60,17 @@ public class GameManager : MonoBehaviour
         playerCritters[index1] = c2;
         playerCritters[index2] = c1;
         HUDController.UpdateCritterRoster(playerCritters);
+        if (BattleController.BattlePanel.activeSelf)
+        {
+            foreach (Critter playerCritter in playerCritters)
+            {
+                if (playerCritter != null && playerCritter.Alive)
+                {
+                    BattleController.PopulatePlayerCritterUI(playerCritter);
+                    return;
+                }
+            }
+        }
     }
 
     void CritterHover(Critter critter)
