@@ -13,7 +13,7 @@ public class MapController : MonoBehaviour
     public MapSelectItem[] MapItems;
     public LocationData[] Locations;
     public GameObject MapPanel;
-    public TMP_Text AreaText;
+    public TMP_Text DayText;
 
     public delegate void OnLocationSelection(CritterData critterData);
     public event OnLocationSelection LocationSelectionEvent;
@@ -22,7 +22,7 @@ public class MapController : MonoBehaviour
     public event OnLocationHover LocationHoverEvent;
     public event Action LocationHoverEventEnd;
 
-    public void EnableMap(int areaNumber)
+    public void EnableMap(int dayNumber)
     {
         foreach(MapSelectItem mapSelectItem in MapItems)
         {
@@ -30,7 +30,7 @@ public class MapController : MonoBehaviour
             mapSelectItem.LocationHoverEvent += LocationHover;
             mapSelectItem.LocationHoverEventEnd += LocationHoverEnd;
         }
-        GenerateMap(areaNumber);
+        GenerateMap(dayNumber);
         MapPanel.SetActive(true);
     }
 
@@ -48,7 +48,7 @@ public class MapController : MonoBehaviour
         }
     }
     
-    void GenerateMap(int areaNumber, bool addTown = false)
+    void GenerateMap(int dayNumber, bool addTown = false)
     {
         List<int> locationIDs = new List<int>();
         for(int i  = 0; i < Locations.Length; i++)
@@ -69,7 +69,7 @@ public class MapController : MonoBehaviour
             MapItems[i].locationName.text = selectedLocations[i].LocationName;
             MapItems[i].locationData = selectedLocations[i];
         }
-        AreaText.text = "Area " + areaNumber;
+        DayText.text = "Day " + dayNumber;
     }
 
     int SelectMapItem(List<int> ids)

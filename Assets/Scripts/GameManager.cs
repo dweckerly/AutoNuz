@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 
     public CritterData[] starterCritters;
 
-    private int AreaNumber = 0;
+    private int DayNumber = 0;
 
     private void Start() 
     {
@@ -141,10 +141,10 @@ public class GameManager : MonoBehaviour
 
     void ShowMap()
     {
-        AreaNumber++;
+        DayNumber++;
         CritterSelector.DisableSelectionPanel();
         BattleController.BattlePanel.SetActive(false);
-        MapController.EnableMap(AreaNumber);
+        MapController.EnableMap(DayNumber);
     }
 
     void ShowBattle()
