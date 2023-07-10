@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
         BattleController.BattleEndEvent += PostBattle;
         BattleController.PlayerCritterDefeated += ChangePlayerBattleCritter;
         BattleController.PlayerCritterDamaged += UpdateCritterRosterDisplay;
+        BattleController.BattleStart += WildBattleStart;
         HUDController.HideCritterDetails();
         ShowFirstSelectionPanel();
     }
@@ -51,6 +52,7 @@ public class GameManager : MonoBehaviour
         BattleController.BattleEndEvent -= PostBattle;
         BattleController.PlayerCritterDefeated -= ChangePlayerBattleCritter;
         BattleController.PlayerCritterDamaged -= UpdateCritterRosterDisplay;
+        BattleController.BattleStart -= WildBattleStart;
     }
 
     void SwapCritters(Critter c1, Critter c2)
@@ -115,6 +117,7 @@ public class GameManager : MonoBehaviour
         {
             if (playerCritter != null && playerCritter.Alive)
             {
+                HUDController.ShowExpositoryText("You encounter a wild " + wildCritter.data.CritterName + "!");
                 BattleController.InitializeBattleUI(playerCritter, wildCritter);
                 return;
             }
@@ -244,5 +247,10 @@ public class GameManager : MonoBehaviour
         }
         HUDController.UpdateCritterRosterDisplays();
         ShowMap();
+    }
+
+    void WildBattleStart()
+    {
+        HUDController.HideExpositoryText();
     }
 }

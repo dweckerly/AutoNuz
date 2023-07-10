@@ -28,6 +28,7 @@ public class BattleController : MonoBehaviour
     public event Action PlayerCritterDefeated;
     public delegate void OnBattleEnd(Critter critter);
     public OnBattleEnd BattleEndEvent;
+    public event Action BattleStart;
 
     public Critter playerCritter;
     Critter wildCritter;
@@ -70,6 +71,7 @@ public class BattleController : MonoBehaviour
     {
         battling = true;
         FightRunBtns.SetActive(false);
+        BattleStart.Invoke();
         StartCoroutine(HandleTurnTIme());
     }
 

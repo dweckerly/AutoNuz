@@ -159,8 +159,9 @@ public class HUDController : MonoBehaviour
         ExpositoryText.gameObject.SetActive(true);
     }
 
-    void HideExpositoryText()
+    public void HideExpositoryText()
     {
+        ExpositoryText.text = "";
         ExpositoryText.gameObject.SetActive(false);
     }
 
