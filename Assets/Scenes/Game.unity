@@ -1730,7 +1730,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: be48fa3cd8e3df44eb9f7b536dae1a1a, type: 2}
   - {fileID: 11400000, guid: 5b47aefe1fb4c8941a63e2ad8133b37a, type: 2}
   MapPanel: {fileID: 1928173619}
-  AreaText: {fileID: 610442656}
+  DayText: {fileID: 610442656}
 --- !u!1001 &580270275
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1990,7 +1990,7 @@ GameObject:
   - component: {fileID: 610442657}
   - component: {fileID: 610442656}
   m_Layer: 5
-  m_Name: AreaDisplay
+  m_Name: DayDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

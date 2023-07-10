@@ -98,7 +98,8 @@ public class GameManager : MonoBehaviour
     {
         HUDController.HideLocationDetails();
         ShowBattle();
-        Critter wildCritter = new Critter(critterData, UnityEngine.Random.Range(2, 4));
+        int[] levelRange = LevelRangeByDayNumber();
+        Critter wildCritter = new Critter(critterData, UnityEngine.Random.Range(levelRange[0], levelRange[1]));
         foreach(Critter playerCritter in playerCritters)
         {
             if (playerCritter != null && playerCritter.Alive)
@@ -107,6 +108,14 @@ public class GameManager : MonoBehaviour
                 return;
             }
         }
+    }
+
+    int[] LevelRangeByDayNumber()
+    {
+        int[] range = new int[2];
+        range[0] = 2 + Mathf.FloorToInt(DayNumber / 4);
+        range[1] = 4 + Mathf.FloorToInt(DayNumber / 3);
+        return range;
     }
 
     void LocationHover(LocationData locationData)
