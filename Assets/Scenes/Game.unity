@@ -2260,6 +2260,7 @@ MonoBehaviour:
     healthText: {fileID: 1881958138}
     levelText: {fileID: 1685231642}
   FightRunBtns: {fileID: 450825815}
+  TypeMatrix: {fileID: 11400000, guid: 21415fcfe1d35034a96b598e96e7ca06, type: 2}
 --- !u!4 &631167623
 Transform:
   m_ObjectHideFlags: 0

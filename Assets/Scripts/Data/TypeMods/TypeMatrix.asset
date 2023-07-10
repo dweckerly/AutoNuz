@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 071a2b7185185ec46bb86ba43f824eb5, type: 3}
+  m_Name: TypeMatrix
+  m_EditorClassIdentifier: 
+  TypeModifiers:
+  - ElementalType: 0
+    Advantages: 
+    Disadvantages: 03000000
+    CannotDamage: 08000000
+  - ElementalType: 1
+    Advantages: 0000000007000000
+    Disadvantages: 0200000006000000
+    CannotDamage: 08000000
+  - ElementalType: 2
+    Advantages: 0600000001000000
+    Disadvantages: 050000000a000000
+    CannotDamage: 
+  - ElementalType: 3
+    Advantages: 0400000005000000
+    Disadvantages: 0600000009000000
+    CannotDamage: 0a000000
+  - ElementalType: 4
+    Advantages: 090000000a000000
+    Disadvantages: 06000000
+    CannotDamage: 03000000
+  - ElementalType: 5
+    Advantages: 0600000002000000
+    Disadvantages: 0900000003000000
+    CannotDamage: 
+  - ElementalType: 6
+    Advantages: 0900000003000000
+    Disadvantages: 0500000002000000
+    CannotDamage: 
+  - ElementalType: 7
+    Advantages: 08000000
+    Disadvantages: 01000000
+    CannotDamage: 
+  - ElementalType: 8
+    Advantages: 01000000
+    Disadvantages: 07000000
+    CannotDamage: 00000000
+  - ElementalType: 9
+    Advantages: 0500000003000000
+    Disadvantages: 0400000006000000
+    CannotDamage: 
+  - ElementalType: 10
+    Advantages: 02000000
+    Disadvantages: 04000000
+    CannotDamage: 

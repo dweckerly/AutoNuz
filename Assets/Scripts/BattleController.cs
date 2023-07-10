@@ -37,6 +37,8 @@ public class BattleController : MonoBehaviour
 
     bool battling = false;
 
+    public TypeMatrix TypeMatrix;
+
     public void InitializeBattleUI(Critter _playerCritter, Critter _wildCritter)
     {
         PopulatePlayerCritterUI(_playerCritter);
@@ -108,7 +110,7 @@ public class BattleController : MonoBehaviour
 
     void DamageWildCritter()
     {
-        int damage = Mathf.Clamp(playerCritter.Attack - wildCritter.Defense, 1, playerCritter.Attack);
+        int damage = (int)Mathf.Clamp((playerCritter.Attack - wildCritter.Defense) * DetermineTypeAdvantages(playerCritter, wildCritter), 1, playerCritter.Attack * DetermineTypeAdvantages(playerCritter, wildCritter));
         wildCritter.currentHp -= damage;
         if (wildCritter.currentHp < 0) wildCritter.currentHp = 0;
         wildCritterUI.healthText.text = wildCritter.currentHp + "/" + wildCritter.Hp;
@@ -126,7 +128,7 @@ public class BattleController : MonoBehaviour
 
     void DamagePlayerCritter()
     {
-        int damage = Mathf.Clamp(wildCritter.Attack - playerCritter.Defense, 1, wildCritter.Attack);
+        int damage = (int)Mathf.Clamp((wildCritter.Attack - playerCritter.Defense) * DetermineTypeAdvantages(wildCritter, playerCritter), 1, wildCritter.Attack * DetermineTypeAdvantages(wildCritter, playerCritter));
         playerCritter.currentHp -= damage;
         if (playerCritter.currentHp < 0) playerCritter.currentHp = 0;
         playerCritterUI.healthText.text = playerCritter.currentHp + "/" + playerCritter.Hp;
@@ -142,4 +144,36 @@ public class BattleController : MonoBehaviour
             PlayerCritterDefeated?.Invoke();
         }
     }
+
+    float DetermineTypeAdvantages(Critter attackingCritter, Critter defendingCritter)
+    {
+        float mod = 1f;
+        foreach (ElementalType attackerType in attackingCritter.data.Types)
+        {
+            foreach (TypeMods tmod in TypeMatrix.TypeModifiers)
+            {
+                if (tmod.ElementalType == attackerType)
+                {
+                    foreach(ElementalType defenderTypes in defendingCritter.data.Types)
+                    {
+                        foreach(ElementalType immuneType in tmod.CannotDamage)
+                        {
+                            if (defenderTypes == immuneType) return 0;
+                        }
+                        foreach (ElementalType advEType in tmod.Advantages)
+                        {
+                            if(defenderTypes == advEType) mod *= 2f;
+                        }
+                        foreach(ElementalType disEType in tmod.Disadvantages)
+                        {
+                            if (defenderTypes == disEType) mod *= 0.5f;
+                        }
+                    }
+                }
+            }
+        }
+        return mod;
+    }
+
+
 }
