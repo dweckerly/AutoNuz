@@ -26,6 +26,7 @@ public class MapSelectItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        rectTransform.localScale = new Vector3(1f, 1f, 1f);
         LocationSelectEvent?.Invoke(locationData);
     }
 
