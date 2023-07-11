@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49ff1d29996fc4741923a5526d2a14d5, type: 3}
-  m_Name: Bouncy
+  m_Name: Hiss
   m_EditorClassIdentifier: 
-  AbilityName: Bouncy
-  Description: Increases SPD by 5% when hit by an oppoennt.
-  Trigger: 1
-  Target: 0
-  Effector: 2
-  Effect: 0
-  Amount: 5
+  AbilityName: Hiss
+  Description: Decreases opponent's DEF by 20% at the start of battle.
+  Trigger: 0
+  Target: 1
+  Effector: 1
+  Effect: 1
+  Amount: 20
   AmountType: 0
