@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Critter
 {
-    const int GENETIC_MOD_MAX = 31;
+    const int GENETIC_MOD_MAX = 301;
     const float PERSONALITY_POSITIVE_MOD = 1.1f;
     const float PERSONALITY_NEGATIVE_MOD = 0.9f;
 
@@ -86,11 +86,11 @@ public class Critter
 
     int BaseStatInt(StatBase statBase)
     {
-        if (statBase == StatBase.Poor) return 10;
-        if (statBase == StatBase.Fair) return 35;
-        if (statBase == StatBase.Average) return 50;
-        if (statBase == StatBase.Superior) return 65;
-        if (statBase == StatBase.Exemplary) return 90;
+        if (statBase == StatBase.Poor) return 100;
+        if (statBase == StatBase.Fair) return 350;
+        if (statBase == StatBase.Average) return 500;
+        if (statBase == StatBase.Superior) return 650;
+        if (statBase == StatBase.Exemplary) return 900;
         return 0;
     }
 

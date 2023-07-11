@@ -17,7 +17,7 @@ public class CritterBattleUI
 
 public class BattleController : MonoBehaviour
 {
-    const float BASE_BATTLE_SPEED = 2f;
+    const float BASE_BATTLE_SPEED = 20f;
     public GameObject BattlePanel;
     public CritterBattleUI playerCritterUI;
     public CritterBattleUI wildCritterUI;
@@ -112,7 +112,7 @@ public class BattleController : MonoBehaviour
 
     void PlayerCritterAttack()
     {
-        int damage = (int)Mathf.Clamp((playerCritter.Attack - wildCritter.Defense) * DetermineTypeAdvantages(playerCritter, wildCritter), 1, playerCritter.Attack * DetermineTypeAdvantages(playerCritter, wildCritter));
+        int damage = DamageCalc(playerCritter, wildCritter);
         wildCritter.currentHp -= damage;
         if (wildCritter.currentHp < 0) wildCritter.currentHp = 0;
         wildCritterUI.healthText.text = wildCritter.currentHp + "/" + wildCritter.Hp;
@@ -130,7 +130,7 @@ public class BattleController : MonoBehaviour
 
     void WildCritterAttack()
     {
-        int damage = (int)Mathf.Clamp((wildCritter.Attack - playerCritter.Defense) * DetermineTypeAdvantages(wildCritter, playerCritter), 1, wildCritter.Attack * DetermineTypeAdvantages(wildCritter, playerCritter));
+        int damage = DamageCalc(wildCritter, playerCritter);
         playerCritter.currentHp -= damage;
         if (playerCritter.currentHp < 0) playerCritter.currentHp = 0;
         playerCritterUI.healthText.text = playerCritter.currentHp + "/" + playerCritter.Hp;
@@ -145,6 +145,15 @@ public class BattleController : MonoBehaviour
             StopAllCoroutines();
             PlayerCritterDefeated?.Invoke();
         }
+    }
+
+    int DamageCalc(Critter attackingCritter, Critter defendingCritter)
+    {
+        float typeMod = DetermineTypeAdvantages(attackingCritter, defendingCritter);
+        float baseDamage = ((((2 * attackingCritter.Level) / 5) * (attackingCritter.Attack / defendingCritter.Defense)) / 30) + 10;
+        float total = baseDamage * typeMod;
+        if (total < 1) total = 1;
+        return Mathf.RoundToInt(total);
     }
 
     float DetermineTypeAdvantages(Critter attackingCritter, Critter defendingCritter)
@@ -176,6 +185,4 @@ public class BattleController : MonoBehaviour
         }
         return mod;
     }
-
-
 }
