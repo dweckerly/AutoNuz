@@ -26,7 +26,8 @@ public enum Effector
     ATK,
     DEF,
     SPD, 
-    HP
+    HP,
+    EVA
 }
 
 public enum Effect
