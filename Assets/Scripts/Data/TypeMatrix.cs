@@ -11,7 +11,7 @@ public class TypeMods
     public ElementalType[] CannotDamage;
 }
 
-[CreateAssetMenu(fileName = "TypeMatrix", menuName = "Data/TypeMatrix", order = 3)]
+[CreateAssetMenu(fileName = "TypeMatrix", menuName = "Data/TypeMatrix", order = 4)]
 public class TypeMatrix: ScriptableObject
 {
     public TypeMods[] TypeModifiers;

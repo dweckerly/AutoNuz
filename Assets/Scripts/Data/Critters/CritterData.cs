@@ -63,4 +63,5 @@ public class CritterData : ScriptableObject
     public StatBase DefenseBase;
     public StatBase SpeedBase;
     public ElementalType[] Types;
+    public AbilityData AbilityData;
 }
