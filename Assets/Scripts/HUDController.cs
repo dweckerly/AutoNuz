@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class CritterDetails
@@ -34,6 +35,7 @@ public class HUDController : MonoBehaviour
     public List<CritterRosterItem> rosterItems = new List<CritterRosterItem>();
     public CritterReleaseSlot critterReleaseSlot;
     public RestButton PostBattleRestBtn;
+    public GameObject GameOverScreen;
 
     public delegate void OnCritterSwap(Critter c1, Critter c2);
     public OnCritterSwap CritterSwapEvent;
@@ -48,6 +50,7 @@ public class HUDController : MonoBehaviour
         CritterDetailsContainer.SetActive(false);
         LocationDetailsContainer.SetActive(false);
         ExpositoryText.gameObject.SetActive(false);
+        GameOverScreen.SetActive(false);
         foreach(CritterRosterSlot crs in DropSlots)
         {
             crs.CritterSwapEvent += CritterSwap;
@@ -239,5 +242,15 @@ public class HUDController : MonoBehaviour
     void RestBtnHoverEnd()
     {
         HideExpositoryText();
+    }
+
+    public void ShowGameOverScreen()
+    {
+        GameOverScreen.SetActive(true);
+    }
+
+    public void Retry()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

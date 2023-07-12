@@ -198,7 +198,7 @@ public class GameManager : MonoBehaviour
 
     void GameOver()
     {
-        Debug.Log("Game Over...");
+        HUDController.ShowGameOverScreen();
     }
 
     void GiveXp(int amount)
