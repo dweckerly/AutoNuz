@@ -72,7 +72,7 @@ public class BattleController : MonoBehaviour
         battling = true;
         FightRunBtns.SetActive(false);
         BattleStart.Invoke();
-        StartCoroutine(HandleTurnTIme());
+        StartCoroutine(HandleTurnTime());
     }
 
     public void RunFromFight()
@@ -85,7 +85,7 @@ public class BattleController : MonoBehaviour
         return (float)critter.currentHp / (float)critter.Hp;
     }
 
-    IEnumerator HandleTurnTIme()
+    IEnumerator HandleTurnTime()
     {
         while(battling)
         {
