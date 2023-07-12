@@ -41,4 +41,44 @@ public class AbilityController : MonoBehaviour
             }
         }
     }
+
+    public void CheckAbilityTrigger(Critter playerCritter, Critter opponentCritter, Trigger trigger)
+    {
+        if (playerCritter.data.AbilityData.Trigger == trigger)
+        {
+            float mod = 1f;
+            if (playerCritter.data.AbilityData.Effect == Effect.Decrease) mod *= -1f;
+            if (playerCritter.data.AbilityData.Target == Target.Self)
+                AddEffectToPlayer(playerCritter, playerCritter.data.AbilityData.Effector, playerCritter.data.AbilityData.Amount * mod);
+            if (playerCritter.data.AbilityData.Target == Target.Opponent)
+                AddEffectToOpponent(opponentCritter, playerCritter.data.AbilityData.Effector, playerCritter.data.AbilityData.Amount * mod);
+        }
+        if (opponentCritter.data.AbilityData.Trigger == trigger)
+        {
+            float mod = 1f;
+            if (opponentCritter.data.AbilityData.Effect == Effect.Decrease) mod *= -1f;
+            if (opponentCritter.data.AbilityData.Target == Target.Self)
+                AddEffectToOpponent(opponentCritter, opponentCritter.data.AbilityData.Effector, opponentCritter.data.AbilityData.Amount * mod);
+            if (opponentCritter.data.AbilityData.Target == Target.Opponent)
+                AddEffectToPlayer(playerCritter, opponentCritter.data.AbilityData.Effector, opponentCritter.data.AbilityData.Amount * mod);
+        }
+    }
+
+    public void CheckAbilityTriggerOnHit(Critter attackingCritter, Critter defendingCritter, Trigger trigger, int damage)
+    {
+        if (defendingCritter.data.AbilityData.AmountType == AmountType.PercentDamageTaken)
+        {
+            float amount = (float)damage * (defendingCritter.data.AbilityData.Amount / 100);
+            float mod = 1f;
+            if (defendingCritter.data.AbilityData.Effect == Effect.Decrease) mod *= -1f;
+            amount *= mod;
+        }
+        if (attackingCritter.data.AbilityData.AmountType == AmountType.PercentDamageDealt)
+        {
+            float amount = (float)damage * (attackingCritter.data.AbilityData.Amount / 100);
+            float mod = 1f;
+            if (attackingCritter.data.AbilityData.Effect == Effect.Decrease) mod *= -1f;
+            amount *= mod;
+        }
+    }
 }
