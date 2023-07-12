@@ -147,12 +147,14 @@ public class GameManager : MonoBehaviour
         ShowMap();
     }
 
-    void PostBattle(Critter critter)
+    void PostBattle(Critter playerCritter, Critter wildCritter)
     {
+        playerCritter.ResetBattleEffectors();
+        wildCritter.ResetBattleEffectors();
         BattleController.BattlePanel.SetActive(false);
         MapController.DisableMap();
-        GiveXp(critter.neededXp * 2);
-        CritterSelector.EnableSelectionPanel(critter);
+        GiveXp(wildCritter.neededXp * 2);
+        CritterSelector.EnableSelectionPanel(wildCritter);
     }
 
     void ShowFirstSelectionPanel()

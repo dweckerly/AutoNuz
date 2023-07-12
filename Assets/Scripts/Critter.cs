@@ -27,6 +27,7 @@ public class Critter
         Defense = CalculateStat(data.DefenseBase, personalityModifiers[2], DefenseGeneticMod);
         Speed = CalculateStat(data.SpeedBase, personalityModifiers[3], SpeedGeneticMod);
         currentHp = Hp;
+        ResetBattleEffectors();
     }
 
     public int Level;
@@ -45,6 +46,8 @@ public class Critter
     int SpeedGeneticMod;
     public bool Alive = true;
 
+    public Dictionary<Effector, float> battleEffectors = new Dictionary<Effector, float>();
+
     public void LevelUp()
     {
         Level += 1;
@@ -55,6 +58,24 @@ public class Critter
         Attack = CalculateStat(data.AttackBase, personalityModifiers[1], AttackGeneticMod);
         Defense = CalculateStat(data.DefenseBase, personalityModifiers[2], DefenseGeneticMod);
         Speed = CalculateStat(data.SpeedBase, personalityModifiers[3], SpeedGeneticMod);
+    }
+
+    public void ResetBattleEffectors()
+    {
+        battleEffectors.Clear();
+        battleEffectors.Add(Effector.ATK, 1f);
+        battleEffectors.Add(Effector.DEF, 1f);
+        battleEffectors.Add(Effector.SPD, 1f);
+    }
+
+    public void SetBattleEffector(Effector stat, float amount)
+    {
+        if (battleEffectors.ContainsKey(stat))
+        {
+            battleEffectors[stat] += amount / 100;
+            return;
+        }
+        battleEffectors.Add(stat, amount / 100);
     }
 
     int CalculateXp()

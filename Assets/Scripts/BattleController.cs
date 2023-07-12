@@ -26,7 +26,7 @@ public class BattleController : MonoBehaviour
     public event Action OnRunSelected;
     public event Action PlayerCritterDamaged;
     public event Action PlayerCritterDefeated;
-    public delegate void OnBattleEnd(Critter critter);
+    public delegate void OnBattleEnd(Critter playerCritter, Critter wildCritter);
     public OnBattleEnd BattleEndEvent;
     public event Action BattleStart;
 
@@ -91,7 +91,7 @@ public class BattleController : MonoBehaviour
         {
             yield return new WaitForSeconds(0.01f);
 
-            speedTimePlayer += playerCritter.Speed * Time.deltaTime;
+            speedTimePlayer += (playerCritter.Speed * playerCritter.battleEffectors[Effector.SPD]) * Time.deltaTime;
             playerCritterUI.speedRect.localScale = new Vector3(speedTimePlayer / BASE_BATTLE_SPEED, 1f, 1f);
             if (playerCritterUI.speedRect.localScale.x >= 1)
             {
@@ -99,7 +99,7 @@ public class BattleController : MonoBehaviour
                 speedTimePlayer = 0f;
                 PlayerCritterAttack();
             }
-            speedTimeWild += wildCritter.Speed * Time.deltaTime;
+            speedTimeWild += (wildCritter.Speed * wildCritter.battleEffectors[Effector.SPD]) * Time.deltaTime;
             wildCritterUI.speedRect.localScale = new Vector3(speedTimeWild / BASE_BATTLE_SPEED, 1f, 1f);
             if (wildCritterUI.speedRect.localScale.x >= 1)
             {
@@ -124,7 +124,7 @@ public class BattleController : MonoBehaviour
             speedTimeWild = 0f;
             wildCritter.currentHp = Mathf.RoundToInt(wildCritter.Hp / 2);
             StopAllCoroutines();
-            BattleEndEvent?.Invoke(wildCritter);
+            BattleEndEvent?.Invoke(playerCritter, wildCritter);
         }
     }
 
@@ -143,6 +143,7 @@ public class BattleController : MonoBehaviour
             speedTimePlayer = 0f;
             speedTimeWild = 0f;
             StopAllCoroutines();
+            playerCritter.ResetBattleEffectors();
             PlayerCritterDefeated?.Invoke();
         }
     }
@@ -150,7 +151,7 @@ public class BattleController : MonoBehaviour
     int DamageCalc(Critter attackingCritter, Critter defendingCritter)
     {
         float typeMod = DetermineTypeAdvantages(attackingCritter, defendingCritter);
-        float baseDamage = ((((2 * attackingCritter.Level) / 5) * (attackingCritter.Attack / defendingCritter.Defense)) / 30) + 10;
+        float baseDamage = ((((2 * attackingCritter.Level) / 5) * ((attackingCritter.Attack * attackingCritter.battleEffectors[Effector.ATK]) / (defendingCritter.Defense * defendingCritter.battleEffectors[Effector.DEF]))) / 30) + 10;
         float total = baseDamage * typeMod;
         if (total < 1) total = 1;
         return Mathf.RoundToInt(total);
