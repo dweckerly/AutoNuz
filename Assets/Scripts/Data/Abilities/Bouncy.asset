@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bouncy
   m_EditorClassIdentifier: 
   AbilityName: Bouncy
-  Description: Increases SPD by 5% when hit by an oppoennt.
+  Description: Raises SPD by 5% when hit by an oppoennt.
   Trigger: 1
   Target: 0
   Effector: 2

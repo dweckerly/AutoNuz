@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: OnFire
   m_EditorClassIdentifier: 
   AbilityName: On Fire
-  Description: Deals 5% of HP to oppenent when hit.
+  Description: Deals 5% of HP to oppenent when hit by an opponent.
   Trigger: 1
   Target: 1
   Effector: 3

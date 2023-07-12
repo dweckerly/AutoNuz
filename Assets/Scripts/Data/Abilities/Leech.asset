@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49ff1d29996fc4741923a5526d2a14d5, type: 3}
   m_Name: Leech
   m_EditorClassIdentifier: 
-  AbilityName: 
-  Description: 
-  Trigger: 0
+  AbilityName: Leech
+  Description: Recovers 10% HP of damage dealt to an opponent.
+  Trigger: 2
   Target: 0
-  Effector: 0
+  Effector: 3
   Effect: 0
-  Amount: 0
-  AmountType: 0
+  Amount: 10
+  AmountType: 2

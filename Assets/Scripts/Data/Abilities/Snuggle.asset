@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Snuggle
   m_EditorClassIdentifier: 
   AbilityName: Snuggle
-  Description: returns 10% of damage taken to the opponent.
+  Description: Returns 10% of damage taken to the opponent.
   Trigger: 1
   Target: 1
   Effector: 3

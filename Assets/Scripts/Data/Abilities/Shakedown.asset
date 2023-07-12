@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49ff1d29996fc4741923a5526d2a14d5, type: 3}
   m_Name: Shakedown
   m_EditorClassIdentifier: 
-  AbilityName: 
-  Description: 
+  AbilityName: Shakedown
+  Description: Lowers opponent's ATK by 20% at the start  of battle.
   Trigger: 0
-  Target: 0
+  Target: 1
   Effector: 0
-  Effect: 0
-  Amount: 0
+  Effect: 1
+  Amount: 20
   AmountType: 0

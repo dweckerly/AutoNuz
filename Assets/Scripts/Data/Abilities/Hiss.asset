@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hiss
   m_EditorClassIdentifier: 
   AbilityName: Hiss
-  Description: Decreases opponent's DEF by 20% at the start of battle.
+  Description: Lowers opponent's DEF by 20% at the start of battle.
   Trigger: 0
   Target: 1
   Effector: 1

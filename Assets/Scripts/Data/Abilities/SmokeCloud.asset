@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49ff1d29996fc4741923a5526d2a14d5, type: 3}
   m_Name: SmokeCloud
   m_EditorClassIdentifier: 
-  AbilityName: 
-  Description: 
-  Trigger: 0
+  AbilityName: Smoke Cloud
+  Description: Raises EVA by 20% when HP falls below 50%.
+  Trigger: 5
   Target: 0
-  Effector: 0
+  Effector: 4
   Effect: 0
-  Amount: 0
+  Amount: 20
   AmountType: 0

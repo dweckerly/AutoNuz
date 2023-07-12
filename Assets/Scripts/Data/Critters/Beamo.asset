@@ -20,3 +20,4 @@ MonoBehaviour:
   DefenseBase: 0
   SpeedBase: 2
   Types: 00000000
+  AbilityData: {fileID: 11400000, guid: 3d60f8687ad42bb43930dffb2b61eb52, type: 2}

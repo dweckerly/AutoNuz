@@ -170,6 +170,7 @@ public class HUDController : MonoBehaviour
         LocationDetailsContainer.SetActive(false);
         ExpositoryText.gameObject.SetActive(false);
         CritterDetails.CritterName.text = critter.data.CritterName;
+        CritterDetails.Ability.text = critter.data.AbilityData.AbilityName + ": " + critter.data.AbilityData.Description;
         CritterDetails.Personality.text = critter.personality.ToString();
         string types = "";
         foreach(ElementalType et in critter.data.Types)

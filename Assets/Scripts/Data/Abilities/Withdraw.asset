@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49ff1d29996fc4741923a5526d2a14d5, type: 3}
   m_Name: Withdraw
   m_EditorClassIdentifier: 
-  AbilityName: 
-  Description: 
-  Trigger: 0
+  AbilityName: Withdraw
+  Description: Raises DEF by 50% when HP falls below 50%.
+  Trigger: 5
   Target: 0
-  Effector: 0
+  Effector: 1
   Effect: 0
-  Amount: 0
+  Amount: 50
   AmountType: 0

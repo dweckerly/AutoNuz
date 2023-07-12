@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49ff1d29996fc4741923a5526d2a14d5, type: 3}
   m_Name: BloodCrazed
   m_EditorClassIdentifier: 
-  AbilityName: 
-  Description: 
-  Trigger: 0
+  AbilityName: Blood Crazed
+  Description: Raises ATK by 50% when opponent's HP falls below 50%.
+  Trigger: 6
   Target: 0
   Effector: 0
   Effect: 0
-  Amount: 0
+  Amount: 50
   AmountType: 0

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StaticBody
   m_EditorClassIdentifier: 
   AbilityName: Static Body
-  Description: Lowers opponent's SPD by 5% when hit.
+  Description: Lowers opponent's SPD by 5% when hit by the opponent.
   Trigger: 1
   Target: 1
   Effector: 2
