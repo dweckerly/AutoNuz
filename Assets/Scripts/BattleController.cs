@@ -24,11 +24,16 @@ public class BattleController : MonoBehaviour
     public GameObject FightRunBtns;
 
     public event Action OnRunSelected;
+    public delegate void OnPlayerCritterAttack(Critter playerCritter, Critter opponentCritter, int damage);
+    public OnPlayerCritterAttack PlayerCritterAttackEvent;
+    public delegate void OnOpponentCritterAttack(Critter playerCritter, Critter opponentCritter, int damage);
+    public OnOpponentCritterAttack OpponentCritterAttackEvent;
     public event Action PlayerCritterDamaged;
     public event Action PlayerCritterDefeated;
     public delegate void OnBattleEnd(Critter playerCritter, Critter wildCritter);
     public OnBattleEnd BattleEndEvent;
-    public event Action BattleStart;
+    public delegate void OnBattleStart(Critter playerCritter, Critter wildCritter);
+    public OnBattleStart BattleStartEvent;
 
     public Critter playerCritter;
     Critter wildCritter;
@@ -71,7 +76,7 @@ public class BattleController : MonoBehaviour
     {
         battling = true;
         FightRunBtns.SetActive(false);
-        BattleStart.Invoke();
+        BattleStartEvent?.Invoke(playerCritter, wildCritter);
         StartCoroutine(HandleTurnTime());
     }
 
@@ -113,6 +118,7 @@ public class BattleController : MonoBehaviour
     void PlayerCritterAttack()
     {
         int damage = DamageCalc(playerCritter, wildCritter);
+        PlayerCritterAttackEvent?.Invoke(playerCritter, wildCritter, damage);
         wildCritter.currentHp -= damage;
         if (wildCritter.currentHp < 0) wildCritter.currentHp = 0;
         wildCritterUI.healthText.text = wildCritter.currentHp + "/" + wildCritter.Hp;
@@ -131,6 +137,7 @@ public class BattleController : MonoBehaviour
     void WildCritterAttack()
     {
         int damage = DamageCalc(wildCritter, playerCritter);
+        OpponentCritterAttackEvent?.Invoke(playerCritter, wildCritter, damage);
         playerCritter.currentHp -= damage;
         if (playerCritter.currentHp < 0) playerCritter.currentHp = 0;
         playerCritterUI.healthText.text = playerCritter.currentHp + "/" + playerCritter.Hp;

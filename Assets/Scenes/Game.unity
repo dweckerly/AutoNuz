@@ -688,6 +688,7 @@ MonoBehaviour:
   CritterSelector: {fileID: 291183164}
   MapController: {fileID: 577247026}
   BattleController: {fileID: 631167622}
+  AbilityController: {fileID: 993271240}
   starterCritters:
   - {fileID: 11400000, guid: 43d5ba9e5230cbc4b966bfe71fd7df72, type: 2}
   - {fileID: 11400000, guid: 6afc9ec8c24977a44962ead555da19b3, type: 2}

@@ -17,20 +17,24 @@ public class AbilityController : MonoBehaviour
     public GameObject StatusEffectItem;
     public List<EffectorSpriteMap> effectorSpriteMaps = new List<EffectorSpriteMap>();
 
+    List<GameObject> PlayerEffectDisplays = new List<GameObject>();
+    List<GameObject> OpponentEffectDisplays = new List<GameObject>();
+
     public void AddEffectToPlayer(Critter playerCritter, Effector stat, float amount)
     {
-        AddEffectToCritter(playerCritter, stat, amount, PlayerStatusDisplay);
+        AddEffectToCritter(playerCritter, stat, amount, PlayerStatusDisplay, PlayerEffectDisplays);
     }
 
     public void AddEffectToOpponent(Critter opponentCritter, Effector stat, float amount)
     {
-        AddEffectToCritter(opponentCritter, stat, amount, OpponentStatusDisplay);
+        AddEffectToCritter(opponentCritter, stat, amount, OpponentStatusDisplay, OpponentEffectDisplays);
     }
 
-    public void AddEffectToCritter(Critter critter, Effector stat, float amount, GameObject display)
+    public void AddEffectToCritter(Critter critter, Effector stat, float amount, GameObject display, List<GameObject> displayRefList)
     {
         critter.SetBattleEffector(stat, amount);
         GameObject effectDisplayItem = Instantiate(StatusEffectItem, display.transform);
+        displayRefList.Add(effectDisplayItem);
         StatusEffectItem statusEffectItem = effectDisplayItem.GetComponent<StatusEffectItem>();
         foreach (EffectorSpriteMap esm in effectorSpriteMaps)
         {
@@ -64,21 +68,102 @@ public class AbilityController : MonoBehaviour
         }
     }
 
-    public void CheckAbilityTriggerOnHit(Critter attackingCritter, Critter defendingCritter, Trigger trigger, int damage)
+    public void CheckAbilityTriggerPlayerAttacking(Critter playerCritter, Critter opponentCritter, int damage)
     {
-        if (defendingCritter.data.AbilityData.AmountType == AmountType.PercentDamageTaken)
+        CheckAbilityTriggerOnHit(playerCritter, opponentCritter, damage, PlayerStatusDisplay, PlayerEffectDisplays, OpponentStatusDisplay, OpponentEffectDisplays);
+    }
+
+    public void CheckAbilityTriggerOpponentAttacking(Critter playerCritter, Critter opponentCritter, int damage)
+    {
+        CheckAbilityTriggerOnHit(opponentCritter, playerCritter, damage, OpponentStatusDisplay, OpponentEffectDisplays, PlayerStatusDisplay, PlayerEffectDisplays);
+    }
+
+    public void CheckAbilityTriggerOnHit(Critter attackingCritter, Critter defendingCritter, int damage, GameObject attackerDisplay, List<GameObject> attackerDisplayRefList, GameObject defenderDisplay, List<GameObject> defenderDisplayRefList)
+    {
+        if (defendingCritter.data.AbilityData.Trigger == Trigger.OnTakeDamage)
         {
-            float amount = (float)damage * (defendingCritter.data.AbilityData.Amount / 100);
+            float amount = defendingCritter.data.AbilityData.Amount;
+            if (defendingCritter.data.AbilityData.AmountType == AmountType.PercentDamageTaken)
+            {
+                amount = (float)damage * (defendingCritter.data.AbilityData.Amount / 100);
+            }
             float mod = 1f;
             if (defendingCritter.data.AbilityData.Effect == Effect.Decrease) mod *= -1f;
             amount *= mod;
+            if (defendingCritter.data.AbilityData.Target == Target.Self)
+            {
+                if (defendingCritter.data.AbilityData.Effector == Effector.HP)
+                {
+                    // TODO
+                }
+                else
+                {
+                    AddEffectToCritter(defendingCritter, defendingCritter.data.AbilityData.Effector, amount, defenderDisplay, defenderDisplayRefList);
+                }
+            }
+            else
+            {
+                if (defendingCritter.data.AbilityData.Effector == Effector.HP)
+                {
+                    // TODO
+                }
+                else
+                {
+                    AddEffectToCritter(attackingCritter, defendingCritter.data.AbilityData.Effector, amount, attackerDisplay, attackerDisplayRefList);
+                }
+            }
+            
         }
-        if (attackingCritter.data.AbilityData.AmountType == AmountType.PercentDamageDealt)
+        if (attackingCritter.data.AbilityData.Trigger == Trigger.OnDealDamage)
         {
-            float amount = (float)damage * (attackingCritter.data.AbilityData.Amount / 100);
+            float amount = attackingCritter.data.AbilityData.Amount;
+            if (attackingCritter.data.AbilityData.AmountType == AmountType.PercentDamageDealt)
+            {
+                amount = (float)damage * (attackingCritter.data.AbilityData.Amount / 100);
+            }
             float mod = 1f;
             if (attackingCritter.data.AbilityData.Effect == Effect.Decrease) mod *= -1f;
             amount *= mod;
+            if (attackingCritter.data.AbilityData.Target == Target.Self)
+            {
+                if (attackingCritter.data.AbilityData.Effector == Effector.HP)
+                {
+                    // TODO
+                }
+                else
+                {
+                    AddEffectToCritter(attackingCritter, attackingCritter.data.AbilityData.Effector, amount, attackerDisplay, attackerDisplayRefList);
+                }
+            }
+            else
+            {
+                if (attackingCritter.data.AbilityData.Effector == Effector.HP)
+                {
+                    // TODO
+                }
+                else
+                {
+                    AddEffectToCritter(defendingCritter, attackingCritter.data.AbilityData.Effector, amount, defenderDisplay, defenderDisplayRefList);
+                }
+            }
         }
+    }
+
+    public void DestroyPlayerEffectDisplayItems()
+    {
+        for (int i = PlayerEffectDisplays.Count - 1; i > -1; i--)
+        {
+            Destroy(PlayerEffectDisplays[i]);
+        }
+        PlayerEffectDisplays.Clear();
+    }
+
+    public void DestroyOpponentEffectDisplayItems()
+    {
+        for (int i = OpponentEffectDisplays.Count - 1; i > -1; i--)
+        {
+            Destroy(OpponentEffectDisplays[i]);
+        }
+        OpponentEffectDisplays.Clear();
     }
 }

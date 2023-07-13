@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public CritterSelector CritterSelector;
     public MapController MapController;
     public BattleController BattleController;
+    public AbilityController AbilityController;
 
     public CritterData[] starterCritters;
 
@@ -32,7 +33,9 @@ public class GameManager : MonoBehaviour
         BattleController.BattleEndEvent += PostBattle;
         BattleController.PlayerCritterDefeated += ChangePlayerBattleCritter;
         BattleController.PlayerCritterDamaged += UpdateCritterRosterDisplay;
-        BattleController.BattleStart += WildBattleStart;
+        BattleController.BattleStartEvent += WildBattleStart;
+        BattleController.PlayerCritterAttackEvent += PlayerCritterAttack;
+        BattleController.OpponentCritterAttackEvent += OpponentCritterAttack;
         HUDController.HideCritterDetails();
         ShowFirstSelectionPanel();
     }
@@ -52,7 +55,9 @@ public class GameManager : MonoBehaviour
         BattleController.BattleEndEvent -= PostBattle;
         BattleController.PlayerCritterDefeated -= ChangePlayerBattleCritter;
         BattleController.PlayerCritterDamaged -= UpdateCritterRosterDisplay;
-        BattleController.BattleStart -= WildBattleStart;
+        BattleController.BattleStartEvent -= WildBattleStart;
+        BattleController.PlayerCritterAttackEvent -= PlayerCritterAttack;
+        BattleController.OpponentCritterAttackEvent -= OpponentCritterAttack;
     }
 
     void SwapCritters(Critter c1, Critter c2)
@@ -179,6 +184,16 @@ public class GameManager : MonoBehaviour
         BattleController.BattlePanel.SetActive(true);
     }
 
+    void PlayerCritterAttack(Critter playerCritter, Critter opponentCritter, int damage)
+    {
+        AbilityController.CheckAbilityTriggerPlayerAttacking(playerCritter, opponentCritter, damage);
+    }
+
+    void OpponentCritterAttack(Critter playerCritter, Critter opponentCritter, int damage)
+    {
+        AbilityController.CheckAbilityTriggerOpponentAttacking(playerCritter, opponentCritter, damage);
+    }
+
     void UpdateCritterRosterDisplay()
     {
         HUDController.UpdateCritterRosterDisplays();
@@ -251,8 +266,9 @@ public class GameManager : MonoBehaviour
         ShowMap();
     }
 
-    void WildBattleStart()
+    void WildBattleStart(Critter playerCritter, Critter wildCritter)
     {
+        AbilityController.CheckAbilityTrigger(playerCritter, wildCritter, Trigger.OnEnter);
         HUDController.HideExpositoryText();
     }
 }
