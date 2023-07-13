@@ -18,6 +18,7 @@ public class CritterBattleUI
 public class BattleController : MonoBehaviour
 {
     const float BASE_BATTLE_SPEED = 30f;
+    const float SPEED_LOG_BASE = 1.15f;
     public GameObject BattlePanel;
     public CritterBattleUI playerCritterUI;
     public CritterBattleUI wildCritterUI;
@@ -100,7 +101,7 @@ public class BattleController : MonoBehaviour
         {
             yield return new WaitForSeconds(0.01f);
 
-            speedTimePlayer += (playerCritter.Speed * playerCritter.battleEffectors[Effector.SPD]) * Time.deltaTime;
+            speedTimePlayer += Mathf.Log((playerCritter.Speed * playerCritter.battleEffectors[Effector.SPD]), SPEED_LOG_BASE) * Time.deltaTime;
             playerCritterUI.speedRect.localScale = new Vector3(speedTimePlayer / BASE_BATTLE_SPEED, 1f, 1f);
             if (playerCritterUI.speedRect.localScale.x >= 1)
             {
@@ -108,7 +109,7 @@ public class BattleController : MonoBehaviour
                 speedTimePlayer = 0f;
                 PlayerCritterAttack();
             }
-            speedTimeWild += (wildCritter.Speed * wildCritter.battleEffectors[Effector.SPD]) * Time.deltaTime;
+            speedTimeWild += Mathf.Log((wildCritter.Speed * wildCritter.battleEffectors[Effector.SPD]), SPEED_LOG_BASE) * Time.deltaTime;
             wildCritterUI.speedRect.localScale = new Vector3(speedTimeWild / BASE_BATTLE_SPEED, 1f, 1f);
             if (wildCritterUI.speedRect.localScale.x >= 1)
             {
@@ -196,8 +197,8 @@ public class BattleController : MonoBehaviour
     int DamageCalc(Critter attackingCritter, Critter defendingCritter)
     {
         float typeMod = DetermineTypeAdvantages(attackingCritter, defendingCritter);
-        float baseDamage = ((((2 * attackingCritter.Level) / 5) * ((attackingCritter.Attack * attackingCritter.battleEffectors[Effector.ATK]) / (defendingCritter.Defense * defendingCritter.battleEffectors[Effector.DEF]))) / 30) + 10;
-        float total = baseDamage * typeMod;
+        float baseDamage = ((((2 * attackingCritter.Level) / 5) * (attackingCritter.Attack / defendingCritter.Defense)) / 30) + 10;
+        float total = baseDamage * typeMod * attackingCritter.battleEffectors[Effector.ATK] * (2 - defendingCritter.battleEffectors[Effector.DEF]);
         if (total < 1) total = 1;
         return Mathf.RoundToInt(total);
     }
