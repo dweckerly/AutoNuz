@@ -115,14 +115,21 @@ public class BattleController : MonoBehaviour
         }
     }
 
+    public void UpdateCritterHealthUI()
+    {
+        wildCritterUI.healthText.text = wildCritter.currentHp + "/" + wildCritter.Hp;
+        wildCritterUI.healthRect.localScale = new Vector3((float)(wildCritter.currentHp) / (float)(wildCritter.Hp), 1f, 1f);
+        playerCritterUI.healthText.text = playerCritter.currentHp + "/" + playerCritter.Hp;
+        playerCritterUI.healthRect.localScale = new Vector3((float)(playerCritter.currentHp) / (float)(playerCritter.Hp), 1f, 1f);
+    }
+
     void PlayerCritterAttack()
     {
         int damage = DamageCalc(playerCritter, wildCritter);
         PlayerCritterAttackEvent?.Invoke(playerCritter, wildCritter, damage);
         wildCritter.currentHp -= damage;
         if (wildCritter.currentHp < 0) wildCritter.currentHp = 0;
-        wildCritterUI.healthText.text = wildCritter.currentHp + "/" + wildCritter.Hp;
-        wildCritterUI.healthRect.localScale = new Vector3((float)(wildCritter.currentHp) / (float)(wildCritter.Hp), 1f, 1f);
+        UpdateCritterHealthUI();
         if (wildCritter.currentHp == 0) 
         {
             battling = false;
@@ -140,8 +147,7 @@ public class BattleController : MonoBehaviour
         OpponentCritterAttackEvent?.Invoke(playerCritter, wildCritter, damage);
         playerCritter.currentHp -= damage;
         if (playerCritter.currentHp < 0) playerCritter.currentHp = 0;
-        playerCritterUI.healthText.text = playerCritter.currentHp + "/" + playerCritter.Hp;
-        playerCritterUI.healthRect.localScale = new Vector3((float)(playerCritter.currentHp) / (float)(playerCritter.Hp), 1f, 1f);
+        UpdateCritterHealthUI();
         PlayerCritterDamaged.Invoke();
         if (playerCritter.currentHp == 0) 
         {
