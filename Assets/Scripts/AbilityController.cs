@@ -107,26 +107,25 @@ public class AbilityController : MonoBehaviour
             float amount = defendingCritter.data.AbilityData.Amount;
             float mod = 1f;
             if (defendingCritter.data.AbilityData.Effect == Effect.Decrease) mod *= -1f;
-            amount *= mod;
             if (defendingCritter.data.AbilityData.Target == Target.Self)
             {
                 if (defendingCritter.data.AbilityData.Effector == Effector.HP)
                 {
                     if (defendingCritter.data.AbilityData.AmountType == AmountType.PercentDamageTaken)
                     {
-                        amount = (float)damage * (defendingCritter.data.AbilityData.Amount / 100);
+                        amount = (float)damage * (defendingCritter.data.AbilityData.Amount / 100) * mod;
                         defendingCritter.currentHp += Mathf.CeilToInt(amount);
                         OnCritterHPCHange?.Invoke();
                     }
                     if (defendingCritter.data.AbilityData.AmountType == AmountType.Percent)
                     {
-                        defendingCritter.currentHp += Mathf.CeilToInt((amount / 100) * defendingCritter.Hp);
+                        defendingCritter.currentHp += Mathf.CeilToInt((amount / 100) * defendingCritter.Hp * mod);
                         OnCritterHPCHange?.Invoke();
                     }
                 }
                 else
                 {
-                    AddEffectToCritter(defendingCritter, defendingCritter.data.AbilityData.Effector, amount, defenderDisplay, defenderDisplayRefList);
+                    AddEffectToCritter(defendingCritter, defendingCritter.data.AbilityData.Effector, amount * mod, defenderDisplay, defenderDisplayRefList);
                 }
             }
             else
@@ -135,19 +134,20 @@ public class AbilityController : MonoBehaviour
                 {
                     if (defendingCritter.data.AbilityData.AmountType == AmountType.PercentDamageTaken)
                     {
-                        amount = (float)damage * (defendingCritter.data.AbilityData.Amount / 100);
+                        amount = (float)damage * (defendingCritter.data.AbilityData.Amount / 100) * mod;
                         attackingCritter.currentHp += Mathf.CeilToInt(amount);
+                        Debug.Log(amount);
                         OnCritterHPCHange?.Invoke();
                     }
                     if (defendingCritter.data.AbilityData.AmountType == AmountType.Percent)
                     {
-                        attackingCritter.currentHp += Mathf.CeilToInt((amount / 100) * defendingCritter.Hp);
+                        attackingCritter.currentHp += Mathf.CeilToInt((amount / 100) * defendingCritter.Hp * mod);
                         OnCritterHPCHange?.Invoke();
                     }
                 }
                 else
                 {
-                    AddEffectToCritter(attackingCritter, defendingCritter.data.AbilityData.Effector, amount, attackerDisplay, attackerDisplayRefList);
+                    AddEffectToCritter(attackingCritter, defendingCritter.data.AbilityData.Effector, amount * mod, attackerDisplay, attackerDisplayRefList);
                 }
             }
             
@@ -157,26 +157,25 @@ public class AbilityController : MonoBehaviour
             float amount = attackingCritter.data.AbilityData.Amount;
             float mod = 1f;
             if (attackingCritter.data.AbilityData.Effect == Effect.Decrease) mod *= -1f;
-            amount *= mod;
             if (attackingCritter.data.AbilityData.Target == Target.Self)
             {
                 if (attackingCritter.data.AbilityData.Effector == Effector.HP)
                 {
                     if (attackingCritter.data.AbilityData.AmountType == AmountType.PercentDamageDealt)
                     {
-                        amount = (float)damage * (amount / 100);
+                        amount = (float)damage * (amount / 100) * mod;
                         attackingCritter.currentHp += Mathf.CeilToInt(amount);
                         OnCritterHPCHange?.Invoke();
                     }
                     if (attackingCritter.data.AbilityData.AmountType == AmountType.Percent)
                     {
-                        attackingCritter.currentHp += Mathf.CeilToInt((amount / 100) * attackingCritter.Hp);
+                        attackingCritter.currentHp += Mathf.CeilToInt((amount / 100) * attackingCritter.Hp * mod);
                         OnCritterHPCHange?.Invoke();
                     }
                 }
                 else
                 {
-                    AddEffectToCritter(attackingCritter, attackingCritter.data.AbilityData.Effector, amount, attackerDisplay, attackerDisplayRefList);
+                    AddEffectToCritter(attackingCritter, attackingCritter.data.AbilityData.Effector, amount * mod, attackerDisplay, attackerDisplayRefList);
                 }
             }
             else
@@ -185,19 +184,19 @@ public class AbilityController : MonoBehaviour
                 {
                     if (attackingCritter.data.AbilityData.AmountType == AmountType.PercentDamageDealt)
                     {
-                        amount = (float)damage * (amount / 100);
+                        amount = (float)damage * (amount / 100) * mod;
                         defendingCritter.currentHp += Mathf.CeilToInt(amount);
                         OnCritterHPCHange?.Invoke();
                     }
                     if (attackingCritter.data.AbilityData.AmountType == AmountType.Percent)
                     {
-                        defendingCritter.currentHp += Mathf.CeilToInt((amount / 100) * attackingCritter.Hp);
+                        defendingCritter.currentHp += Mathf.CeilToInt((amount / 100) * attackingCritter.Hp * mod);
                         OnCritterHPCHange?.Invoke();
                     }   
                 }
                 else
                 {
-                    AddEffectToCritter(defendingCritter, attackingCritter.data.AbilityData.Effector, amount, defenderDisplay, defenderDisplayRefList);
+                    AddEffectToCritter(defendingCritter, attackingCritter.data.AbilityData.Effector, amount * mod, defenderDisplay, defenderDisplayRefList);
                 }
             }
         }
