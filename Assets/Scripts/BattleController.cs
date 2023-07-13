@@ -101,7 +101,7 @@ public class BattleController : MonoBehaviour
         {
             yield return new WaitForSeconds(0.01f);
 
-            speedTimePlayer += Mathf.Log((playerCritter.Speed * playerCritter.battleEffectors[Effector.SPD]), SPEED_LOG_BASE) * Time.deltaTime;
+            speedTimePlayer += Mathf.Log(playerCritter.Speed, SPEED_LOG_BASE) * Time.deltaTime * playerCritter.battleEffectors[Effector.SPD];
             playerCritterUI.speedRect.localScale = new Vector3(speedTimePlayer / BASE_BATTLE_SPEED, 1f, 1f);
             if (playerCritterUI.speedRect.localScale.x >= 1)
             {
@@ -109,7 +109,7 @@ public class BattleController : MonoBehaviour
                 speedTimePlayer = 0f;
                 PlayerCritterAttack();
             }
-            speedTimeWild += Mathf.Log((wildCritter.Speed * wildCritter.battleEffectors[Effector.SPD]), SPEED_LOG_BASE) * Time.deltaTime;
+            speedTimeWild += Mathf.Log(wildCritter.Speed, SPEED_LOG_BASE) * Time.deltaTime * wildCritter.battleEffectors[Effector.SPD];
             wildCritterUI.speedRect.localScale = new Vector3(speedTimeWild / BASE_BATTLE_SPEED, 1f, 1f);
             if (wildCritterUI.speedRect.localScale.x >= 1)
             {

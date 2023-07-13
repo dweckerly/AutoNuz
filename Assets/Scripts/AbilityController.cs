@@ -115,12 +115,12 @@ public class AbilityController : MonoBehaviour
                     if (defendingCritter.data.AbilityData.AmountType == AmountType.PercentDamageTaken)
                     {
                         amount = (float)damage * (defendingCritter.data.AbilityData.Amount / 100);
-                        defendingCritter.currentHp += Mathf.RoundToInt(amount);
+                        defendingCritter.currentHp += Mathf.CeilToInt(amount);
                         OnCritterHPCHange?.Invoke();
                     }
                     if (defendingCritter.data.AbilityData.AmountType == AmountType.Percent)
                     {
-                        defendingCritter.currentHp += Mathf.RoundToInt((amount / 100) * defendingCritter.Hp);
+                        defendingCritter.currentHp += Mathf.CeilToInt((amount / 100) * defendingCritter.Hp);
                         OnCritterHPCHange?.Invoke();
                     }
                 }
@@ -136,12 +136,12 @@ public class AbilityController : MonoBehaviour
                     if (defendingCritter.data.AbilityData.AmountType == AmountType.PercentDamageTaken)
                     {
                         amount = (float)damage * (defendingCritter.data.AbilityData.Amount / 100);
-                        attackingCritter.currentHp += Mathf.RoundToInt(amount);
+                        attackingCritter.currentHp += Mathf.CeilToInt(amount);
                         OnCritterHPCHange?.Invoke();
                     }
                     if (defendingCritter.data.AbilityData.AmountType == AmountType.Percent)
                     {
-                        attackingCritter.currentHp += Mathf.RoundToInt((amount / 100) * defendingCritter.Hp);
+                        attackingCritter.currentHp += Mathf.CeilToInt((amount / 100) * defendingCritter.Hp);
                         OnCritterHPCHange?.Invoke();
                     }
                 }
@@ -165,12 +165,12 @@ public class AbilityController : MonoBehaviour
                     if (attackingCritter.data.AbilityData.AmountType == AmountType.PercentDamageDealt)
                     {
                         amount = (float)damage * (amount / 100);
-                        attackingCritter.currentHp += Mathf.RoundToInt(amount);
+                        attackingCritter.currentHp += Mathf.CeilToInt(amount);
                         OnCritterHPCHange?.Invoke();
                     }
                     if (attackingCritter.data.AbilityData.AmountType == AmountType.Percent)
                     {
-                        attackingCritter.currentHp += Mathf.RoundToInt((amount / 100) * attackingCritter.Hp);
+                        attackingCritter.currentHp += Mathf.CeilToInt((amount / 100) * attackingCritter.Hp);
                         OnCritterHPCHange?.Invoke();
                     }
                 }
@@ -186,12 +186,12 @@ public class AbilityController : MonoBehaviour
                     if (attackingCritter.data.AbilityData.AmountType == AmountType.PercentDamageDealt)
                     {
                         amount = (float)damage * (amount / 100);
-                        defendingCritter.currentHp += Mathf.RoundToInt(amount);
+                        defendingCritter.currentHp += Mathf.CeilToInt(amount);
                         OnCritterHPCHange?.Invoke();
                     }
                     if (attackingCritter.data.AbilityData.AmountType == AmountType.Percent)
                     {
-                        defendingCritter.currentHp += Mathf.RoundToInt((amount / 100) * attackingCritter.Hp);
+                        defendingCritter.currentHp += Mathf.CeilToInt((amount / 100) * attackingCritter.Hp);
                         OnCritterHPCHange?.Invoke();
                     }   
                 }
