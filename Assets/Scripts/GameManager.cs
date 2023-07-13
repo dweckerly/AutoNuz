@@ -302,6 +302,11 @@ public class GameManager : MonoBehaviour
             AbilityController.CheckPlayerCritterAbilityTrigger(playerCritter, opponentCritter, Trigger.OnSelfHP50);
             playerCritter.singleUseAbilityTriggered = true;
         }
+        if (!opponentCritter.singleUseAbilityTriggered)
+        {
+            AbilityController.CheckOpponentCritterAbilityTrigger(playerCritter, opponentCritter, Trigger.OnOpponentHP50);
+            opponentCritter.singleUseAbilityTriggered = true;
+        }
     }
 
     void OpponentBelow50HP(Critter playerCritter, Critter opponentCritter)
@@ -310,6 +315,11 @@ public class GameManager : MonoBehaviour
         {
             AbilityController.CheckOpponentCritterAbilityTrigger(playerCritter, opponentCritter, Trigger.OnSelfHP50);
             opponentCritter.singleUseAbilityTriggered = true;
+        }
+        if (!playerCritter.singleUseAbilityTriggered)
+        {
+            AbilityController.CheckPlayerCritterAbilityTrigger(playerCritter, opponentCritter, Trigger.OnOpponentHP50);
+            playerCritter.singleUseAbilityTriggered = true;
         }
     }
 
