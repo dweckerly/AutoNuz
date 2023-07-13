@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
         BattleController.OpponentCritterAttackEvent += OpponentCritterAttack;
         BattleController.PlayerCritterBelow50HPEvent += PlayerBelow50HP;
         BattleController.OpponentCritterBelow50HPEvent += OpponentBelow50HP;
-        AbilityController.OnCritterHPCHange += UpdateCritterDisplays;
+        AbilityController.OnCritterHPCHange += UpdateCritterHP;
         HUDController.HideCritterDetails();
         ShowFirstSelectionPanel();
     }
@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
         BattleController.OpponentCritterAttackEvent -= OpponentCritterAttack;
         BattleController.PlayerCritterBelow50HPEvent -= PlayerBelow50HP;
         BattleController.OpponentCritterBelow50HPEvent -= OpponentBelow50HP;
-        AbilityController.OnCritterHPCHange -= UpdateCritterDisplays;
+        AbilityController.OnCritterHPCHange -= UpdateCritterHP;
     }
 
     void SwapCritters(Critter c1, Critter c2)
@@ -202,7 +202,7 @@ public class GameManager : MonoBehaviour
         AbilityController.CheckAbilityTriggerOpponentAttacking(playerCritter, opponentCritter, damage);
     }
 
-    void UpdateCritterDisplays()
+    void UpdateCritterHP()
     {
         UpdateCritterBattleHPDisplay();
         UpdateCritterRosterDisplay();
@@ -210,6 +210,7 @@ public class GameManager : MonoBehaviour
 
     void UpdateCritterBattleHPDisplay()
     {
+        BattleController.CheckCritterHP();
         BattleController.UpdateCritterHealthUI();
     }
 

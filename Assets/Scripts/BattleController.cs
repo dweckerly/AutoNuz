@@ -132,10 +132,26 @@ public class BattleController : MonoBehaviour
         int damage = DamageCalc(playerCritter, wildCritter);
         PlayerCritterAttackEvent?.Invoke(playerCritter, wildCritter, damage);
         wildCritter.currentHp -= damage;
-        if (wildCritter.currentHp < 0) wildCritter.currentHp = 0;
+        CheckWildCritterHP();
         UpdateCritterHealthUI();
+    }
+
+    public void CheckCritterHP()
+    {
+        CheckWildCritterHP();
+        CheckPlayerCritterHP();
+    }
+
+    void CheckWildCritterHP()
+    {
+        if (wildCritter.currentHp > wildCritter.Hp)
+        {
+            wildCritter.currentHp = wildCritter.Hp;
+            return;
+        }
         if (wildCritter.currentHp <= wildCritter.Hp / 2) OpponentCritterBelow50HPEvent?.Invoke(playerCritter, wildCritter);
-        if (wildCritter.currentHp == 0) 
+        if (wildCritter.currentHp < 0) wildCritter.currentHp = 0;
+        if (wildCritter.currentHp == 0)
         {
             battling = false;
             speedTimePlayer = 0f;
@@ -146,16 +162,17 @@ public class BattleController : MonoBehaviour
         }
     }
 
-    void WildCritterAttack()
+    void CheckPlayerCritterHP()
     {
-        int damage = DamageCalc(wildCritter, playerCritter);
-        OpponentCritterAttackEvent?.Invoke(playerCritter, wildCritter, damage);
-        playerCritter.currentHp -= damage;
-        if (playerCritter.currentHp < 0) playerCritter.currentHp = 0;
-        UpdateCritterHealthUI();
         PlayerCritterDamaged.Invoke();
+        if (playerCritter.currentHp > playerCritter.Hp) 
+        {
+            playerCritter.currentHp = playerCritter.Hp;
+            return;
+        }
         if (playerCritter.currentHp <= playerCritter.Hp / 2) PlayerCritterBelow50HPEvent?.Invoke(playerCritter, wildCritter);
-        if (playerCritter.currentHp == 0) 
+        if (playerCritter.currentHp < 0) playerCritter.currentHp = 0;
+        if (playerCritter.currentHp == 0)
         {
             playerCritter.Alive = false;
             battling = false;
@@ -165,6 +182,15 @@ public class BattleController : MonoBehaviour
             playerCritter.ResetBattleEffectors();
             PlayerCritterDefeated?.Invoke();
         }
+    }
+
+    void WildCritterAttack()
+    {
+        int damage = DamageCalc(wildCritter, playerCritter);
+        OpponentCritterAttackEvent?.Invoke(playerCritter, wildCritter, damage);
+        playerCritter.currentHp -= damage;
+        CheckPlayerCritterHP();
+        UpdateCritterHealthUI();
     }
 
     int DamageCalc(Critter attackingCritter, Critter defendingCritter)
@@ -193,7 +219,7 @@ public class BattleController : MonoBehaviour
                         }
                         foreach (ElementalType advEType in tmod.Advantages)
                         {
-                            if(defenderTypes == advEType) mod *= 2f;
+                            if (defenderTypes == advEType) mod *= 2f;
                         }
                         foreach(ElementalType disEType in tmod.Disadvantages)
                         {
