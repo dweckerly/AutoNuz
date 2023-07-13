@@ -44,6 +44,7 @@ public class AbilityController : MonoBehaviour
             {
                 if (stat == esm.stat)
                 {
+                    statusEffectItem.stat = stat;
                     statusEffectItem.image.sprite = esm.sprite;
                     statusEffectItem.percentAmount.text = amount.ToString() + "%";
                 }
@@ -53,7 +54,7 @@ public class AbilityController : MonoBehaviour
         foreach(GameObject go in displayRefList)
         {
             StatusEffectItem statusEffectItem = go.GetComponent<StatusEffectItem>();
-            if (statusEffectItem.stat == stat) statusEffectItem.percentAmount.text = amount.ToString() + "%";
+            if (statusEffectItem.stat == stat) statusEffectItem.percentAmount.text = ((critter.battleEffectors[stat] - 1) * 100) + "%";
         }
     }
 
