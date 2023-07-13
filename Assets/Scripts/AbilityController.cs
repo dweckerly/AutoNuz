@@ -54,11 +54,11 @@ public class AbilityController : MonoBehaviour
         foreach(GameObject go in displayRefList)
         {
             StatusEffectItem statusEffectItem = go.GetComponent<StatusEffectItem>();
-            if (statusEffectItem.stat == stat) statusEffectItem.percentAmount.text = ((critter.battleEffectors[stat] - 1) * 100) + "%";
+            if (statusEffectItem.stat == stat) statusEffectItem.percentAmount.text = Mathf.RoundToInt((critter.battleEffectors[stat] - 1) * 100) + "%";
         }
     }
 
-    public void CheckAbilityTrigger(Critter playerCritter, Critter opponentCritter, Trigger trigger)
+    public void CheckPlayerCritterAbilityTrigger(Critter playerCritter, Critter opponentCritter, Trigger trigger)
     {
         if (playerCritter.data.AbilityData.Trigger == trigger)
         {
@@ -69,6 +69,10 @@ public class AbilityController : MonoBehaviour
             if (playerCritter.data.AbilityData.Target == Target.Opponent)
                 AddEffectToOpponent(opponentCritter, playerCritter.data.AbilityData.Effector, playerCritter.data.AbilityData.Amount * mod);
         }
+    }
+
+    public void CheckOpponentCritterAbilityTrigger(Critter playerCritter, Critter opponentCritter, Trigger trigger)
+    {
         if (opponentCritter.data.AbilityData.Trigger == trigger)
         {
             float mod = 1f;
@@ -78,6 +82,12 @@ public class AbilityController : MonoBehaviour
             if (opponentCritter.data.AbilityData.Target == Target.Opponent)
                 AddEffectToPlayer(playerCritter, opponentCritter.data.AbilityData.Effector, opponentCritter.data.AbilityData.Amount * mod);
         }
+    }
+
+    public void CheckAbilityTrigger(Critter playerCritter, Critter opponentCritter, Trigger trigger)
+    {
+        CheckPlayerCritterAbilityTrigger(playerCritter, opponentCritter, trigger);
+        CheckOpponentCritterAbilityTrigger(playerCritter, opponentCritter, trigger);
     }
 
     public void CheckAbilityTriggerPlayerAttacking(Critter playerCritter, Critter opponentCritter, int damage)

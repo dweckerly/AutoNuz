@@ -36,6 +36,8 @@ public class GameManager : MonoBehaviour
         BattleController.BattleStartEvent += WildBattleStart;
         BattleController.PlayerCritterAttackEvent += PlayerCritterAttack;
         BattleController.OpponentCritterAttackEvent += OpponentCritterAttack;
+        BattleController.PlayerCritterBelow50HPEvent += PlayerBelow50HP;
+        BattleController.OpponentCritterBelow50HPEvent += OpponentBelow50HP;
         AbilityController.OnCritterHPCHange += UpdateCritterDisplays;
         HUDController.HideCritterDetails();
         ShowFirstSelectionPanel();
@@ -59,6 +61,8 @@ public class GameManager : MonoBehaviour
         BattleController.BattleStartEvent -= WildBattleStart;
         BattleController.PlayerCritterAttackEvent -= PlayerCritterAttack;
         BattleController.OpponentCritterAttackEvent -= OpponentCritterAttack;
+        BattleController.PlayerCritterBelow50HPEvent -= PlayerBelow50HP;
+        BattleController.OpponentCritterBelow50HPEvent -= OpponentBelow50HP;
         AbilityController.OnCritterHPCHange -= UpdateCritterDisplays;
     }
 
@@ -286,5 +290,15 @@ public class GameManager : MonoBehaviour
     {
         AbilityController.CheckAbilityTrigger(playerCritter, wildCritter, Trigger.OnEnter);
         HUDController.HideExpositoryText();
+    }
+
+    void PlayerBelow50HP(Critter playerCritter, Critter opponentCritter)
+    {
+        AbilityController.CheckPlayerCritterAbilityTrigger(playerCritter, opponentCritter, Trigger.OnSelfHP50);
+    }
+
+    void OpponentBelow50HP(Critter playerCritter, Critter opponentCritter)
+    {
+        AbilityController.CheckOpponentCritterAbilityTrigger(playerCritter, opponentCritter, Trigger.OnSelfHP50);
     }
 }

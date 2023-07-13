@@ -34,6 +34,10 @@ public class BattleController : MonoBehaviour
     public OnBattleEnd BattleEndEvent;
     public delegate void OnBattleStart(Critter playerCritter, Critter wildCritter);
     public OnBattleStart BattleStartEvent;
+    public delegate void OnPlayerCritterBelow50HP(Critter playerCritter, Critter wildCritter);
+    public OnPlayerCritterBelow50HP PlayerCritterBelow50HPEvent;
+    public delegate void OnOpponentCritterBelow50HP(Critter playerCritter, Critter wildCritter);
+    public OnOpponentCritterBelow50HP OpponentCritterBelow50HPEvent;
 
     public Critter playerCritter;
     Critter wildCritter;
@@ -130,6 +134,7 @@ public class BattleController : MonoBehaviour
         wildCritter.currentHp -= damage;
         if (wildCritter.currentHp < 0) wildCritter.currentHp = 0;
         UpdateCritterHealthUI();
+        if (wildCritter.currentHp <= wildCritter.Hp / 2) OpponentCritterBelow50HPEvent?.Invoke(playerCritter, wildCritter);
         if (wildCritter.currentHp == 0) 
         {
             battling = false;
@@ -149,6 +154,7 @@ public class BattleController : MonoBehaviour
         if (playerCritter.currentHp < 0) playerCritter.currentHp = 0;
         UpdateCritterHealthUI();
         PlayerCritterDamaged.Invoke();
+        if (playerCritter.currentHp <= playerCritter.Hp / 2) PlayerCritterBelow50HPEvent?.Invoke(playerCritter, wildCritter);
         if (playerCritter.currentHp == 0) 
         {
             playerCritter.Alive = false;
