@@ -156,6 +156,8 @@ public class GameManager : MonoBehaviour
     {
         playerCritter.ResetBattleEffectors();
         wildCritter.ResetBattleEffectors();
+        AbilityController.DestroyPlayerEffectDisplayItems();
+        AbilityController.DestroyOpponentEffectDisplayItems();
         BattleController.BattlePanel.SetActive(false);
         MapController.DisableMap();
         GiveXp(wildCritter.neededXp * 2);
@@ -205,6 +207,7 @@ public class GameManager : MonoBehaviour
         {
             if (playerCritters[i] != null && playerCritters[i].Alive)
             {
+                AbilityController.DestroyPlayerEffectDisplayItems();
                 BattleController.PopulatePlayerCritterUI(playerCritters[i]);
                 BattleController.StartBattle();
                 return;

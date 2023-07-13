@@ -8,4 +8,5 @@ public class StatusEffectItem : MonoBehaviour
 {
     public Image image;
     public TMP_Text percentAmount;
+    public Effector stat;
 }

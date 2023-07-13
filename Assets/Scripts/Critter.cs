@@ -68,14 +68,16 @@ public class Critter
         battleEffectors.Add(Effector.SPD, 1f);
     }
 
-    public void SetBattleEffector(Effector stat, float amount)
+    public bool SetBattleEffector(Effector stat, float amount)
     {
+        // return true if stat effector exists
         if (battleEffectors.ContainsKey(stat))
         {
             battleEffectors[stat] += amount / 100;
-            return;
+            return true;
         }
         battleEffectors.Add(stat, amount / 100);
+        return false;
     }
 
     int CalculateXp()

@@ -32,17 +32,26 @@ public class AbilityController : MonoBehaviour
 
     public void AddEffectToCritter(Critter critter, Effector stat, float amount, GameObject display, List<GameObject> displayRefList)
     {
-        critter.SetBattleEffector(stat, amount);
-        GameObject effectDisplayItem = Instantiate(StatusEffectItem, display.transform);
-        displayRefList.Add(effectDisplayItem);
-        StatusEffectItem statusEffectItem = effectDisplayItem.GetComponent<StatusEffectItem>();
-        foreach (EffectorSpriteMap esm in effectorSpriteMaps)
+        bool existing = critter.SetBattleEffector(stat, amount);
+        if (!existing)
         {
-            if (stat == esm.stat)
+            GameObject effectDisplayItem = Instantiate(StatusEffectItem, display.transform);
+            displayRefList.Add(effectDisplayItem);
+            StatusEffectItem statusEffectItem = effectDisplayItem.GetComponent<StatusEffectItem>();
+            foreach (EffectorSpriteMap esm in effectorSpriteMaps)
             {
-                statusEffectItem.image.sprite = esm.sprite;
-                statusEffectItem.percentAmount.text = amount.ToString() + "%";
+                if (stat == esm.stat)
+                {
+                    statusEffectItem.image.sprite = esm.sprite;
+                    statusEffectItem.percentAmount.text = amount.ToString() + "%";
+                }
             }
+            return;
+        }
+        foreach(GameObject go in displayRefList)
+        {
+            StatusEffectItem statusEffectItem = go.GetComponent<StatusEffectItem>();
+            if (statusEffectItem.stat == stat) statusEffectItem.percentAmount.text = amount.ToString() + "%";
         }
     }
 
@@ -83,10 +92,6 @@ public class AbilityController : MonoBehaviour
         if (defendingCritter.data.AbilityData.Trigger == Trigger.OnTakeDamage)
         {
             float amount = defendingCritter.data.AbilityData.Amount;
-            if (defendingCritter.data.AbilityData.AmountType == AmountType.PercentDamageTaken)
-            {
-                amount = (float)damage * (defendingCritter.data.AbilityData.Amount / 100);
-            }
             float mod = 1f;
             if (defendingCritter.data.AbilityData.Effect == Effect.Decrease) mod *= -1f;
             amount *= mod;
@@ -94,7 +99,15 @@ public class AbilityController : MonoBehaviour
             {
                 if (defendingCritter.data.AbilityData.Effector == Effector.HP)
                 {
-                    // TODO
+                    if (defendingCritter.data.AbilityData.AmountType == AmountType.PercentDamageTaken)
+                    {
+                        amount = (float)damage * (defendingCritter.data.AbilityData.Amount / 100);
+                        defendingCritter.currentHp += Mathf.RoundToInt(amount);
+                    }
+                    if (defendingCritter.data.AbilityData.AmountType == AmountType.Percent)
+                    {
+                        defendingCritter.currentHp += Mathf.RoundToInt(amount * defendingCritter.Hp);
+                    }
                 }
                 else
                 {
@@ -105,7 +118,15 @@ public class AbilityController : MonoBehaviour
             {
                 if (defendingCritter.data.AbilityData.Effector == Effector.HP)
                 {
-                    // TODO
+                    if (defendingCritter.data.AbilityData.AmountType == AmountType.PercentDamageTaken)
+                    {
+                        amount = (float)damage * (defendingCritter.data.AbilityData.Amount / 100);
+                        attackingCritter.currentHp += Mathf.RoundToInt(amount);
+                    }
+                    if (defendingCritter.data.AbilityData.AmountType == AmountType.Percent)
+                    {
+                        attackingCritter.currentHp += Mathf.RoundToInt(amount * defendingCritter.Hp);
+                    }
                 }
                 else
                 {
@@ -117,10 +138,6 @@ public class AbilityController : MonoBehaviour
         if (attackingCritter.data.AbilityData.Trigger == Trigger.OnDealDamage)
         {
             float amount = attackingCritter.data.AbilityData.Amount;
-            if (attackingCritter.data.AbilityData.AmountType == AmountType.PercentDamageDealt)
-            {
-                amount = (float)damage * (attackingCritter.data.AbilityData.Amount / 100);
-            }
             float mod = 1f;
             if (attackingCritter.data.AbilityData.Effect == Effect.Decrease) mod *= -1f;
             amount *= mod;
@@ -128,7 +145,15 @@ public class AbilityController : MonoBehaviour
             {
                 if (attackingCritter.data.AbilityData.Effector == Effector.HP)
                 {
-                    // TODO
+                    if (attackingCritter.data.AbilityData.AmountType == AmountType.PercentDamageDealt)
+                    {
+                        amount = (float)damage * (amount / 100);
+                        attackingCritter.currentHp += Mathf.RoundToInt(amount);
+                    }
+                    if (attackingCritter.data.AbilityData.AmountType == AmountType.Percent)
+                    {
+                        attackingCritter.currentHp += Mathf.RoundToInt(amount * attackingCritter.Hp);
+                    }
                 }
                 else
                 {
@@ -139,7 +164,15 @@ public class AbilityController : MonoBehaviour
             {
                 if (attackingCritter.data.AbilityData.Effector == Effector.HP)
                 {
-                    // TODO
+                    if (attackingCritter.data.AbilityData.AmountType == AmountType.PercentDamageDealt)
+                    {
+                        amount = (float)damage * (amount / 100);
+                        defendingCritter.currentHp += Mathf.RoundToInt(amount);
+                    }
+                    if (attackingCritter.data.AbilityData.AmountType == AmountType.Percent)
+                    {
+                        defendingCritter.currentHp += Mathf.RoundToInt(amount * attackingCritter.Hp);
+                    }   
                 }
                 else
                 {
