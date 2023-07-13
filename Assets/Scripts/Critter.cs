@@ -45,6 +45,7 @@ public class Critter
     int DefenseGeneticMod;
     int SpeedGeneticMod;
     public bool Alive = true;
+    public bool singleUseAbilityTriggered = false;
 
     public Dictionary<Effector, float> battleEffectors = new Dictionary<Effector, float>();
 

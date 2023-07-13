@@ -167,7 +167,9 @@ public class GameManager : MonoBehaviour
         BattleController.BattlePanel.SetActive(false);
         MapController.DisableMap();
         GiveXp(wildCritter.neededXp * 2);
+        wildCritter.singleUseAbilityTriggered = false;
         CritterSelector.EnableSelectionPanel(wildCritter);
+        ResetSingleUseAbilityTrigger();
     }
 
     void ShowFirstSelectionPanel()
@@ -295,11 +297,27 @@ public class GameManager : MonoBehaviour
 
     void PlayerBelow50HP(Critter playerCritter, Critter opponentCritter)
     {
-        AbilityController.CheckPlayerCritterAbilityTrigger(playerCritter, opponentCritter, Trigger.OnSelfHP50);
+        if (!playerCritter.singleUseAbilityTriggered)
+        {
+            AbilityController.CheckPlayerCritterAbilityTrigger(playerCritter, opponentCritter, Trigger.OnSelfHP50);
+            playerCritter.singleUseAbilityTriggered = true;
+        }
     }
 
     void OpponentBelow50HP(Critter playerCritter, Critter opponentCritter)
     {
-        AbilityController.CheckOpponentCritterAbilityTrigger(playerCritter, opponentCritter, Trigger.OnSelfHP50);
+        if (!opponentCritter.singleUseAbilityTriggered)
+        {
+            AbilityController.CheckOpponentCritterAbilityTrigger(playerCritter, opponentCritter, Trigger.OnSelfHP50);
+            opponentCritter.singleUseAbilityTriggered = true;
+        }
+    }
+
+    void ResetSingleUseAbilityTrigger()
+    {
+        foreach(Critter critter in playerCritters)
+        {
+            if (critter != null) critter.singleUseAbilityTriggered = false;
+        }
     }
 }

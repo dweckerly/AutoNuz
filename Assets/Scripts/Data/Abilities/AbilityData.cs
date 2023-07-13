@@ -55,4 +55,5 @@ public class AbilityData : ScriptableObject
     public Effect Effect;
     public float Amount;
     public AmountType AmountType;
+    public bool singleUse;
 }
