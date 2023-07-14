@@ -17,9 +17,11 @@ public class CritterBattleUI
 
 public class BattleController : MonoBehaviour
 {
-    const float BASE_BATTLE_SPEED = 20f;
-    const float SPEED_LOG_BASE = 1.1f;
-    const float SPEED_ADDITIVE = 20f;
+    const float BASE_BATTLE_SPEED = 25f;
+    const float SPEED_LOG_BASE = 1.5f;
+    const float SPEED_ADDITIVE_MOD = 20f;
+    const float SPEED_MULTI_MOD = 2f;
+    const float SPEED_EXPO_MOD = 2.5f;
     public GameObject BattlePanel;
     public CritterBattleUI playerCritterUI;
     public CritterBattleUI wildCritterUI;
@@ -96,13 +98,18 @@ public class BattleController : MonoBehaviour
         return (float)critter.currentHp / (float)critter.Hp;
     }
 
+    float SpeedCalc(Critter critter)
+    {
+        return (SPEED_MULTI_MOD * (Mathf.Log(Mathf.Pow(critter.Speed, SPEED_EXPO_MOD), SPEED_LOG_BASE) + SPEED_ADDITIVE_MOD)) * Time.deltaTime * critter.battleEffectors[Effector.SPD];
+    }
+
     IEnumerator HandleTurnTime()
     {
         while(battling)
         {
             yield return new WaitForSeconds(0.01f);
 
-            speedTimePlayer += (Mathf.Log(playerCritter.Speed, SPEED_LOG_BASE) + SPEED_ADDITIVE)* Time.deltaTime * playerCritter.battleEffectors[Effector.SPD];
+            speedTimePlayer += SpeedCalc(playerCritter);
             playerCritterUI.speedRect.localScale = new Vector3(speedTimePlayer / BASE_BATTLE_SPEED, 1f, 1f);
             if (playerCritterUI.speedRect.localScale.x >= 1)
             {
@@ -110,7 +117,7 @@ public class BattleController : MonoBehaviour
                 speedTimePlayer = 0f;
                 PlayerCritterAttack();
             }
-            speedTimeWild += (Mathf.Log(wildCritter.Speed, SPEED_LOG_BASE) + SPEED_ADDITIVE) * Time.deltaTime * wildCritter.battleEffectors[Effector.SPD];
+            speedTimeWild += SpeedCalc(wildCritter);
             wildCritterUI.speedRect.localScale = new Vector3(speedTimeWild / BASE_BATTLE_SPEED, 1f, 1f);
             if (wildCritterUI.speedRect.localScale.x >= 1)
             {
