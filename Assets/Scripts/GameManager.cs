@@ -261,7 +261,7 @@ public class GameManager : MonoBehaviour
         int critterCount = 0;
         foreach(Critter c in playerCritters)
         {
-            if (c != null && c.Alive) critterCount++;
+            if (c != null) critterCount++;
         }
         if (critterCount > 1)
         {
