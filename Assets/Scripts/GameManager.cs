@@ -218,6 +218,7 @@ public class GameManager : MonoBehaviour
         CritterSelector.DisableSelectionPanel();
         MapController.DisableMap();
         BattleController.BattlePanel.SetActive(true);
+        AnimationsController.BattleStart();
     }
 
     void PlayerCritterAttack(Critter playerCritter, Critter opponentCritter, int damage)
@@ -298,7 +299,6 @@ public class GameManager : MonoBehaviour
     {
         AbilityController.CheckAbilityTrigger(playerCritter, wildCritter, Trigger.OnEnter);
         HUDController.HideExpositoryText();
-        AnimationsController.BattleStart();
     }
 
     void PlayerBelow50HP(Critter playerCritter, Critter opponentCritter)
