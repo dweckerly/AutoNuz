@@ -49,6 +49,9 @@ public class Critter
 
     public Dictionary<Effector, float> battleEffectors = new Dictionary<Effector, float>();
 
+    public delegate void OnHPChange(Critter critter);
+    public OnHPChange HPChangeEvent;
+
     public void LevelUp()
     {
         Level += 1;
@@ -175,12 +178,14 @@ public class Critter
     {
         currentHp -= amount;
         if (currentHp < 0) currentHp = 0;
+        HPChangeEvent.Invoke(this);
     }
 
     public void Heal(int amount)
     {
         currentHp += amount;
         if (currentHp > Hp) currentHp = Hp;
+        HPChangeEvent.Invoke(this);
     }
 
     public float CalculateHealthPercentage()

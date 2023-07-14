@@ -66,6 +66,51 @@ public class GameManager : MonoBehaviour
         AbilityController.OnCritterHPCHange -= UpdateCritterHP;
     }
 
+    void CritterSelected()
+    {
+        if (selectedCritter != null)
+        {
+            HUDController.HideCritterDetails();
+            for (int i = 0; i < playerCritters.Length; i++)
+            {
+                if (playerCritters[i] == null)
+                {
+                    playerCritters[i] = selectedCritter;
+                    playerCritters[i].HPChangeEvent += CritterHPChanged;
+                    HUDController.AddCritterToRoster(playerCritters[i]);
+                    selectedCritter = null;
+                    ShowMap();
+                    return;
+                }
+            }
+            HUDController.ShowExpositoryText("Your party is full! Release another critter to keep this one.");
+        }
+    }
+
+    void ReleaseCritter(Critter critter)
+    {
+        int critterCount = 0;
+        foreach (Critter c in playerCritters)
+        {
+            if (c != null) critterCount++;
+        }
+        if (critterCount > 1)
+        {
+            int index = Array.IndexOf(playerCritters, critter);
+            playerCritters[index].HPChangeEvent -= CritterHPChanged;
+            playerCritters[index] = null;
+            for (int i = 1; i < playerCritters.Length; i++)
+            {
+                if (playerCritters[i - 1] == null)
+                {
+                    playerCritters[i - 1] = playerCritters[i];
+                    playerCritters[i] = null;
+                }
+            }
+            HUDController.UpdateCritterRoster(playerCritters);
+        }
+    }
+
     void SwapCritters(Critter c1, Critter c2)
     {
         int index1 = Array.IndexOf(playerCritters, c1);
@@ -96,26 +141,6 @@ public class GameManager : MonoBehaviour
     {
         selectedCritter = null;
         HUDController.HideCritterDetails();
-    }
-
-    void CritterSelected()
-    {
-        if (selectedCritter != null)
-        {
-            HUDController.HideCritterDetails();
-            for (int i = 0; i < playerCritters.Length; i++)
-            {
-                if (playerCritters[i] == null)
-                {
-                    playerCritters[i] = selectedCritter;
-                    HUDController.AddCritterToRoster(playerCritters[i]);
-                    selectedCritter = null;
-                    ShowMap();
-                    return;
-                }
-            }
-            HUDController.ShowExpositoryText("Your party is full! Release another critter to keep this one.");
-        }
     }
 
     void SelectLocation(CritterData critterData)
@@ -256,29 +281,6 @@ public class GameManager : MonoBehaviour
         HUDController.UpdateCritterRoster(playerCritters);
     }
 
-    void ReleaseCritter(Critter critter)
-    {
-        int critterCount = 0;
-        foreach(Critter c in playerCritters)
-        {
-            if (c != null) critterCount++;
-        }
-        if (critterCount > 1)
-        {
-            int index = Array.IndexOf(playerCritters, critter);
-            playerCritters[index] = null;
-            for(int i = 1; i < playerCritters.Length; i++)
-            {
-                if (playerCritters[i - 1] == null)
-                {
-                    playerCritters[i - 1] = playerCritters[i];
-                    playerCritters[i] = null;
-                }
-            }
-            HUDController.UpdateCritterRoster(playerCritters);
-        }
-    }
-
     void RestCritters()
     {
         foreach(Critter critter in playerCritters)
@@ -329,5 +331,10 @@ public class GameManager : MonoBehaviour
         {
             if (critter != null) critter.singleUseAbilityTriggered = false;
         }
+    }
+
+    void CritterHPChanged(Critter critter)
+    {
+
     }
 }

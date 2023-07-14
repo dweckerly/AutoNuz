@@ -135,26 +135,29 @@ public class BattleController : MonoBehaviour
     {
         int damage = DamageCalc(playerCritter, wildCritter);
         PlayerCritterAttackEvent?.Invoke(playerCritter, wildCritter, damage);
-        wildCritter.currentHp -= damage;
-        CheckWildCritterHP();
+        wildCritter.TakeDamage(damage);
+        CheckCritterHP();
+        UpdateCritterHealthUI();
+    }
+
+    void WildCritterAttack()
+    {
+        int damage = DamageCalc(wildCritter, playerCritter);
+        OpponentCritterAttackEvent?.Invoke(playerCritter, wildCritter, damage);
+        playerCritter.TakeDamage(damage);
+        CheckCritterHP();
         UpdateCritterHealthUI();
     }
 
     public void CheckCritterHP()
     {
-        CheckWildCritterHP();
         CheckPlayerCritterHP();
+        CheckWildCritterHP();
     }
 
     void CheckWildCritterHP()
     {
-        if (wildCritter.currentHp > wildCritter.Hp)
-        {
-            wildCritter.currentHp = wildCritter.Hp;
-            return;
-        }
         if (wildCritter.currentHp <= wildCritter.Hp / 2) OpponentCritterBelow50HPEvent?.Invoke(playerCritter, wildCritter);
-        if (wildCritter.currentHp < 0) wildCritter.currentHp = 0;
         if (wildCritter.currentHp == 0)
         {
             battling = false;
@@ -169,13 +172,7 @@ public class BattleController : MonoBehaviour
     void CheckPlayerCritterHP()
     {
         PlayerCritterDamaged.Invoke();
-        if (playerCritter.currentHp > playerCritter.Hp) 
-        {
-            playerCritter.currentHp = playerCritter.Hp;
-            return;
-        }
         if (playerCritter.currentHp <= playerCritter.Hp / 2) PlayerCritterBelow50HPEvent?.Invoke(playerCritter, wildCritter);
-        if (playerCritter.currentHp < 0) playerCritter.currentHp = 0;
         if (playerCritter.currentHp == 0)
         {
             playerCritter.Alive = false;
@@ -186,15 +183,6 @@ public class BattleController : MonoBehaviour
             playerCritter.ResetBattleEffectors();
             PlayerCritterDefeated?.Invoke();
         }
-    }
-
-    void WildCritterAttack()
-    {
-        int damage = DamageCalc(wildCritter, playerCritter);
-        OpponentCritterAttackEvent?.Invoke(playerCritter, wildCritter, damage);
-        playerCritter.currentHp -= damage;
-        CheckPlayerCritterHP();
-        UpdateCritterHealthUI();
     }
 
     int DamageCalc(Critter attackingCritter, Critter defendingCritter)
