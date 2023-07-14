@@ -171,9 +171,20 @@ public class Critter
         Heal(Mathf.RoundToInt(Hp / 2));
     }
 
+    public void TakeDamage(int amount)
+    {
+        currentHp -= amount;
+        if (currentHp < 0) currentHp = 0;
+    }
+
     public void Heal(int amount)
     {
         currentHp += amount;
         if (currentHp > Hp) currentHp = Hp;
+    }
+
+    public float CalculateHealthPercentage()
+    {
+        return (float) currentHp / (float) Hp;
     }
 }
