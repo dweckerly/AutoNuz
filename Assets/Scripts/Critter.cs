@@ -178,7 +178,7 @@ public class Critter
     {
         currentHp -= amount;
         if (currentHp < 0) currentHp = 0;
-        HPChangeEvent.Invoke(this);
+        HPChangeEvent?.Invoke(this);
     }
 
     public void Heal(int amount)

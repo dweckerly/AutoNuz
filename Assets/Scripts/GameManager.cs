@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public MapController MapController;
     public BattleController BattleController;
     public AbilityController AbilityController;
+    public AnimationsController AnimationsController;
 
     public CritterData[] starterCritters;
 
@@ -222,11 +223,13 @@ public class GameManager : MonoBehaviour
     void PlayerCritterAttack(Critter playerCritter, Critter opponentCritter, int damage)
     {
         AbilityController.CheckAbilityTriggerPlayerAttacking(playerCritter, opponentCritter, damage);
+        AnimationsController.PlayerAttack();
     }
 
     void OpponentCritterAttack(Critter playerCritter, Critter opponentCritter, int damage)
     {
         AbilityController.CheckAbilityTriggerOpponentAttacking(playerCritter, opponentCritter, damage);
+        AnimationsController.OpponentAttack();
     }
 
     void UpdateCritterHP()
@@ -295,6 +298,7 @@ public class GameManager : MonoBehaviour
     {
         AbilityController.CheckAbilityTrigger(playerCritter, wildCritter, Trigger.OnEnter);
         HUDController.HideExpositoryText();
+        AnimationsController.BattleStart();
     }
 
     void PlayerBelow50HP(Critter playerCritter, Critter opponentCritter)

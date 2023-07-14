@@ -136,7 +136,6 @@ public class AbilityController : MonoBehaviour
                     {
                         amount = (float)damage * (defendingCritter.data.AbilityData.Amount / 100) * mod;
                         attackingCritter.currentHp += Mathf.CeilToInt(amount);
-                        Debug.Log(amount);
                         OnCritterHPCHange?.Invoke();
                     }
                     if (defendingCritter.data.AbilityData.AmountType == AmountType.Percent)

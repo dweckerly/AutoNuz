@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class AnimationsController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Animator BattlePlayerCritterAnimator;
+    public Animator BattleOpponentCritterAnimator;
+
+    public void BattleStart() 
     {
-        
+        float playerOffset = Random.Range(0, 1f);
+        float opponentOffset = Random.Range(0, 1f);
+        BattlePlayerCritterAnimator.Play("Idle", 0, playerOffset);
+        BattleOpponentCritterAnimator.Play("Idle", 0, opponentOffset);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PlayerAttack()
     {
-        
+        BattlePlayerCritterAnimator.SetTrigger("Attack");
     }
+
+    public void OpponentAttack()
+    {
+        BattleOpponentCritterAnimator.SetTrigger("Attack");
+    }
+
 }

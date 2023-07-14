@@ -17,7 +17,7 @@ public class CritterBattleUI
 
 public class BattleController : MonoBehaviour
 {
-    const float BASE_BATTLE_SPEED = 25f;
+    const float BASE_BATTLE_SPEED = 50f;
     const float SPEED_LOG_BASE = 1.5f;
     const float SPEED_ADDITIVE_MOD = 20f;
     const float SPEED_MULTI_MOD = 2f;

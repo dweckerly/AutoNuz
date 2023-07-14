@@ -689,6 +689,7 @@ MonoBehaviour:
   MapController: {fileID: 577247026}
   BattleController: {fileID: 631167622}
   AbilityController: {fileID: 993271240}
+  AnimationsController: {fileID: 1754663698}
   starterCritters:
   - {fileID: 11400000, guid: 43d5ba9e5230cbc4b966bfe71fd7df72, type: 2}
   - {fileID: 11400000, guid: 6afc9ec8c24977a44962ead555da19b3, type: 2}
@@ -4810,6 +4811,7 @@ GameObject:
   - component: {fileID: 1092323480}
   - component: {fileID: 1092323482}
   - component: {fileID: 1092323481}
+  - component: {fileID: 1092323483}
   m_Layer: 5
   m_Name: CritterSprite
   m_TagString: Untagged
@@ -4875,6 +4877,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1092323479}
   m_CullTransparentMesh: 1
+--- !u!95 &1092323483
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092323479}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a5a004d59c2498146ae4201838f9cc8b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &1129527626
 GameObject:
   m_ObjectHideFlags: 0
@@ -5326,6 +5348,7 @@ GameObject:
   - component: {fileID: 1294102436}
   - component: {fileID: 1294102438}
   - component: {fileID: 1294102437}
+  - component: {fileID: 1294102439}
   m_Layer: 5
   m_Name: CritterSprite
   m_TagString: Untagged
@@ -5391,6 +5414,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1294102435}
   m_CullTransparentMesh: 1
+--- !u!95 &1294102439
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294102435}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ac6dc8359990e264cab4a38f297b97bd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &1299914159
 GameObject:
   m_ObjectHideFlags: 0
@@ -7060,6 +7103,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d16ae2f6eae3a342a09daf22fd41a18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BattlePlayerCritterAnimator: {fileID: 1294102439}
+  BattleOpponentCritterAnimator: {fileID: 1092323483}
 --- !u!1 &1809272673
 GameObject:
   m_ObjectHideFlags: 0
