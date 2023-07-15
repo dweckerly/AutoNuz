@@ -136,6 +136,12 @@ public class BattleController : MonoBehaviour
 
     void PlayerCritterAttack()
     {
+        float hitchance = UnityEngine.Random.Range(0f, 1f);
+        if (hitchance > (2f - wildCritter.battleEffectors[Effector.EVA]))
+        {
+            // invoke a miss event
+            return;
+        }
         int damage = DamageCalc(playerCritter, wildCritter);
         PlayerCritterAttackEvent?.Invoke(playerCritter, wildCritter, damage);
         wildCritter.TakeDamage(damage);
@@ -145,6 +151,12 @@ public class BattleController : MonoBehaviour
 
     void WildCritterAttack()
     {
+        float hitchance = UnityEngine.Random.Range(0f, 1f);
+        if (hitchance > (2f - playerCritter.battleEffectors[Effector.EVA]))
+        {
+            // invoke a miss event
+            return;
+        }
         int damage = DamageCalc(wildCritter, playerCritter);
         OpponentCritterAttackEvent?.Invoke(playerCritter, wildCritter, damage);
         playerCritter.TakeDamage(damage);
