@@ -157,31 +157,37 @@ public class BattleController : MonoBehaviour
 
     void CheckWildCritterHP()
     {
-        if (wildCritter.currentHp <= wildCritter.Hp / 2) OpponentCritterBelow50HPEvent?.Invoke(playerCritter, wildCritter);
-        if (wildCritter.currentHp == 0)
+        if (wildCritter != null)
         {
-            battling = false;
-            speedTimePlayer = 0f;
-            speedTimeWild = 0f;
-            wildCritter.currentHp = Mathf.RoundToInt(wildCritter.Hp / 2);
-            StopAllCoroutines();
-            BattleEndEvent?.Invoke(playerCritter, wildCritter);
+            if (wildCritter.currentHp <= wildCritter.Hp / 2) OpponentCritterBelow50HPEvent?.Invoke(playerCritter, wildCritter);
+            if (wildCritter.currentHp == 0)
+            {
+                battling = false;
+                speedTimePlayer = 0f;
+                speedTimeWild = 0f;
+                wildCritter.currentHp = Mathf.RoundToInt(wildCritter.Hp / 2);
+                StopAllCoroutines();
+                BattleEndEvent?.Invoke(playerCritter, wildCritter);
+            }
         }
     }
 
     void CheckPlayerCritterHP()
     {
-        PlayerCritterDamaged.Invoke();
-        if (playerCritter.currentHp <= playerCritter.Hp / 2) PlayerCritterBelow50HPEvent?.Invoke(playerCritter, wildCritter);
-        if (playerCritter.currentHp == 0)
+        PlayerCritterDamaged?.Invoke();
+        if (playerCritter != null)
         {
-            playerCritter.Alive = false;
-            battling = false;
-            speedTimePlayer = 0f;
-            speedTimeWild = 0f;
-            StopAllCoroutines();
-            playerCritter.ResetBattleEffectors();
-            PlayerCritterDefeated?.Invoke();
+            if (playerCritter.currentHp <= playerCritter.Hp / 2) PlayerCritterBelow50HPEvent?.Invoke(playerCritter, wildCritter);
+            if (playerCritter.currentHp == 0)
+            {
+                playerCritter.Alive = false;
+                battling = false;
+                speedTimePlayer = 0f;
+                speedTimeWild = 0f;
+                StopAllCoroutines();
+                playerCritter.ResetBattleEffectors();
+                PlayerCritterDefeated?.Invoke();
+            }
         }
     }
 

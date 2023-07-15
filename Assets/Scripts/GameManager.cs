@@ -219,6 +219,7 @@ public class GameManager : MonoBehaviour
         MapController.DisableMap();
         BattleController.BattlePanel.SetActive(true);
         AnimationsController.BattleStart();
+        BattleController.CheckCritterHP();
     }
 
     void PlayerCritterAttack(Critter playerCritter, Critter opponentCritter, int damage)
@@ -297,35 +298,34 @@ public class GameManager : MonoBehaviour
 
     void WildBattleStart(Critter playerCritter, Critter wildCritter)
     {
+        ResetSingleUseAbilityTrigger();
         AbilityController.CheckAbilityTrigger(playerCritter, wildCritter, Trigger.OnEnter);
         HUDController.HideExpositoryText();
     }
 
     void PlayerBelow50HP(Critter playerCritter, Critter opponentCritter)
     {
+        AnimationsController.SlowPlayerAnimSpeed();
         if (!playerCritter.singleUseAbilityTriggered)
         {
             AbilityController.CheckPlayerCritterAbilityTrigger(playerCritter, opponentCritter, Trigger.OnSelfHP50);
-            playerCritter.singleUseAbilityTriggered = true;
         }
         if (!opponentCritter.singleUseAbilityTriggered)
         {
             AbilityController.CheckOpponentCritterAbilityTrigger(playerCritter, opponentCritter, Trigger.OnOpponentHP50);
-            opponentCritter.singleUseAbilityTriggered = true;
         }
     }
 
     void OpponentBelow50HP(Critter playerCritter, Critter opponentCritter)
     {
+        AnimationsController.SlowOpponentAnimSpeed();
         if (!opponentCritter.singleUseAbilityTriggered)
         {
             AbilityController.CheckOpponentCritterAbilityTrigger(playerCritter, opponentCritter, Trigger.OnSelfHP50);
-            opponentCritter.singleUseAbilityTriggered = true;
         }
         if (!playerCritter.singleUseAbilityTriggered)
         {
             AbilityController.CheckPlayerCritterAbilityTrigger(playerCritter, opponentCritter, Trigger.OnOpponentHP50);
-            playerCritter.singleUseAbilityTriggered = true;
         }
     }
 

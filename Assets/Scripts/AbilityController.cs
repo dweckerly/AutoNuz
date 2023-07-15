@@ -62,6 +62,10 @@ public class AbilityController : MonoBehaviour
     {
         if (playerCritter.data.AbilityData.Trigger == trigger)
         {
+            if (trigger == Trigger.OnSelfHP50 || trigger == Trigger.OnOpponentHP50 || trigger == Trigger.OnEnter || trigger == Trigger.OnDefeated)
+            {
+                playerCritter.singleUseAbilityTriggered = true;
+            }
             float mod = 1f;
             if (playerCritter.data.AbilityData.Effect == Effect.Decrease) mod *= -1f;
             if (playerCritter.data.AbilityData.Target == Target.Self)
@@ -75,6 +79,10 @@ public class AbilityController : MonoBehaviour
     {
         if (opponentCritter.data.AbilityData.Trigger == trigger)
         {
+            if (trigger == Trigger.OnSelfHP50 || trigger == Trigger.OnOpponentHP50 || trigger == Trigger.OnEnter || trigger == Trigger.OnDefeated)
+            {
+                opponentCritter.singleUseAbilityTriggered = true;
+            }
             float mod = 1f;
             if (opponentCritter.data.AbilityData.Effect == Effect.Decrease) mod *= -1f;
             if (opponentCritter.data.AbilityData.Target == Target.Self)
