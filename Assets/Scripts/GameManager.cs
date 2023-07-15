@@ -193,7 +193,6 @@ public class GameManager : MonoBehaviour
         BattleController.BattlePanel.SetActive(false);
         MapController.DisableMap();
         GiveXp(wildCritter.neededXp * 2);
-        wildCritter.singleUseAbilityTriggered = false;
         CritterSelector.EnableSelectionPanel(wildCritter);
         ResetSingleUseAbilityTrigger();
     }

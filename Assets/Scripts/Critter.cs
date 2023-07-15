@@ -71,6 +71,7 @@ public class Critter
         battleEffectors.Add(Effector.DEF, 1f);
         battleEffectors.Add(Effector.SPD, 1f);
         battleEffectors.Add(Effector.EVA, 1f);
+        singleUseAbilityTriggered = false;
     }
 
     public bool SetBattleEffector(Effector stat, float amount)

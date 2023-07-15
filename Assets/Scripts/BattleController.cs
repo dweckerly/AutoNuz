@@ -95,6 +95,7 @@ public class BattleController : MonoBehaviour
 
     float SpeedCalc(Critter critter)
     {
+        if (critter == null) return 0f;
         return (SPEED_MULTI_MOD * (Mathf.Log(Mathf.Pow(critter.Speed, SPEED_EXPO_MOD), SPEED_LOG_BASE) + SPEED_ADDITIVE_MOD)) * Time.deltaTime * critter.battleEffectors[Effector.SPD];
     }
 
@@ -103,7 +104,6 @@ public class BattleController : MonoBehaviour
         while(battling)
         {
             yield return new WaitForSeconds(0.01f);
-
             speedTimePlayer += SpeedCalc(playerCritter);
             playerCritterUI.speedRect.localScale = new Vector3(speedTimePlayer / BASE_BATTLE_SPEED, 1f, 1f);
             if (playerCritterUI.speedRect.localScale.x >= 1)
@@ -125,10 +125,13 @@ public class BattleController : MonoBehaviour
 
     public void UpdateCritterHealthUI()
     {
-        wildCritterUI.healthText.text = wildCritter.currentHp + "/" + wildCritter.Hp;
-        wildCritterUI.healthRect.localScale = new Vector3((float)(wildCritter.currentHp) / (float)(wildCritter.Hp), 1f, 1f);
-        playerCritterUI.healthText.text = playerCritter.currentHp + "/" + playerCritter.Hp;
-        playerCritterUI.healthRect.localScale = new Vector3((float)(playerCritter.currentHp) / (float)(playerCritter.Hp), 1f, 1f);
+        if (wildCritter != null && playerCritter != null)
+        {
+            wildCritterUI.healthText.text = wildCritter.currentHp + "/" + wildCritter.Hp;
+            wildCritterUI.healthRect.localScale = new Vector3((float)(wildCritter.currentHp) / (float)(wildCritter.Hp), 1f, 1f);
+            playerCritterUI.healthText.text = playerCritter.currentHp + "/" + playerCritter.Hp;
+            playerCritterUI.healthRect.localScale = new Vector3((float)(playerCritter.currentHp) / (float)(playerCritter.Hp), 1f, 1f);
+        }
     }
 
     void PlayerCritterAttack()
@@ -168,6 +171,8 @@ public class BattleController : MonoBehaviour
                 wildCritter.currentHp = Mathf.RoundToInt(wildCritter.Hp / 2);
                 StopAllCoroutines();
                 BattleEndEvent?.Invoke(playerCritter, wildCritter);
+                playerCritter = null;
+                wildCritter = null;
             }
         }
     }
