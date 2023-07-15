@@ -37,4 +37,14 @@ public class AnimationsController : MonoBehaviour
         BattleOpponentCritterAnimator.speed = 0.5f;
     }
 
+    public void PlayerMissAnim()
+    {
+
+    }
+
+    public void OpponentMissAnim()
+    {
+        
+    }
+
 }

@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour
         BattleController.OpponentCritterAttackEvent += OpponentCritterAttack;
         BattleController.PlayerCritterBelow50HPEvent += PlayerBelow50HP;
         BattleController.OpponentCritterBelow50HPEvent += OpponentBelow50HP;
+        BattleController.PlayerMissEvent += PlayerMissInBattle;
+        BattleController.OpponentMissEvent += OpponentMissInBattle;
         AbilityController.OnCritterHPCHange += UpdateCritterHP;
         HUDController.HideCritterDetails();
         ShowFirstSelectionPanel();
@@ -64,6 +66,8 @@ public class GameManager : MonoBehaviour
         BattleController.OpponentCritterAttackEvent -= OpponentCritterAttack;
         BattleController.PlayerCritterBelow50HPEvent -= PlayerBelow50HP;
         BattleController.OpponentCritterBelow50HPEvent -= OpponentBelow50HP;
+        BattleController.PlayerMissEvent -= PlayerMissInBattle;
+        BattleController.OpponentMissEvent -= OpponentMissInBattle;
         AbilityController.OnCritterHPCHange -= UpdateCritterHP;
     }
 
@@ -334,6 +338,16 @@ public class GameManager : MonoBehaviour
         {
             if (critter != null) critter.singleUseAbilityTriggered = false;
         }
+    }
+
+    void PlayerMissInBattle()
+    {
+
+    }
+
+    void OpponentMissInBattle()
+    {
+
     }
 
     void CritterHPChanged(Critter critter)

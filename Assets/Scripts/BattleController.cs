@@ -42,6 +42,8 @@ public class BattleController : MonoBehaviour
     public OnPlayerCritterBelow50HP PlayerCritterBelow50HPEvent;
     public delegate void OnOpponentCritterBelow50HP(Critter playerCritter, Critter wildCritter);
     public OnOpponentCritterBelow50HP OpponentCritterBelow50HPEvent;
+    public event Action PlayerMissEvent;
+    public event Action OpponentMissEvent;
 
     public Critter playerCritter;
     Critter wildCritter;
@@ -139,7 +141,7 @@ public class BattleController : MonoBehaviour
         float hitchance = UnityEngine.Random.Range(0f, 1f);
         if (hitchance > (2f - wildCritter.battleEffectors[Effector.EVA]))
         {
-            // invoke a miss event
+            PlayerMissEvent?.Invoke();
             return;
         }
         int damage = DamageCalc(playerCritter, wildCritter);
@@ -154,7 +156,7 @@ public class BattleController : MonoBehaviour
         float hitchance = UnityEngine.Random.Range(0f, 1f);
         if (hitchance > (2f - playerCritter.battleEffectors[Effector.EVA]))
         {
-            // invoke a miss event
+            OpponentMissEvent?.Invoke();
             return;
         }
         int damage = DamageCalc(wildCritter, playerCritter);
