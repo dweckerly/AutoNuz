@@ -138,38 +138,32 @@ public class BattleController : MonoBehaviour
 
     void PlayerCritterAttack()
     {
-        if (wildCritter != null)
+        float hitchance = UnityEngine.Random.Range(0f, 1f);
+        if (hitchance > (2f - wildCritter.battleEffectors[Effector.EVA]))
         {
-            float hitchance = UnityEngine.Random.Range(0f, 1f);
-            if (hitchance > (2f - wildCritter.battleEffectors[Effector.EVA]))
-            {
-                PlayerMissEvent?.Invoke();
-                return;
-            }
-            int damage = DamageCalc(playerCritter, wildCritter);
-            PlayerCritterAttackEvent?.Invoke(playerCritter, wildCritter, damage);
-            wildCritter.TakeDamage(damage);
-            CheckCritterHP();
-            UpdateCritterHealthUI();
+            PlayerMissEvent?.Invoke();
+            return;
         }
+        int damage = DamageCalc(playerCritter, wildCritter);
+        PlayerCritterAttackEvent?.Invoke(playerCritter, wildCritter, damage);
+        wildCritter?.TakeDamage(damage);
+        CheckCritterHP();
+        UpdateCritterHealthUI();
     }
 
     void WildCritterAttack()
     {
-        if (playerCritter != null)
+        float hitchance = UnityEngine.Random.Range(0f, 1f);
+        if (hitchance > (2f - playerCritter.battleEffectors[Effector.EVA]))
         {
-            float hitchance = UnityEngine.Random.Range(0f, 1f);
-            if (hitchance > (2f - playerCritter.battleEffectors[Effector.EVA]))
-            {
-                OpponentMissEvent?.Invoke();
-                return;
-            }
-            int damage = DamageCalc(wildCritter, playerCritter);
-            OpponentCritterAttackEvent?.Invoke(playerCritter, wildCritter, damage);
-            playerCritter.TakeDamage(damage);
-            CheckCritterHP();
-            UpdateCritterHealthUI();
+            OpponentMissEvent?.Invoke();
+            return;
         }
+        int damage = DamageCalc(wildCritter, playerCritter);
+        OpponentCritterAttackEvent?.Invoke(playerCritter, wildCritter, damage);
+        playerCritter?.TakeDamage(damage);
+        CheckCritterHP();
+        UpdateCritterHealthUI();
     }
 
     public void CheckCritterHP()
