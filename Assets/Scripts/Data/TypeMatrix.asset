@@ -14,46 +14,57 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TypeModifiers:
   - ElementalType: 0
+    Icon: {fileID: 21300000, guid: f426d6fc1b69e4d458c9515c648c36bf, type: 3}
     Advantages: 
     Disadvantages: 03000000
     CannotDamage: 08000000
   - ElementalType: 1
+    Icon: {fileID: 21300000, guid: da11a1d7763c928469eaac6b18de5103, type: 3}
     Advantages: 0000000007000000
     Disadvantages: 0200000006000000
     CannotDamage: 08000000
   - ElementalType: 2
+    Icon: {fileID: 21300000, guid: c3629a334aa7f9d49903411a21ec874f, type: 3}
     Advantages: 0600000001000000
     Disadvantages: 050000000a000000
     CannotDamage: 
   - ElementalType: 3
+    Icon: {fileID: 21300000, guid: b23d49623921b7d43856bd8e7092cd40, type: 3}
     Advantages: 0400000005000000
     Disadvantages: 0600000009000000
     CannotDamage: 0a000000
   - ElementalType: 4
+    Icon: {fileID: 21300000, guid: 8a6ec9c11726ede4592a88fb21233547, type: 3}
     Advantages: 090000000a000000
     Disadvantages: 06000000
     CannotDamage: 03000000
   - ElementalType: 5
+    Icon: {fileID: 21300000, guid: 2c3703b4910b4294082184697468d542, type: 3}
     Advantages: 0600000002000000
     Disadvantages: 0900000003000000
     CannotDamage: 
   - ElementalType: 6
+    Icon: {fileID: 21300000, guid: 18d49f10688e9094c833356dbfd6be7f, type: 3}
     Advantages: 0900000003000000
     Disadvantages: 0500000002000000
     CannotDamage: 
   - ElementalType: 7
+    Icon: {fileID: 21300000, guid: f5c87f3721898ad488de3f0860f0bd70, type: 3}
     Advantages: 08000000
     Disadvantages: 01000000
     CannotDamage: 
   - ElementalType: 8
+    Icon: {fileID: 21300000, guid: 416482c351222904188409bcd02f3a72, type: 3}
     Advantages: 01000000
     Disadvantages: 07000000
     CannotDamage: 00000000
   - ElementalType: 9
+    Icon: {fileID: 21300000, guid: 3e2133a26a39ff948b1053ef050f0827, type: 3}
     Advantages: 0500000003000000
     Disadvantages: 0400000006000000
     CannotDamage: 
   - ElementalType: 10
+    Icon: {fileID: 21300000, guid: 18af2aaebb49a4343b395860d27e3fde, type: 3}
     Advantages: 02000000
     Disadvantages: 04000000
     CannotDamage: 

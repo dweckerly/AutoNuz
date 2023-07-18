@@ -6,6 +6,7 @@ using UnityEngine;
 public class TypeMods
 {
     public ElementalType ElementalType;
+    public Sprite Icon;
     public ElementalType[] Advantages;
     public ElementalType[] Disadvantages;
     public ElementalType[] CannotDamage;

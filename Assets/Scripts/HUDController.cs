@@ -280,8 +280,8 @@ public class HUDController : MonoBehaviour
             float typeBonus = 1 + ((amount * 0.25f) - 0.25f);
             message += Environment.NewLine + "Party Damage Bonus: x" + typeBonus.ToString();
         }
-        //message += Environment.NewLine + "x2: " + 
-        //message += Environment.NewLine + "x0.5: " + 
+        message += Environment.NewLine + "x2: " + GetTypeAdvantagesMessage(type);
+        message += Environment.NewLine + "x0.5: " + GetTypeDisadvantagesMessage(type);
         ShowExpositoryText(message);
     }
 
@@ -296,5 +296,37 @@ public class HUDController : MonoBehaviour
         {
             tci.count.text = partyTypeBonuses[tci.type].ToString();
         }
+    }
+
+    string GetTypeAdvantagesMessage(ElementalType type)
+    {
+        string message = "";
+        foreach(TypeMods typeMod in TypeMatrix.TypeModifiers)
+        {
+            if (typeMod.ElementalType == type)
+            {
+                foreach(ElementalType etype in typeMod.Advantages)
+                {
+                    message += etype.ToString() + " ";
+                }
+            }
+        }
+        return message;
+    }
+
+    string GetTypeDisadvantagesMessage(ElementalType type)
+    {
+        string message = "";
+        foreach (TypeMods typeMod in TypeMatrix.TypeModifiers)
+        {
+            if (typeMod.ElementalType == type)
+            {
+                foreach (ElementalType etype in typeMod.Disadvantages)
+                {
+                    message += etype.ToString() + " ";
+                }
+            }
+        }
+        return message;
     }
 }
