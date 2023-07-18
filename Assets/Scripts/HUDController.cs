@@ -267,8 +267,16 @@ public class HUDController : MonoBehaviour
 
     void TypeCountHover(ElementalType type, int amount)
     {
-        float typeBonus = 1 + ((amount * 0.25f) - 0.25f);
-        string message = type.ToString() + " type damage bonus: x" + typeBonus.ToString();
+        string message = "";
+        if (amount < 2)
+        {
+            message = type.ToString() + " type";
+        }
+        else
+        {
+            float typeBonus = 1 + ((amount * 0.25f) - 0.25f);
+            message = type.ToString() + " type damage bonus: x" + typeBonus.ToString();
+        }
         ShowExpositoryText(message);
     }
 
