@@ -43,13 +43,13 @@ public class AnimationsController : MonoBehaviour
     public void PlayerMissAnim()
     {
         PlayerNotificationText.text = "Miss";
-        BattlePlayerCritterAnimator.Play("Notification");
+        BattlePlayerCritterAnimator.Play("Notification", 1);
     }
 
     public void OpponentMissAnim()
     {
         OpponentNotificationText.text = "Miss";
-        BattleOpponentCritterAnimator.Play("Notification");
+        BattleOpponentCritterAnimator.Play("Notification", 1);
     }
 
 }
