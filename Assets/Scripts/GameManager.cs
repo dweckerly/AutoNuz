@@ -370,5 +370,6 @@ public class GameManager : MonoBehaviour
     {
         partyBonusController.SetBonuses(playerCritters);
         HUDController.UpdateTypeCountItem(partyBonusController.PartyTypeBonuses);
+        BattleController.PartyTypeBonuses = partyBonusController.PartyTypeBonuses;
     }
 }

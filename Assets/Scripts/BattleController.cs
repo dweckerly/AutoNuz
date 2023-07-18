@@ -54,6 +54,7 @@ public class BattleController : MonoBehaviour
     bool battling = false;
 
     private TypeMatrix TypeMatrix;
+    public Dictionary<ElementalType, int> PartyTypeBonuses = new Dictionary<ElementalType, int>();
 
     public void InitializeBattleUI(Critter _playerCritter, Critter _wildCritter)
     {
@@ -149,7 +150,7 @@ public class BattleController : MonoBehaviour
             PlayerMissEvent?.Invoke();
             return;
         }
-        int damage = DamageCalc(playerCritter, wildCritter);
+        int damage = Mathf.RoundToInt(DamageCalc(playerCritter, wildCritter) * GetCritterPartyBonus(playerCritter));
         PlayerCritterAttackEvent?.Invoke(playerCritter, wildCritter, damage);
         wildCritter?.TakeDamage(damage);
         CheckCritterHP();
@@ -252,5 +253,18 @@ public class BattleController : MonoBehaviour
             }
         }
         return mod;
+    }
+
+    float GetCritterPartyBonus(Critter critter)
+    {
+        float partyBonus = 1f;
+        foreach(ElementalType type in critter.data.Types)
+        {
+            if (PartyTypeBonuses[type] > 1)
+            {
+                partyBonus += (PartyTypeBonuses[type] * 0.25f) - 0.25f;
+            }
+        }
+        return partyBonus;
     }
 }
