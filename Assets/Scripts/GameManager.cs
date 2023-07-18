@@ -229,14 +229,12 @@ public class GameManager : MonoBehaviour
     {
         AbilityController.CheckAbilityTriggerPlayerAttacking(playerCritter, opponentCritter, damage);
         AnimationsController.PlayerAttack();
-        AnimationsController.PlayerMissAnim();
     }
 
     void OpponentCritterAttack(Critter playerCritter, Critter opponentCritter, int damage)
     {
         AbilityController.CheckAbilityTriggerOpponentAttacking(playerCritter, opponentCritter, damage);
         AnimationsController.OpponentAttack();
-        AnimationsController.OpponentMissAnim();
     }
 
     void UpdateCritterHP()
