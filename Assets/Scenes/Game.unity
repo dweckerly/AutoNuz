@@ -2408,6 +2408,18 @@ MonoBehaviour:
   critterReleaseSlot: {fileID: 250087255}
   PostBattleRestBtn: {fileID: 1652870608}
   GameOverScreen: {fileID: 540135523}
+  typeCountItems:
+  - {fileID: 601140300}
+  - {fileID: 1605076434}
+  - {fileID: 1922260168}
+  - {fileID: 1068750127}
+  - {fileID: 1128288435}
+  - {fileID: 1785140748}
+  - {fileID: 832476331}
+  - {fileID: 878596900}
+  - {fileID: 919460066}
+  - {fileID: 49731211}
+  - {fileID: 63143033}
 --- !u!4 &531896769
 Transform:
   m_ObjectHideFlags: 0

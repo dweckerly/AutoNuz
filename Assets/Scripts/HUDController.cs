@@ -36,6 +36,7 @@ public class HUDController : MonoBehaviour
     public CritterReleaseSlot critterReleaseSlot;
     public RestButton PostBattleRestBtn;
     public GameObject GameOverScreen;
+    public TypeCountItem[] typeCountItems;
 
     public delegate void OnCritterSwap(Critter c1, Critter c2);
     public OnCritterSwap CritterSwapEvent;
@@ -61,6 +62,11 @@ public class HUDController : MonoBehaviour
         PostBattleRestBtn.BtnClickEvent += PostBattleRest;
         PostBattleRestBtn.BtnHoverEvent += RestBtnHover;
         PostBattleRestBtn.BtnHoverEventEnd += RestBtnHoverEnd;
+        foreach (TypeCountItem tci in typeCountItems)
+        {
+            tci.TypeCountHoverEvent += TypeCountHover;
+            tci.TypeCountHoverExitEvent += TypeCountHoverExit;
+        }
     }
 
     public void UpdateCritterRoster(Critter[] critters)
@@ -120,6 +126,11 @@ public class HUDController : MonoBehaviour
         PostBattleRestBtn.BtnClickEvent -= PostBattleRest;
         PostBattleRestBtn.BtnHoverEvent -= RestBtnHover;
         PostBattleRestBtn.BtnHoverEventEnd -= RestBtnHoverEnd;
+        foreach (TypeCountItem tci in typeCountItems)
+        {
+            tci.TypeCountHoverEvent -= TypeCountHover;
+            tci.TypeCountHoverExitEvent -= TypeCountHoverExit;
+        }
     }
 
     void RosterItemDragEvent()
@@ -252,5 +263,16 @@ public class HUDController : MonoBehaviour
     public void Retry()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    void TypeCountHover(ElementalType type)
+    {
+        string message = type.ToString() + " type icon";
+        ShowExpositoryText(message);
+    }
+
+    void TypeCountHoverExit()
+    {
+        HideExpositoryText();
     }
 }
