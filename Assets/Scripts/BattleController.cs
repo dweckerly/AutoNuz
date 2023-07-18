@@ -182,7 +182,7 @@ public class BattleController : MonoBehaviour
         if (wildCritter != null)
         {
             if (wildCritter.currentHp <= wildCritter.Hp / 2) OpponentCritterBelow50HPEvent?.Invoke(playerCritter, wildCritter);
-            if (wildCritter.currentHp == 0)
+            if (wildCritter.currentHp <= 0)
             {
                 battling = false;
                 speedTimePlayer = 0f;
@@ -202,7 +202,7 @@ public class BattleController : MonoBehaviour
         if (playerCritter != null)
         {
             if (playerCritter.currentHp <= playerCritter.Hp / 2) PlayerCritterBelow50HPEvent?.Invoke(playerCritter, wildCritter);
-            if (playerCritter.currentHp == 0)
+            if (playerCritter.currentHp <= 0)
             {
                 playerCritter.Alive = false;
                 battling = false;
