@@ -53,13 +53,18 @@ public class BattleController : MonoBehaviour
 
     bool battling = false;
 
-    public TypeMatrix TypeMatrix;
+    private TypeMatrix TypeMatrix;
 
     public void InitializeBattleUI(Critter _playerCritter, Critter _wildCritter)
     {
         PopulatePlayerCritterUI(_playerCritter);
         PopulateWildCritterUI(_wildCritter);
         FightRunBtns.SetActive(true);
+    }
+
+    public void SetTypeMatrix(TypeMatrix typeMatrix)
+    {
+        TypeMatrix = typeMatrix;
     }
 
     public void PopulatePlayerCritterUI(Critter _playerCritter)

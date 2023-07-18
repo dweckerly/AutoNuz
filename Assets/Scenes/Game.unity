@@ -1033,6 +1033,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 43d5ba9e5230cbc4b966bfe71fd7df72, type: 2}
   - {fileID: 11400000, guid: 6afc9ec8c24977a44962ead555da19b3, type: 2}
   - {fileID: 11400000, guid: 6dc41698ef650bc408218360d3da7534, type: 2}
+  TypeMatrix: {fileID: 11400000, guid: 21415fcfe1d35034a96b598e96e7ca06, type: 2}
 --- !u!4 &194329966
 Transform:
   m_ObjectHideFlags: 0
@@ -3581,7 +3582,6 @@ MonoBehaviour:
     healthText: {fileID: 1881958138}
     levelText: {fileID: 1685231642}
   FightRunBtns: {fileID: 450825815}
-  TypeMatrix: {fileID: 11400000, guid: 21415fcfe1d35034a96b598e96e7ca06, type: 2}
 --- !u!4 &631167623
 Transform:
   m_ObjectHideFlags: 0

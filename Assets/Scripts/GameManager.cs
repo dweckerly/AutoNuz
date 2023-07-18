@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
 
     private int DayNumber = 0;
 
+    public TypeMatrix TypeMatrix;
+
     private void Start() 
     {
         HUDController.CritterSwapEvent += SwapCritters;
@@ -46,6 +48,10 @@ public class GameManager : MonoBehaviour
         AbilityController.OnCritterHPCHange += UpdateCritterHP;
         HUDController.HideCritterDetails();
         partyBonusController.InstantiateBonuses();
+
+        BattleController.SetTypeMatrix(TypeMatrix);
+        HUDController.SetTypeMatrix(TypeMatrix);
+
         ShowFirstSelectionPanel();
     }
 

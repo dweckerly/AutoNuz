@@ -46,6 +46,8 @@ public class HUDController : MonoBehaviour
 
     public event Action RestOptionSelectedEvent;
 
+    private TypeMatrix TypeMatrix;
+
     private void Awake()
     {
         CritterDetailsContainer.SetActive(false);
@@ -67,6 +69,11 @@ public class HUDController : MonoBehaviour
             tci.TypeCountHoverEvent += TypeCountHover;
             tci.TypeCountHoverExitEvent += TypeCountHoverExit;
         }
+    }
+
+    public void SetTypeMatrix(TypeMatrix typeMatrix)
+    {
+        TypeMatrix = typeMatrix;
     }
 
     public void UpdateCritterRoster(Critter[] critters)
@@ -267,16 +274,14 @@ public class HUDController : MonoBehaviour
 
     void TypeCountHover(ElementalType type, int amount)
     {
-        string message = "";
-        if (amount < 2)
-        {
-            message = type.ToString() + " type";
-        }
-        else
+        string message = type.ToString() + " type";
+        if (amount > 1)
         {
             float typeBonus = 1 + ((amount * 0.25f) - 0.25f);
-            message = type.ToString() + " type damage bonus: x" + typeBonus.ToString();
+            message += Environment.NewLine + "Party Damage Bonus: x" + typeBonus.ToString();
         }
+        //message += Environment.NewLine + "x2: " + 
+        //message += Environment.NewLine + "x0.5: " + 
         ShowExpositoryText(message);
     }
 
