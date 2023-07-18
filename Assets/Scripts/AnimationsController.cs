@@ -13,18 +13,18 @@ public class AnimationsController : MonoBehaviour
         BattleOpponentCritterAnimator.speed = 1f;
         float playerOffset = Random.Range(0, 1f);
         float opponentOffset = Random.Range(0, 1f);
-        BattlePlayerCritterAnimator.Play("Idle", 0, playerOffset);
-        BattleOpponentCritterAnimator.Play("Idle", 0, opponentOffset);
+        BattlePlayerCritterAnimator.Play("BattleIdle", 0, playerOffset);
+        BattleOpponentCritterAnimator.Play("BattleIdle", 0, opponentOffset);
     }
 
     public void PlayerAttack()
     {
-        BattlePlayerCritterAnimator.SetTrigger("Attack");
+        BattlePlayerCritterAnimator.Play("PlayerAttack");
     }
 
     public void OpponentAttack()
     {
-        BattleOpponentCritterAnimator.SetTrigger("Attack");
+        BattleOpponentCritterAnimator.Play("OpponentAttack");
     }
 
     public void SlowPlayerAnimSpeed()
