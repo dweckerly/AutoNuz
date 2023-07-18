@@ -265,14 +265,23 @@ public class HUDController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    void TypeCountHover(ElementalType type)
+    void TypeCountHover(ElementalType type, int amount)
     {
-        string message = type.ToString() + " type icon";
+        float typeBonus = 1 + ((amount * 0.25f) - 0.25f);
+        string message = type.ToString() + " type damage bonus: x" + typeBonus.ToString();
         ShowExpositoryText(message);
     }
 
     void TypeCountHoverExit()
     {
         HideExpositoryText();
+    }
+
+    public void UpdateTypeCountItem(Dictionary<ElementalType, int> partyTypeBonuses)
+    {
+        foreach(TypeCountItem tci in typeCountItems)
+        {
+            tci.count.text = partyTypeBonuses[tci.type].ToString();
+        }
     }
 }

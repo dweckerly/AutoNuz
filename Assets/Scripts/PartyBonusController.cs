@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PartyBonusController : MonoBehaviour
+public class PartyBonusController
 {
     public Dictionary<ElementalType, int> PartyTypeBonuses = new Dictionary<ElementalType, int>();
 
-    void InstantiateBonuses()
+    public void InstantiateBonuses()
     {
         PartyTypeBonuses.Clear();
         foreach(ElementalType e in Enum.GetValues(typeof(ElementalType)))
@@ -21,7 +21,7 @@ public class PartyBonusController : MonoBehaviour
         InstantiateBonuses();
         foreach(Critter critter in critters)
         {
-            if (critter != null)
+            if (critter != null && critter.Alive)
             {
                 foreach(ElementalType e in critter.data.Types)
                 {

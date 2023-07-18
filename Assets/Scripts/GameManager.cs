@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
 
     public CritterData[] starterCritters;
 
+    PartyBonusController partyBonusController = new PartyBonusController();
+
     private int DayNumber = 0;
 
     private void Start() 
@@ -43,6 +45,7 @@ public class GameManager : MonoBehaviour
         BattleController.OpponentMissEvent += OpponentMissInBattle;
         AbilityController.OnCritterHPCHange += UpdateCritterHP;
         HUDController.HideCritterDetails();
+        partyBonusController.InstantiateBonuses();
         ShowFirstSelectionPanel();
     }
 
@@ -84,6 +87,7 @@ public class GameManager : MonoBehaviour
                     playerCritters[i].HPChangeEvent += CritterHPChanged;
                     HUDController.AddCritterToRoster(playerCritters[i]);
                     selectedCritter = null;
+                    UpdatePartyTypeBonuses();
                     ShowMap();
                     return;
                 }
@@ -262,6 +266,7 @@ public class GameManager : MonoBehaviour
             {
                 AbilityController.DestroyPlayerEffectDisplayItems();
                 BattleController.PopulatePlayerCritterUI(playerCritters[i]);
+                UpdatePartyTypeBonuses();
                 BattleController.StartBattle();
                 return;
             }
@@ -353,5 +358,11 @@ public class GameManager : MonoBehaviour
     void CritterHPChanged(Critter critter)
     {
 
+    }
+
+    void UpdatePartyTypeBonuses()
+    {
+        partyBonusController.SetBonuses(playerCritters);
+        HUDController.UpdateTypeCountItem(partyBonusController.PartyTypeBonuses);
     }
 }
