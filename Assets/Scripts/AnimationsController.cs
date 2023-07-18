@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class AnimationsController : MonoBehaviour
 {
     public Animator BattlePlayerCritterAnimator;
     public Animator BattleOpponentCritterAnimator;
+    public TMP_Text PlayerNotificationText;
+    public TMP_Text OpponentNotificationText;
 
     public void BattleStart() 
     {
@@ -39,12 +42,14 @@ public class AnimationsController : MonoBehaviour
 
     public void PlayerMissAnim()
     {
-
+        PlayerNotificationText.text = "Miss";
+        BattlePlayerCritterAnimator.Play("Notification");
     }
 
     public void OpponentMissAnim()
     {
-        
+        OpponentNotificationText.text = "Miss";
+        BattleOpponentCritterAnimator.Play("Notification");
     }
 
 }

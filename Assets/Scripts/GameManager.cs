@@ -340,14 +340,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void PlayerMissInBattle()
+    void  PlayerMissInBattle()
     {
-
+        AnimationsController.OpponentMissAnim();
     }
 
     void OpponentMissInBattle()
     {
-
+        AnimationsController.PlayerMissAnim();
     }
 
     void CritterHPChanged(Critter critter)
